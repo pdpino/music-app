@@ -181,35 +181,3 @@ Yo como usuario administrador, quiero poder modificar playlists (agregar, quitar
 * Si playlist era privada y pasa a ser pública, todos los usuarios (visitas, administrador, adminsitrador) pueden verla y acceder a ella.
 * Si modificación es en bache, todos los cambios se aplican a la lista una vez que el administrador haya terminado de hacer los cambios. 
 * Si modificación es 'uno a uno', las modificaciones se van aplicando y visualizando en la medida que se hacen.
-
-
-## Relato 21: Reproducir canción.
-### Historia: 
-Yo como usuario (visita, estándar, administrador) quiero reproducir una cancion que haya previamente seleccionado, para satisfacer mis necesidades musicales.
-### Validación:
-* Canción puede ser iniciada, parada, pausada.
-* Canción puede ser repetida en modo loop.
-* Usuario es informado de la canción que está escuchando.
-
-
-## Relato 22: Reproducir álbum o lista 
-### Historia: 
-Yo como usuario (visita, estándar, administrador) quiero reproducir un álbum o lista que haya previamente seleccionado, para satisfacer mis necesidades musicales.
-### Validación:
-* Reproducción puede ser iniciada, parada, pausada.
-* Álbum o lista puede ser repetida en modo loop.
-* Álbum o lista puede ser reproducido en modo aleatorio.
-* Si reproducción es en modo loop y en modo aleatorio, se debe reproducir el álbum entero en modo aleatorio, y para cada nueva repetición, determinar un nuevo orden aleatorio de reproducción
-* Usuario es informado de la canción que está escuchando.
-
-
-# Relato 23: Reproducir artista. 
-### Historia: 
-Yo como usuario (visita, estándar, administrador) quiero reproducir un álbum o lista que haya previamente seleccionado, para satisfacer mis necesidades musicales.
-### Validación
-* Reproducción puede ser iniciada, parada, pausada.
-* Artista puede ser reproducido en modo aleatorio.
-* Si reproducción no es en modo aleatorio, el orden se determina por cronología de lanzamiento de sus álbumes/singles.
-* Artista puede ser reproducido en modo loop.
-* Si reproducción es en modo loop y en modo aleatorio, se debe reproducir el artista entero en modo aleatorio, y para cada nueva repetición, determinar un nuevo orden aleatorio de reproducción
-* Usuario es informado de la canción que está escuchando.
