@@ -1,4 +1,4 @@
-# Épica 5: Opininar sobre el contenido musical.
+# Épica 5: Opinar sobre el contenido musical.
 
 ## Relato 1: Calificaciones
 ### Historia:
@@ -6,6 +6,7 @@ Yo como usuario (estándar) quiero poder calificar el contenido musical (cancion
 ### Validación:
 * Usuario puede calificar un contenido y esto es visible para quienes tengan acceso al contenido.
 
+***
 
 ## Relato 2: Comentarios
 ### Historia:

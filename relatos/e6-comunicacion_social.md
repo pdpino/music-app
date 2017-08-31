@@ -6,6 +6,8 @@ Yo como usuario estándar quiero seguir a otros usuarios, artistas y listas, par
 ### Validación:
 * Usuario puede seguir a otros usuarios, artistas y listas. No necesariamente seguir significa que te sigan de vuelta.
 
+***
+
 ## Relato 2: Muro de mensajes
 ### Historia:
 Yo como usuario quiero poder dejar mensajes en el muro de los demás (o en el mio propio) usuarios para comunicarme públicamente por escrito con ellos.
