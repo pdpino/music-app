@@ -141,7 +141,7 @@ Yo como usuario estándar, quiero marcar un álbum como 'favorito' para guardar 
 
 ***
 
-## Relato 14: Marcar artista como favorito.
+## Relato 16: Marcar artista como favorito.
 ### Historia:
 Yo como usuario estándar, quiero marcar un artista como 'favorito' para guardar y recordar mis preferencias.
 ### Validación:
@@ -149,7 +149,7 @@ Yo como usuario estándar, quiero marcar un artista como 'favorito' para guardar
 
 ***
 
-## Relato 15: Desmarcar álbum de favorito.
+## Relato 17: Desmarcar álbum de favorito.
 ### Historia:
 Yo como usuario estándar, quiero desmarcar un álbum de 'favorito' para corregir un error, o reflejar un cambio en mis preferencias.
 ### Validación:
@@ -157,7 +157,7 @@ Yo como usuario estándar, quiero desmarcar un álbum de 'favorito' para corregi
 
 ***
 
-## Relato 16: Desmarcar artista como favorito.
+## Relato 18: Desmarcar artista como favorito.
 ### Historia:
 Yo como usuario estándar, quiero desmarcar un artista de 'favorito' para corregir un error, o reflejar un cambio en mis preferencias.
 ### Validación:
@@ -165,7 +165,7 @@ Yo como usuario estándar, quiero desmarcar un artista de 'favorito' para correg
 
 ***
 
-## Relato 17: Crear y eliminar una playlist como usuario estándar.
+## Relato 19: Crear y eliminar una playlist como usuario estándar.
 ### Historia:
 Yo como usuario estándar, quiero poder crear listas (pùblicas o privadas) de canciones, para poder reflejar y satisfacer mis gustos musicales.
 ### Validación:
@@ -175,7 +175,8 @@ Yo como usuario estándar, quiero poder crear listas (pùblicas o privadas) de c
 
 ***
 
-## Relato 18: Modificar playlist como usuario estándar.
+## Relato 20: Modificar playlist como usuario estándar.
+### Historia:  
 Yo como usuario estándar, quiero poder modificar (agregar, quitar y reordenar canciones; cambiar visibilidad (pública/privada)) playlists (pùblicas o privadas) que yo haya creado, para poder reflejar y satisfacer mis gustos musicales.
 ### Validación:
 * Si playlist era pública y pasa a ser privada, sólo el usuario que la creo puede ver y acceder a ella.
@@ -184,7 +185,7 @@ Yo como usuario estándar, quiero poder modificar (agregar, quitar y reordenar c
 
 ***
 
-## Relato 19: Crear y eliminar una playlist como usuario administrador.
+## Relato 21: Crear y eliminar una playlist como usuario administrador.
 ### Historia:
 Yo como usuario administrador, quiero poder crear playlists (pùblicas o privadas), para generar contenido para los usuarios visita o estándares.
 ### Validación:
@@ -194,7 +195,7 @@ Yo como usuario administrador, quiero poder crear playlists (pùblicas o privada
 
 ***
 
-## Relato 20: Modificar playlist como usuario administrador.
+## Relato 22: Modificar playlist como usuario administrador.
 ### Historia:
 Yo como usuario administrador, quiero poder modificar playlists (agregar, quitar y reordenar canciones; cambiar visibilidad (pública/privada)) creadas por administradores, en bache o 'uno a uno', para generar y actualizar contenido para los usuarios visita o estándares
 ### Validación:
