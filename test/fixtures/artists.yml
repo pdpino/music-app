@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  country: MyString
+  members: MyString
+  active_since: 2017-09-23
+  active_until: 2017-09-23
+
+two:
+  name: MyString
+  description: MyText
+  country: MyString
+  members: MyString
+  active_since: 2017-09-23
+  active_until: 2017-09-23

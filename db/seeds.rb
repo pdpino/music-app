@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+
+artists = Artist.create( Array.new(10) do
+    {
+      name: Faker::Name.unique.name,
+      description: Faker::Lorem.paragraph,
+      country: Faker::Address.country,
+      members: Faker::Number.between(1, 10).times { Faker::Name.name },
+      active_since: Faker::Date.backward(100),
+      active_until: Date.today,
+    }
+  end)

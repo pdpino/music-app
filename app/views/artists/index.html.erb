@@ -1,0 +1,15 @@
+<h1> Index de artistas </h1>
+
+<ul>
+  <% if @artists.length > 0 then %>
+    <% @artists.each do |artist| %>
+    <li>
+      <%= artist.name %>
+    </li>
+    <% end %>
+  <% else %>
+      <p>
+        No hay artistas para mostrar
+      </p>
+  <% end %>
+</ul>
