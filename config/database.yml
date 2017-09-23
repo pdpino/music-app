@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: Grupo29_development
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,6 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: Grupo29_production
-  username: Grupo29
-  password: <%= ENV['GRUPO29_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
