@@ -17,6 +17,14 @@ admin = User.create(
   role: 'admin',
   )
 
+juan = User.create(
+  first_name: 'juan',
+  last_name: 'perez',
+  email: 'juan@perez.cl',
+  password_digest: BCrypt::Password.create('juan'),
+  # role: '',
+  )
+
 artists = Artist.create( Array.new(10) do
     n_members = Faker::Number.between(1, 5)
     members = Array.new(n_members) { Faker::Name.name }
