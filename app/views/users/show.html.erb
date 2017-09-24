@@ -12,6 +12,7 @@
 </p>
 
 <% if @artists.length > 0 then %>
+  <h3>Artistas que ha creado el usuario:</h3>
   <% @artists.each do |artist| %>
     <li>
       <%= artist.name %>
