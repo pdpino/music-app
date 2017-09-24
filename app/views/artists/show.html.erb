@@ -25,5 +25,11 @@
   <%= @artist.active_since %> hasta <%= @artist.active_until %>
 </p>
 
-<%= link_to 'Editar', edit_artist_path(@artist) %>
+<% if @has_permission %>
+  <%= link_to 'Editar', edit_artist_path(@artist) %>
+  <%= link_to 'Eliminar', @artist, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <br> <!-- HACK: use CSS instead of this -->
+<% end %>
+
+
 <%= link_to 'Volver', artists_path %>

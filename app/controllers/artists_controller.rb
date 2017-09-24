@@ -1,5 +1,6 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -47,6 +48,7 @@ class ArtistsController < ApplicationController
 
     def set_user
       @user = User.find(@artist.user_id)
+      @has_permission = current_user?(@user)
     end
 
     def artist_params
@@ -54,9 +56,10 @@ class ArtistsController < ApplicationController
     end
 
     def correct_user
-      # set_artist # Assume this is already called, discomment if necessary
-      set_user
-      redirect_to root_path unless current_user?(@user)
+      # Assume this was called already, discomment if necessary
+      # set_artist
+      # set_user
+      redirect_to root_path unless @has_permission
     end
 
 end
