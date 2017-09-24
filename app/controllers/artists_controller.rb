@@ -56,7 +56,7 @@ class ArtistsController < ApplicationController
 
     def set_user
       @user = User.find(@artist.user_id)
-      @has_permission = current_user?(@user)
+      @has_permission = has_modify_permission?(@user)
     end
 
     def correct_user
