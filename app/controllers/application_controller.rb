@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     rescue ActiveRecord::RecordNotFound # Can't find user
       @current_user = nil
-      # TODO: also delete session
-      # TODO: notify user??
+      session[:user_id] = nil # necessary for closing session?
+      # REVIEW: notify user??
     end
   end
 
