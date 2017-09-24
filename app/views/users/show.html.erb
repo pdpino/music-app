@@ -1,0 +1,29 @@
+<h1>Usuario</h1>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @user.first_name %>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<% if @artists.length > 0 then %>
+  <% @artists.each do |artist| %>
+    <li>
+      <%= artist.name %>
+      |
+      <%= link_to 'Mostrar', artist %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este usuario no ha creado artistas
+    </p>
+<% end %>
+
+
+<%= link_to 'Volver', users_path %>

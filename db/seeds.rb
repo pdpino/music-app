@@ -8,6 +8,14 @@
 
 require 'faker'
 
+admin = User.create(
+  first_name: 'admin',
+  last_name: 'admin',
+  email: 'admin@admin.cl',
+  password_digest: 'admin', # TODO: how is the digest from 'admin'? use bcrypt
+  role: 'admin',
+  )
+
 artists = Artist.create( Array.new(10) do
     n_members = Faker::Number.between(1, 5)
     members = Array.new(n_members) { Faker::Name.name }
@@ -19,13 +27,6 @@ artists = Artist.create( Array.new(10) do
       members: members,
       active_since: Faker::Date.backward(100),
       active_until: Date.today,
+      user_id: admin.id
     }
   end)
-
-admin = User.create(
-  first_name: 'admin',
-  last_name: 'admin',
-  email: 'admin@admin.cl',
-  password_digest: 'admin', # TODO: how is the digest from 'admin'? use bcrypt
-  role: 'admin',
-  )

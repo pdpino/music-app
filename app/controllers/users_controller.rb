@@ -11,7 +11,15 @@ class UsersController < ApplicationController
     else
       redirect_to signup_path
     end
+  end
 
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.find(params[:id])
+  	@artists = @user.artists
   end
 
   private

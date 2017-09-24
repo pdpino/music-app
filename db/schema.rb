@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20170924030017) do
     t.string   "members"
     t.date     "active_since"
     t.date     "active_until"
+    t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["user_id"], name: "index_artists_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

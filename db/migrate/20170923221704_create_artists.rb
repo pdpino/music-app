@@ -8,6 +8,8 @@ class CreateArtists < ActiveRecord::Migration[5.0]
       t.date :active_since
       t.date :active_until
 
+      t.references :user # creator of the artist
+
       t.timestamps
     end
   end
