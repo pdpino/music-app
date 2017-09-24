@@ -1,0 +1,27 @@
+<p>
+  <strong>Nombre:</strong>
+  <%= @artist.name %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @artist.description %>
+</p>
+
+<p>
+  <strong>País de origen:</strong>
+  <%= @artist.country %>
+</p>
+
+<p>
+  <strong>Integrantes:</strong>
+  <%= @artist.members %>
+</p>
+
+<p>
+  <strong>Actividad:</strong>
+  <%= @artist.active_since %> hasta <%= @artist.active_until %>
+</p>
+
+
+<%= link_to 'Volver', artists_path %>

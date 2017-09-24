@@ -9,11 +9,14 @@
 require 'faker'
 
 artists = Artist.create( Array.new(10) do
+    n_members = Faker::Number.between(1, 5)
+    members = Array.new(n_members) { Faker::Name.name }
+    members = members.join(", ")
     {
       name: Faker::Name.unique.name,
       description: Faker::Lorem.paragraph,
       country: Faker::Address.country,
-      members: Faker::Number.between(1, 10).times { Faker::Name.name },
+      members: members,
       active_since: Faker::Date.backward(100),
       active_until: Date.today,
     }
