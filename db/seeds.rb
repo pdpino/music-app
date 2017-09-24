@@ -7,12 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
+require 'bcrypt'
 
 admin = User.create(
   first_name: 'admin',
   last_name: 'admin',
   email: 'admin@admin.cl',
-  password_digest: 'admin', # TODO: how is the digest from 'admin'? use bcrypt
+  password_digest: BCrypt::Password.create('admin'),
   role: 'admin',
   )
 
