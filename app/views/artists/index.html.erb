@@ -6,7 +6,11 @@
     <li>
       <%= artist.name %>
       |
-      LINK <!-- TODO -->
+      <%= link_to 'Mostrar', artist %>
+      |
+      <%= link_to 'Editar', edit_artist_path(artist) %>
+      |
+      <%= link_to 'Eliminar', artist, method: :delete, data: { confirm: 'Está seguro?' } %>
     </li>
     <% end %>
   <% else %>
@@ -15,3 +19,5 @@
       </p>
   <% end %>
 </ul>
+
+<%= link_to 'Crear artista', new_artist_path %>
