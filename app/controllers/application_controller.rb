@@ -23,6 +23,6 @@ class ApplicationController < ActionController::Base
   end
 
   def index
-
+    # USE AS HOME
   end
 end
