@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user # makes current_user available in the views
+  helper_method :current_user?
 
   def current_user
     begin
@@ -11,6 +12,10 @@ class ApplicationController < ActionController::Base
       # TODO: also delete session
       # TODO: notify user??
     end
+  end
+
+  def current_user?(user)
+    user == current_user
   end
 
   def require_user
