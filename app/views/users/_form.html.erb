@@ -1,0 +1,27 @@
+<h1> <%= title %> </h1>
+
+<%= form_for(user) do |f| %>
+  <div>
+    <%= f.label :first_name, "Nombre" %>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= f.label :last_name, "Apellido" %>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= f.label :email, "Email" %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password, "Contraseña" %>
+    <%= f.password_field :password %>
+  </div>
+
+  <%= f.submit button_message %>
+<% end %>
+
+<%= link_to "Volver", back_path %>

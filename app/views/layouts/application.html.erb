@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grupo29</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+
+
+
+      <nav>
+        <div>
+          <%= link_to "Home", root_path %>
+        </div>
+
+        <% if current_user %>
+          <ul>
+            <li><%= current_user.email %></li>
+            <li><%= link_to "Salir", logout_path, method: "delete" %></li>
+          </ul>
+        <% else %>
+          <ul>
+            <li><%= link_to "Login", login_path %></li>
+            <li><%= link_to "Registrarse", signup_path %></li>
+          </ul>
+        <% end %>
+
+      </nav>
+
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<h1>Artista</h1>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @artist.name %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @artist.description %>
+</p>
+
+<p>
+  <strong>País de origen:</strong>
+  <%= @artist.country %>
+</p>
+
+<p>
+  <strong>Integrantes:</strong>
+  <%= @artist.members %>
+</p>
+
+<p>
+  <strong>Actividad:</strong>
+  <%= @artist.active_since %> hasta <%= @artist.active_until %>
+</p>
+
+<% if @has_permission %>
+  <%= link_to 'Editar', edit_artist_path(@artist) %>
+  <%= link_to 'Eliminar', @artist, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <br> <!-- HACK: use CSS instead of this -->
+<% end %>
+
+
+<%= link_to 'Volver', artists_path %>
