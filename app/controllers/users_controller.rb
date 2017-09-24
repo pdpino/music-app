@@ -48,10 +48,11 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
+      @has_permission = current_user?(@user)
     end
 
     def correct_user
       set_user
-      redirect_to root_path unless current_user?(@user)
+      redirect_to root_path unless @has_permission
     end
 end

@@ -11,8 +11,11 @@
   <%= @user.email %>
 </p>
 
-<%= link_to 'Editar', edit_user_path(@user) %>
-<%= link_to 'Eliminar', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
+<% if @has_permission %>
+  <%= link_to 'Editar', edit_user_path(@user) %>
+  <%= link_to 'Eliminar', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
+<% end %>
+
 
 <% if @artists.length > 0 then %>
   <h3>Artistas que ha creado el usuario:</h3>
