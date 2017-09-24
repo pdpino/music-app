@@ -9,6 +9,29 @@
   </head>
 
   <body>
+
+
+
+
+      <nav>
+        <div>
+          <%= link_to "Home", root_path %>
+        </div>
+        
+        <% if current_user %>
+          <ul>
+            <li><%= current_user.email %></li>
+            <li><%= link_to "Salir", logout_path, method: "delete" %></li>
+          </ul>
+        <% else %>
+          <ul>
+            <li><%= link_to "Login", 'login' %></li>
+            <li><%= link_to "Registrarse", 'signup' %></li>
+          </ul>
+        <% end %>
+
+      </nav>
+
     <%= yield %>
   </body>
 </html>
