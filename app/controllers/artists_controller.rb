@@ -19,7 +19,10 @@ class ArtistsController < ApplicationController
   end
 
   def create
-    @artist = Artist.new(artist_params)
+    create_params = artist_params
+    create_params[:user_id] = current_user.id
+
+    @artist = Artist.new(create_params)
 
     if @artist.save
       redirect_to @artist
@@ -42,6 +45,11 @@ class ArtistsController < ApplicationController
   end
 
   private
+    def artist_params
+      params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
+      # NOTE: do not permit :user_id, an user would be able to fake the artist creator
+    end
+
     def set_artist
       @artist = Artist.find(params[:id])
     end
@@ -49,10 +57,6 @@ class ArtistsController < ApplicationController
     def set_user
       @user = User.find(@artist.user_id)
       @has_permission = current_user?(@user)
-    end
-
-    def artist_params
-      params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
     end
 
     def correct_user
