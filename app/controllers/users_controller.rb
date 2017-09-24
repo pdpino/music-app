@@ -1,6 +1,19 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @users = User.all
+  end
+
+  def show
+    @artists = @user.artists # Artists from the user
+  end
+
   def new
     @user = User.new
+  end
+
+  def edit
   end
 
   def create
@@ -13,17 +26,25 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    @users = User.all
+  def update
+    if @user.update(user_params)
+      redirect_to @user
+    else
+      render :edit
+    end
   end
 
-  def show
-    @user = User.find(params[:id])
-  	@artists = @user.artists
+  def destroy
+    @users.destroy
+    redirect_to userss_url
   end
 
   private
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password)
+    end
+
+    def set_user
+      @user = User.find(params[:id])
     end
 end
