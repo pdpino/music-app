@@ -21,3 +21,11 @@ artists = Artist.create( Array.new(10) do
       active_until: Date.today,
     }
   end)
+
+admin = User.create(
+  first_name: 'admin',
+  last_name: 'admin',
+  email: 'admin@admin.cl',
+  password_digest: 'admin', # TODO: how is the digest from 'admin'? use bcrypt
+  role: 'admin',
+  )
