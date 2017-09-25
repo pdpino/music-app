@@ -1,6 +1,8 @@
 # Grupo29
 Repositorio principal para el desarrollo del proyecto
 
+## Heroku
+[Link to heroku app](guarded-island-96195.herokuapp.com)
 
 ## Instructions
 
@@ -14,3 +16,5 @@ DB_NAME=dbname
 ```
 
 * Run `source .exportenv` in the console
+
+* Now you can run `rails server` to run the app.
