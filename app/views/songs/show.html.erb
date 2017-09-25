@@ -1,0 +1,20 @@
+<h1>Canción</h1>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @song.name %>
+</p>
+
+<p>
+  <strong>Duración:</strong>
+  <%= @song.duration %>
+</p>
+
+<% if @has_permission %>
+  <%= link_to 'Editar', edit_song_path(@song) %>
+  <%= link_to 'Eliminar', @song, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <br> <!-- HACK: use CSS instead of this -->
+<% end %>
+
+
+<%= link_to 'Volver', songs_path %>

@@ -1,0 +1,19 @@
+<h1> Index de canciones </h1>
+
+<ul>
+  <% if @songs.length > 0 then %>
+    <% @songs.each do |song| %>
+    <li>
+      <%= song.name %>
+      |
+      <%= link_to 'Mostrar', song %>
+    </li>
+    <% end %>
+  <% else %>
+      <p>
+        No hay canciones para mostrar
+      </p>
+  <% end %>
+</ul>
+
+<%= link_to 'Crear canción', new_song_path %>

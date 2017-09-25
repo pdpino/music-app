@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  resources :songs
   resources :artists
   ## resources is equivalent to:
   # get 'artists' => 'artists#index'
