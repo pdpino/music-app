@@ -1,3 +1,5 @@
+<h1> <%= title %> </h1>
+
 <%= form_for(artist) do |f| %>
   <% if artist.errors.any? %>
     <div id="error_explanation">
@@ -33,15 +35,17 @@
 
   <div>
     <%= f.label :active_since, "Activo desde" %>  <!-- TODO: mejor label -->
-    <%= f.text_field :active_since %>
+    <%= f.date_field :active_since %>
   </div>
 
   <div>
     <%= f.label :active_until, "Activo hasta" %>
-    <%= f.text_field :active_until %>
+    <%= f.date_field :active_until %>
   </div>
 
   <div>
     <%= f.submit "Guardar" %>
   </div>
 <% end %>
+
+<%= link_to 'Volver', back_path %>

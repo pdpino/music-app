@@ -1,7 +1,3 @@
-<h1>Editar artista</h1>
-
-<%= render 'form', artist: @artist %>
-
-<%= link_to 'Mostrar', @artist %>
-|
-<%= link_to 'Volver', artists_path %>
+<%= render 'form', artist: @artist,
+  title: 'Editar artista',
+  back_path: @artist %>
