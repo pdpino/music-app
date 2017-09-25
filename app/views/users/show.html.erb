@@ -32,5 +32,20 @@
     </p>
 <% end %>
 
+<% if @songs.length > 0 then %>
+  <h3>Canciones que ha creado el usuario:</h3>
+  <% @songs.each do |song| %>
+    <li>
+      <%= song.name %>
+      |
+      <%= link_to 'Mostrar', song %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este usuario no ha creado canciones
+    </p>
+<% end %>
+
 
 <%= link_to 'Volver', users_path %>
