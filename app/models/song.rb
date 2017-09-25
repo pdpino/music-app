@@ -1,3 +1,3 @@
 class Song < ApplicationRecord
-  belongs_to :owner, class_name: :users
+  belongs_to :user, foreign_key: :owner_id
 end

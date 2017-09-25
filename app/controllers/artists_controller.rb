@@ -20,7 +20,7 @@ class ArtistsController < ApplicationController
 
   def create
     create_params = artist_params
-    create_params[:user_id] = current_user.id
+    create_params[:owner_id] = current_user.id
 
     @artist = Artist.new(create_params)
 
@@ -47,7 +47,7 @@ class ArtistsController < ApplicationController
   private
     def artist_params
       params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
-      # NOTE: do not permit :user_id, an user would be able to fake the artist creator
+      # NOTE: do not permit :owner_id, an user would be able to fake the artist creator
     end
 
     def set_artist
@@ -55,7 +55,7 @@ class ArtistsController < ApplicationController
     end
 
     def set_user
-      @user = User.find(@artist.user_id)
+      @user = User.find(@artist.owner_id)
       @has_permission = has_modify_permission?(@user)
     end
 

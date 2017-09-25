@@ -44,6 +44,6 @@ artists = Artist.create( Array.new(10) do
       members: members,
       active_since: Faker::Date.backward(100),
       active_until: Date.today,
-      user_id: admin.id
+      owner_id: admin.id
     }
   end)
