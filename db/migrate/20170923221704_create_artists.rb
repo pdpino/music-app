@@ -9,6 +9,7 @@ class CreateArtists < ActiveRecord::Migration[5.0]
       t.date :active_until
 
       t.references :user # creator of the artist
+      # TODO: rename column to owner
 
       t.timestamps
     end
