@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def has_modify_permission?(user)
     # NOTE: 'modify permissions' includes editing and deleting
-    user == current_user || current_user.role == 'admin'
+    user == current_user || (current_user && current_user.role == 'admin')
   end
 
   def require_user
