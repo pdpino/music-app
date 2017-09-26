@@ -10,7 +10,7 @@
   <%= @song.duration %>
 </p>
 
-<% if @has_permission %>
+<% if @has_modify_permission %>
   <%= link_to 'Editar', edit_song_path(@song) %>
   <%= link_to 'Eliminar', @song, method: :delete, data: { confirm: 'Está seguro?' } %>
   <br> <!-- HACK: use CSS instead of this -->

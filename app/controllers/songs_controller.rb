@@ -7,6 +7,9 @@ class SongsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
+    @has_create_permission = current_user || false
+    # NOTE: This could be a before_action but is only used here
+
     @songs = Song.all
   end
 
@@ -72,13 +75,13 @@ class SongsController < ApplicationController
 
     def set_user
       @user = User.find(@song.owner_id)
-      @has_permission = has_modify_permission?(@user)
+      @has_modify_permission = has_modify_permission?(@user)
     end
 
     def correct_user
       # Assume this was called already, discomment if necessary
       # set_song
       # set_user
-      redirect_to root_path unless @has_permission
+      redirect_to root_path unless @has_modify_permission
     end
 end

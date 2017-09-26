@@ -16,4 +16,6 @@
   <% end %>
 </ul>
 
-<%= link_to 'Crear canción', new_song_path %>
+<% if @has_create_permission %>
+  <%= link_to 'Crear canción', new_song_path %>
+<% end%>
