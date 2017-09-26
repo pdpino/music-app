@@ -17,6 +17,10 @@ admin = User.create(
   role: 'admin',
   )
 
+rock = Genre.create(name: 'rock')
+jazz = Genre.create(name: 'jazz')
+classic = Genre.create(name: 'clásica')
+
 juan = User.create(
   first_name: 'juan',
   last_name: 'perez',
