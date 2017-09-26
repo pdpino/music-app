@@ -1,9 +1,11 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
-  before_action :set_all_attributes, only: [:new, :create, :edit, :update]
+
+  before_action :set_all_entities, only: [:new, :create, :edit, :update]
   before_action :set_song_attributes, only: [:show, :edit, :update]
 
   def index
@@ -76,7 +78,7 @@ class SongsController < ApplicationController
       @song = Song.find(params[:id])
     end
 
-    def set_all_attributes
+    def set_all_entities
       # NOTE: parse to array to be able to match intersection with @song_artists
       @all_artists = Array.new Artist.all
       @all_genres = Array.new Genre.all
