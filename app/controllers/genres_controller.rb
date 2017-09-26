@@ -1,0 +1,54 @@
+class GenresController < ApplicationController
+  before_action :set_genre, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
+
+  def index
+    @genres = Genre.all
+  end
+
+  def show
+  end
+
+  def new
+    @genre = Genre.new
+  end
+
+  def edit
+  end
+
+  def create
+    @genre = Song.new(genre_params)
+
+    if @genre.save
+      redirect_to @genre
+    else
+      render :new
+    end
+  end
+
+  def update
+    if @genre.update(genre_params)
+      redirect_to @genre
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @genre.destroy
+    redirect_to genres_path
+  end
+
+  private
+    def genre_params
+      params.require(:genre).permit(:name)
+    end
+
+    def set_genre
+      @genre = Genre.find(params[:id])
+    end
+
+    def correct_user
+      redirect_to root_path unless is_current_user_admin?
+    end
+end
