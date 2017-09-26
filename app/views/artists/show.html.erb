@@ -25,7 +25,7 @@
   <%= @artist.active_since %> hasta <%= @artist.active_until %>
 </p>
 
-<% if @has_permission %>
+<% if @has_modify_permission %>
   <%= link_to 'Editar', edit_artist_path(@artist) %>
   <%= link_to 'Eliminar', @artist, method: :delete, data: { confirm: 'Está seguro?' } %>
   <br> <!-- HACK: use CSS instead of this -->

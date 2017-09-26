@@ -5,6 +5,9 @@ class ArtistsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
+    @has_create_permission = current_user || false
+    # NOTE: this could go to a private method and a before_action, but is just used here
+
     @artists = Artist.all
   end
 
@@ -57,14 +60,14 @@ class ArtistsController < ApplicationController
 
     def set_user
       @user = User.find(@artist.owner_id)
-      @has_permission = has_modify_permission?(@user)
+      @has_modify_permission = has_modify_permission?(@user)
     end
 
     def correct_user
       # Assume this was called already, discomment if necessary
       # set_artist
       # set_user
-      redirect_to root_path unless @has_permission
+      redirect_to root_path unless @has_modify_permission
     end
 
 end
