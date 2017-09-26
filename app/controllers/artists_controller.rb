@@ -1,8 +1,10 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+
   before_action :set_all_genres, only: [:new, :create, :edit, :update]
   before_action :set_artist_genres, only: [:show, :edit, :update]
 
@@ -14,6 +16,7 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    # NOTE: this could go to a before_action but is used only here
     @artist_songs = @artist.songs
   end
 
@@ -21,7 +24,7 @@ class ArtistsController < ApplicationController
     @artist = Artist.new
 
     # REVIEW: neccesary ?? is used in _form
-    @song_genres = Array.new # Empty array
+    @artist_genres = Array.new # Empty array
   end
 
   def edit
@@ -55,8 +58,15 @@ class ArtistsController < ApplicationController
 
   private
     def artist_params
-      params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
       # NOTE: do not permit :owner_id, an user would be able to fake the artist creator
+      permitted = params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
+
+      # OPTIMIZE or at least REFACTOR
+      params[:all_genres] ||= Array.new
+      selected_genres_id = params[:all_genres].map do |x| x.to_i end
+      permitted[:genres] = Genre.find(selected_genres_id)
+
+      permitted
     end
 
     def set_artist

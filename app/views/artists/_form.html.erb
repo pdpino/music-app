@@ -48,7 +48,7 @@
       <h3>Elegir género (s):</h3>
       <% @all_genres.each do |genre| %>
         <%= check_box_tag("all_genres[]", genre.id,
-          @song_genres.index { |song_genre| song_genre.id == genre.id }
+          @artist_genres.index { |artist_genre| artist_genre.id == genre.id }
           ) %>
           <!-- OPTIMIZE index function ???  -->
         <%= label_tag(:all_genres, genre.name) %>
