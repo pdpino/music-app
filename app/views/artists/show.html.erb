@@ -31,5 +31,20 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<% if @artist_songs.length > 0 then %>
+  <h3>Canciones del artista:</h3>
+  <% @artist_songs.each do |song| %>
+    <li>
+      <%= song.name %>
+      |
+      <%= link_to 'Mostrar', song %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este artista no tiene canciones
+    </p>
+<% end %>
+
 
 <%= link_to 'Volver', artists_path %>

@@ -16,5 +16,21 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<h3>Artista (s):</h3>
+<% if @song_artists.length > 0 then %>
+  <% @song_artists.each do |artist| %>
+    <li>
+      <%= artist.name %>
+      |
+      <%= link_to 'Mostrar', artist %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin artista
+    </p>
+<% end %>
+
+
 
 <%= link_to 'Volver', songs_path %>
