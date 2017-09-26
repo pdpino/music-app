@@ -1,10 +1,10 @@
 class SongsController < ApplicationController
+  before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_all_attributes, only: [:new, :create, :edit, :update]
   before_action :set_song_attributes, only: [:show, :edit, :update]
-  before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @has_create_permission = current_user || false
