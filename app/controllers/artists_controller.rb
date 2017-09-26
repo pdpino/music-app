@@ -3,6 +3,8 @@ class ArtistsController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_all_genres, only: [:new, :create, :edit, :update]
+  before_action :set_artist_genres, only: [:show, :edit, :update]
 
   def index
     @has_create_permission = current_user || false
@@ -17,6 +19,9 @@ class ArtistsController < ApplicationController
 
   def new
     @artist = Artist.new
+
+    # REVIEW: neccesary ?? is used in _form
+    @song_genres = Array.new # Empty array
   end
 
   def edit
@@ -56,6 +61,14 @@ class ArtistsController < ApplicationController
 
     def set_artist
       @artist = Artist.find(params[:id])
+    end
+
+    def set_all_genres
+      @all_genres = Genre.all
+    end
+
+    def set_artist_genres
+      @artist_genres = Array.new @artist.genres
     end
 
     def set_user

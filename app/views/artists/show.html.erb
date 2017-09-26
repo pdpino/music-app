@@ -31,6 +31,21 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<% if @artist_genres.length > 0 then %>
+  <h3>Género (s):</h3>
+  <% @artist_genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+      |
+      <%= link_to 'Mostrar', genre %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin géneros
+    </p>
+<% end %>
+
 <% if @artist_songs.length > 0 then %>
   <h3>Canciones del artista:</h3>
   <% @artist_songs.each do |song| %>
