@@ -3,4 +3,7 @@ class Song < ApplicationRecord
 
   has_many :artist_song
   has_many :artists, through: :artist_song
+
+  has_many :song_genre
+  has_many :genres, through: :song_genre
 end
