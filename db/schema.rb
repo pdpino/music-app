@@ -44,8 +44,12 @@ ActiveRecord::Schema.define(version: 20170926220455) do
   end
 
   create_table "song_genres", force: :cascade do |t|
+    t.integer  "song_id"
+    t.integer  "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_song_genres_on_genre_id", using: :btree
+    t.index ["song_id"], name: "index_song_genres_on_song_id", using: :btree
   end
 
   create_table "songs", force: :cascade do |t|

@@ -1,8 +1,8 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :set_all_artists, only: [:new, :create, :edit, :update]
-  before_action :set_song_artists, only: [:show, :edit, :update]
+  before_action :set_all_attributes, only: [:new, :create, :edit, :update]
+  before_action :set_song_attributes, only: [:show, :edit, :update]
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -54,8 +54,16 @@ class SongsController < ApplicationController
   private
     def song_params
       permitted = params.require(:song).permit(:name, :duration)
+
+      # OPTIMIZE
+      params[:all_artists] ||= Array.new
       selected_artists_id = params[:all_artists].map do |x| x.to_i end
       permitted[:artists] = Artist.find(selected_artists_id)
+
+      params[:all_genres] ||= Array.new
+      selected_genres_id = params[:all_genres].map do |x| x.to_i end
+      permitted[:genres] = Genre.find(selected_genres_id)
+
       permitted
       # NOTE: do not permit :owner_id, an user would be able to fake the song creator
     end
@@ -64,13 +72,15 @@ class SongsController < ApplicationController
       @song = Song.find(params[:id])
     end
 
-    def set_all_artists
-      @all_artists = Array.new Artist.all
+    def set_all_attributes
       # NOTE: parse to array to be able to match intersection with @song_artists
+      @all_artists = Array.new Artist.all
+      @all_genres = Array.new Genre.all
     end
 
-    def set_song_artists
+    def set_song_attributes
       @song_artists = Array.new @song.artists
+      @song_genres = Array.new @song.genres
     end
 
     def set_user
