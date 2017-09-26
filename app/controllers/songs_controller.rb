@@ -63,6 +63,7 @@ class SongsController < ApplicationController
 
     def set_all_artists
       @all_artists = Array.new Artist.all
+      # NOTE: parse to array to be able to match intersection with @song_artists
     end
 
     def set_song_artists
