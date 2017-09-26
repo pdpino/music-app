@@ -1,6 +1,8 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_all_artists, only: [:new, :create, :edit, :update]
+  before_action :set_song_artists, only: [:show, :edit, :update]
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
@@ -9,11 +11,11 @@ class SongsController < ApplicationController
   end
 
   def show
-    @song_artists = @song.artists
   end
 
   def new
     @song = Song.new
+    @song_artists = Array.new # Empty array
   end
 
   def edit
@@ -33,7 +35,8 @@ class SongsController < ApplicationController
   end
 
   def update
-    if @song.update(song_params)
+    update_params = song_params
+    if @song.update(update_params)
       redirect_to @song
     else
       render :edit
@@ -47,12 +50,23 @@ class SongsController < ApplicationController
 
   private
     def song_params
-      params.require(:song).permit(:name, :duration)
+      permitted = params.require(:song).permit(:name, :duration)
+      selected_artists_id = params[:all_artists].map do |x| x.to_i end
+      permitted[:artists] = Artist.find(selected_artists_id)
+      permitted
       # NOTE: do not permit :owner_id, an user would be able to fake the song creator
     end
 
     def set_song
       @song = Song.find(params[:id])
+    end
+
+    def set_all_artists
+      @all_artists = Array.new Artist.all
+    end
+
+    def set_song_artists
+      @song_artists = Array.new @song.artists
     end
 
     def set_user
