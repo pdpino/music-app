@@ -1,4 +1,5 @@
 class GenresController < ApplicationController
+  before_action :set_permission
   before_action :set_genre, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
 
@@ -17,7 +18,7 @@ class GenresController < ApplicationController
   end
 
   def create
-    @genre = Song.new(genre_params)
+    @genre = Genre.new(genre_params)
 
     if @genre.save
       redirect_to @genre
@@ -44,11 +45,15 @@ class GenresController < ApplicationController
       params.require(:genre).permit(:name)
     end
 
+    def set_permission
+      @has_permission = is_current_user_admin?
+    end
+
     def set_genre
       @genre = Genre.find(params[:id])
     end
 
     def correct_user
-      redirect_to root_path unless is_current_user_admin?
+      redirect_to root_path unless @has_permission
     end
 end
