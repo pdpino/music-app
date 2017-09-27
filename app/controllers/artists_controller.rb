@@ -5,8 +5,8 @@ class ArtistsController < ApplicationController
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
-  before_action :set_all_genres, only: [:new, :create, :edit, :update]
-  before_action :set_artist_genres, only: [:show, :edit, :update]
+  before_action :set_all_entities, only: [:new, :create, :edit, :update]
+  before_action :set_artist_attributes, only: [:show, :edit, :update]
 
   def index
     @has_create_permission = current_user || false
@@ -18,6 +18,7 @@ class ArtistsController < ApplicationController
   def show
     # NOTE: this could go to a before_action but is used only here
     @artist_songs = @artist.songs
+    @artist_albums = @artist.albums
   end
 
   def new
@@ -73,11 +74,11 @@ class ArtistsController < ApplicationController
       @artist = Artist.find(params[:id])
     end
 
-    def set_all_genres
+    def set_all_entities
       @all_genres = Genre.all
     end
 
-    def set_artist_genres
+    def set_artist_attributes
       @artist_genres = Array.new @artist.genres
     end
 
