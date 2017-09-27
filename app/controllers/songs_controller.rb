@@ -86,7 +86,21 @@ class SongsController < ApplicationController
       # NOTE: parse to array to be able to match intersection with @song_artists
       @all_artists = Array.new Artist.all
       @all_genres = Array.new Genre.all
-      @all_albums = Array.new Album.all # TODO: Find albums where there is an artist
+      # @all_albums = Array.new Album.all
+
+      # HACK: don't use raw SQL !!!
+      query = "SELECT albums.*
+            FROM albums, artists, album_artists as AA, songs, artist_songs as SA
+            WHERE albums.id = AA.album_id AND
+              artists.id = AA.artist_id AND
+              artists.id = SA.artist_id AND
+              songs.id = SA.song_id"
+
+      if @song
+        query + " AND song.id = #{@song.id}"
+      end
+
+      @all_albums = Album.find_by_sql(query)
     end
 
     def set_song_attributes
