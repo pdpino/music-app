@@ -6,7 +6,7 @@ Repositorio principal para el desarrollo del proyecto. Miembros del equipo:
 * <img src="https://github.com/pdpino.png?size=64" width="64" height="64" alt="pdpino">[ Luciano Chiang](https://github.com/pdpino)
 
 ## Heroku
-Se ha montado un ambiente de ejecución en heroku. [ Aquí hay un link a tal.](guarded-island-96195.herokuapp.com)
+Se ha montado un ambiente de ejecución en heroku. [ Aquí hay un link a tal.](http://guarded-island-96195.herokuapp.com)
 
 ## Instrucciones generales.
 ### Base de Datos y configuración de ambiente (ubuntu, debian y similares)
