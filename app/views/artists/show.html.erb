@@ -31,8 +31,8 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<h3>Género (s):</h3>
 <% if @artist_genres.length > 0 then %>
-  <h3>Género (s):</h3>
   <% @artist_genres.each do |genre| %>
     <li>
       <%= genre.name %>
@@ -46,8 +46,23 @@
     </p>
 <% end %>
 
+<h3>Álbum (s):</h3>
+<% if @artist_albums.length > 0 then %>
+  <% @artist_albums.each do |album| %>
+    <li>
+      <%= album.name %>
+      |
+      <%= link_to 'Mostrar', album %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin álbumes
+    </p>
+<% end %>
+
+<h3>Canciones:</h3>
 <% if @artist_songs.length > 0 then %>
-  <h3>Canciones del artista:</h3>
   <% @artist_songs.each do |song| %>
     <li>
       <%= song.name %>
