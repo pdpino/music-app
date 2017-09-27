@@ -1,0 +1,21 @@
+<h1> Index de géneros </h1>
+
+<ul>
+  <% if @genres.length > 0 then %>
+    <% @genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+      |
+      <%= link_to 'Mostrar', genre %>
+    </li>
+    <% end %>
+  <% else %>
+      <p>
+        No hay géneros para mostrar
+      </p>
+  <% end %>
+</ul>
+
+<% if @has_permission %>
+  <%= link_to 'Crear género', new_genre_path %>
+<% end%>

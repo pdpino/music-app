@@ -1,18 +1,30 @@
 class ArtistsController < ApplicationController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
+  before_action :set_all_genres, only: [:new, :create, :edit, :update]
+  before_action :set_artist_genres, only: [:show, :edit, :update]
+
   def index
+    @has_create_permission = current_user || false
+    # NOTE: this could go to a private method and a before_action, but is just used here
+
     @artists = Artist.all
   end
 
   def show
+    # NOTE: this could go to a before_action but is used only here
+    @artist_songs = @artist.songs
   end
 
   def new
     @artist = Artist.new
+
+    # REVIEW: neccesary ?? is used in _form
+    @artist_genres = Array.new # Empty array
   end
 
   def edit
@@ -46,24 +58,39 @@ class ArtistsController < ApplicationController
 
   private
     def artist_params
-      params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
       # NOTE: do not permit :owner_id, an user would be able to fake the artist creator
+      permitted = params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
+
+      # OPTIMIZE or at least REFACTOR
+      params[:all_genres] ||= Array.new
+      selected_genres_id = params[:all_genres].map do |x| x.to_i end
+      permitted[:genres] = Genre.find(selected_genres_id)
+
+      permitted
     end
 
     def set_artist
       @artist = Artist.find(params[:id])
     end
 
+    def set_all_genres
+      @all_genres = Genre.all
+    end
+
+    def set_artist_genres
+      @artist_genres = Array.new @artist.genres
+    end
+
     def set_user
       @user = User.find(@artist.owner_id)
-      @has_permission = has_modify_permission?(@user)
+      @has_modify_permission = has_modify_permission?(@user)
     end
 
     def correct_user
       # Assume this was called already, discomment if necessary
       # set_artist
       # set_user
-      redirect_to root_path unless @has_permission
+      redirect_to root_path unless @has_modify_permission
     end
 
 end

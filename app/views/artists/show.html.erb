@@ -25,10 +25,40 @@
   <%= @artist.active_since %> hasta <%= @artist.active_until %>
 </p>
 
-<% if @has_permission %>
+<% if @has_modify_permission %>
   <%= link_to 'Editar', edit_artist_path(@artist) %>
   <%= link_to 'Eliminar', @artist, method: :delete, data: { confirm: 'Está seguro?' } %>
   <br> <!-- HACK: use CSS instead of this -->
+<% end %>
+
+<% if @artist_genres.length > 0 then %>
+  <h3>Género (s):</h3>
+  <% @artist_genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+      |
+      <%= link_to 'Mostrar', genre %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin géneros
+    </p>
+<% end %>
+
+<% if @artist_songs.length > 0 then %>
+  <h3>Canciones del artista:</h3>
+  <% @artist_songs.each do |song| %>
+    <li>
+      <%= song.name %>
+      |
+      <%= link_to 'Mostrar', song %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este artista no tiene canciones
+    </p>
 <% end %>
 
 

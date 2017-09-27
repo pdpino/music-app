@@ -10,11 +10,42 @@
   <%= @song.duration %>
 </p>
 
-<% if @has_permission %>
+<% if @has_modify_permission %>
   <%= link_to 'Editar', edit_song_path(@song) %>
   <%= link_to 'Eliminar', @song, method: :delete, data: { confirm: 'Está seguro?' } %>
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
+
+<h3>Artista (s):</h3>
+<% if @song_artists.length > 0 then %>
+  <% @song_artists.each do |artist| %>
+    <li>
+      <%= artist.name %>
+      |
+      <%= link_to 'Mostrar', artist %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin artista
+    </p>
+<% end %>
+
+<h3>Géneros (s):</h3>
+<% if @song_genres.length > 0 then %>
+  <% @song_genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+      |
+      <%= link_to 'Mostrar', genre %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin géneros
+    </p>
+<% end %>
+
 
 
 <%= link_to 'Volver', songs_path %>

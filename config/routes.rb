@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :songs
+  resources :genres
   resources :artists
   ## resources is equivalent to:
   # get 'artists' => 'artists#index'
