@@ -31,6 +31,35 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<h3>Artista (s):</h3>
+<% if @album_artists.length > 0 then %>
+  <% @album_artists.each do |artist| %>
+    <li>
+      <%= artist.name %>
+      |
+      <%= link_to 'Mostrar', artist %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin artistas
+    </p>
+<% end %>
+
+<h3>Canciones (s):</h3>
+<% if @album_songs.length > 0 then %>
+  <% @album_songs.each do |song| %>
+    <li>
+      <%= song.name %>
+      |
+      <%= link_to 'Mostrar', song %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin canciones
+    </p>
+<% end %>
 
 
 <%= link_to 'Volver', albums_path %>

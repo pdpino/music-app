@@ -38,6 +38,24 @@
   <% end %>
 
   <div>
+    <% if @all_artists.length > 0 then %>
+      <h3>Elegir artista (s):</h3>
+      <% @all_artists.each do |artist| %>
+        <%= check_box_tag("all_artists[]", artist.id,
+          @album_artists.index { |album_artist| album_artist.id == artist.id }
+          ) %>
+          <!-- OPTIMIZE index function ???  -->
+        <%= label_tag(:all_artists, artist.name) %>
+        <br> <!-- HACK: use CSS!!! -->
+      <% end %>
+    <% else %>
+        <p>
+          No existen artistas para elegir
+        </p>
+    <% end %>
+  </div>
+
+  <div>
     <%= f.submit "Guardar" %>
   </div>
 <% end %>
