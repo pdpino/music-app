@@ -6,4 +6,7 @@ class Artist < ApplicationRecord
 
   has_many :artist_genre
   has_many :genres, through: :artist_genre
+
+  has_many :album_artist
+  has_many :albums, through: :album_artist
 end
