@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :songs
   resources :genres
+  resources :albums
   resources :artists
   ## resources is equivalent to:
   # get 'artists' => 'artists#index'
