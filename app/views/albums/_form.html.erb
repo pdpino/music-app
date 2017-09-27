@@ -1,0 +1,45 @@
+<h1> <%= title %> </h1>
+
+<%= form_for(album) do |f| %>
+  <% if album.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(album.errors.count, "error") %> No se pudo guardar este álbum:</h2>
+
+      <ul>
+        <% album.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :name, "Nombre" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Descripción" %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.label :release_date, "Fecha de lanzamiento" %>
+    <%= f.date_field :release_date %>
+  </div>
+
+  <div>
+    <%= f.label :artwork_img_name, "Imagen" %>
+    <%= f.text_field :artwork_img_name %>
+  </div>
+
+  <%= fields_for :album do |is_single_field| %>
+    <%= is_single_field.check_box :is_single %> Single
+  <% end %>
+
+  <div>
+    <%= f.submit "Guardar" %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver', back_path %>

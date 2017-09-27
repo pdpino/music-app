@@ -1,0 +1,36 @@
+<h1>Álbum</h1>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @album.name %>
+</p>
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @album.description %>
+</p>
+
+<p>
+  <strong>Fecha de lanzamiento:</strong>
+  <%= @album.release_date %>
+</p>
+
+<p>
+  <strong>Imagen:</strong>
+  <%= @album.artwork_img_name %>
+</p>
+
+<p>
+  <%= @album.is_single ? "Es un single" : "No es un single" %>
+  <!-- CHGME: really creative... -->
+</p>
+
+<% if @has_modify_permission %>
+  <%= link_to 'Editar', edit_album_path(@album) %>
+  <%= link_to 'Eliminar', @album, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <br> <!-- HACK: use CSS instead of this -->
+<% end %>
+
+
+
+<%= link_to 'Volver', albums_path %>

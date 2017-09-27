@@ -1,0 +1,21 @@
+<h1> Index de álbumes </h1>
+
+<ul>
+  <% if @albums.length > 0 then %>
+    <% @albums.each do |album| %>
+    <li>
+      <%= album.name %>
+      |
+      <%= link_to 'Mostrar', album %>
+    </li>
+    <% end %>
+  <% else %>
+      <p>
+        No hay álbumes para mostrar
+      </p>
+  <% end %>
+</ul>
+
+<% if @has_create_permission %>
+  <%= link_to 'Crear álbum', new_album_path %>
+<% end%>
