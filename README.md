@@ -1,8 +1,8 @@
 # Grupo 29!
 Repositorio principal para el desarrollo del proyecto. Miembros del equipo: 
 
-* <img src="https://github.com/pdpino.png?size=64" width="64" height="64" alt="pdpino">[Pablo Pino](https://github.com/pdpino)
-* <img src="https://github.com/dtfuller.png?size=64" width="64" height="64" alt="dtfuller">[David Fuller](https://github.com/dtfuller)
+* <img src="https://github.com/pdpino.png?size=64" width="64" height="64" alt="pdpino">[ Pablo Pino](https://github.com/pdpino)
+* <img src="https://github.com/dtfuller.png?size=64" width="64" height="64" alt="dtfuller">[ David Fuller](https://github.com/dtfuller)
 * <img src="https://github.com/pdpino.png?size=64" width="64" height="64" alt="pdpino">[ Luciano Chiang](https://github.com/pdpino)
 
 ## Heroku
