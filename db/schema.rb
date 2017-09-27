@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926222632) do
+ActiveRecord::Schema.define(version: 20170927012747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "album_artists", force: :cascade do |t|
+    t.integer  "album_id"
+    t.integer  "artist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_album_artists_on_album_id", using: :btree
+    t.index ["artist_id"], name: "index_album_artists_on_artist_id", using: :btree
+  end
+
+  create_table "album_songs", force: :cascade do |t|
+    t.integer  "album_id"
+    t.integer  "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_album_songs_on_album_id", using: :btree
+    t.index ["song_id"], name: "index_album_songs_on_song_id", using: :btree
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.date     "release_date"
+    t.boolean  "is_single"
+    t.string   "artwork_img_name"
+    t.integer  "owner_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["owner_id"], name: "index_albums_on_owner_id", using: :btree
+  end
 
   create_table "artist_genres", force: :cascade do |t|
     t.integer  "artist_id"
@@ -80,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170926222632) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "albums", "users", column: "owner_id"
   add_foreign_key "artists", "users", column: "owner_id"
   add_foreign_key "songs", "users", column: "owner_id"
 end
