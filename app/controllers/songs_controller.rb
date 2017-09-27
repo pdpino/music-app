@@ -24,7 +24,8 @@ class SongsController < ApplicationController
     # REVIEW: neccesary ??
     # in _form this things are used,
     @song_artists = Array.new # Empty array
-    @song_genres = Array.new # Empty array
+    @song_genres = Array.new
+    @song_albums = Array.new
   end
 
   def edit
@@ -44,8 +45,7 @@ class SongsController < ApplicationController
   end
 
   def update
-    update_params = song_params
-    if @song.update(update_params)
+    if @song.update(song_params)
       redirect_to @song
     else
       render :edit
@@ -70,6 +70,10 @@ class SongsController < ApplicationController
       selected_genres_id = params[:all_genres].map do |x| x.to_i end
       permitted[:genres] = Genre.find(selected_genres_id)
 
+      params[:all_albums] ||= Array.new
+      selected_albums_id = params[:all_albums].map do |x| x.to_i end
+      permitted[:albums] = Album.find(selected_albums_id)
+
       permitted
       # NOTE: do not permit :owner_id, an user would be able to fake the song creator
     end
@@ -82,6 +86,7 @@ class SongsController < ApplicationController
       # NOTE: parse to array to be able to match intersection with @song_artists
       @all_artists = Array.new Artist.all
       @all_genres = Array.new Genre.all
+      @all_albums = Array.new Album.all # TODO: Find albums where there is an artist
     end
 
     def set_song_attributes
