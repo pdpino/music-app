@@ -87,6 +87,7 @@ class SongsController < ApplicationController
     def set_song_attributes
       @song_artists = Array.new @song.artists
       @song_genres = Array.new @song.genres
+      @song_albums = Array.new @song.albums
     end
 
     def set_user

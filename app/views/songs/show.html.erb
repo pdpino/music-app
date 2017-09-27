@@ -31,6 +31,21 @@
     </p>
 <% end %>
 
+<h3>Álbumes (s):</h3>
+<% if @song_albums.length > 0 then %>
+  <% @song_albums.each do |album| %>
+    <li>
+      <%= album.name %>
+      |
+      <%= link_to 'Mostrar', album %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin álbumes
+    </p>
+<% end %>
+
 <h3>Géneros (s):</h3>
 <% if @song_genres.length > 0 then %>
   <% @song_genres.each do |genre| %>
