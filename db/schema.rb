@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925052647) do
+ActiveRecord::Schema.define(version: 20170926222632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artist_genres", force: :cascade do |t|
+    t.integer  "artist_id"
+    t.integer  "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_artist_genres_on_artist_id", using: :btree
+    t.index ["genre_id"], name: "index_artist_genres_on_genre_id", using: :btree
+  end
+
+  create_table "artist_songs", force: :cascade do |t|
+    t.integer  "artist_id"
+    t.integer  "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artist_id"], name: "index_artist_songs_on_artist_id", using: :btree
+    t.index ["song_id"], name: "index_artist_songs_on_song_id", using: :btree
+  end
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +44,21 @@ ActiveRecord::Schema.define(version: 20170925052647) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["owner_id"], name: "index_artists_on_owner_id", using: :btree
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "song_genres", force: :cascade do |t|
+    t.integer  "song_id"
+    t.integer  "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_song_genres_on_genre_id", using: :btree
+    t.index ["song_id"], name: "index_song_genres_on_song_id", using: :btree
   end
 
   create_table "songs", force: :cascade do |t|
