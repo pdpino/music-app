@@ -60,6 +60,23 @@
   </div>
 
   <div>
+    <% if @all_albums.length > 0 then %>
+      <h3>Elegir álbum (s):</h3>
+      <% @all_albums.each do |album| %>
+        <%= check_box_tag("all_albums[]", album.id,
+          @song_albums.index { |song_album| song_album.id == album.id } ) %>
+          <!-- OPTIMIZE index function ???  -->
+        <%= label_tag(:all_albums, album.name) %>
+        <br> <!-- HACK: use CSS!!! -->
+      <% end %>
+    <% else %>
+        <p>
+          No existen álbumes para elegir
+        </p>
+    <% end %>
+  </div>
+
+  <div>
     <%= f.submit "Guardar" %>
   </div>
 <% end %>

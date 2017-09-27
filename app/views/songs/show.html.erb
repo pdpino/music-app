@@ -61,6 +61,21 @@
     </p>
 <% end %>
 
+<h3>Álbum (s):</h3>
+<% if @song_albums.length > 0 then %>
+  <% @song_albums.each do |album| %>
+    <li>
+      <%= album.name %>
+      |
+      <%= link_to 'Mostrar', album %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin álbumes
+    </p>
+<% end %>
+
 
 
 <%= link_to 'Volver', songs_path %>
