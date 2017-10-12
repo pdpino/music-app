@@ -70,8 +70,8 @@ class SongsController < ApplicationController
       selected_genres_id = params[:all_genres].map do |x| x.to_i end
       permitted[:genres] = Genre.find(selected_genres_id)
 
-      params[:all_albums] ||= Array.new
-      selected_albums_id = params[:all_albums].map do |x| x.to_i end
+      params[:eligible_albums] ||= Array.new
+      selected_albums_id = params[:eligible_albums].map do |x| x.to_i end
       permitted[:albums] = Album.find(selected_albums_id)
 
       permitted
@@ -86,7 +86,6 @@ class SongsController < ApplicationController
       # NOTE: parse to array to be able to match intersection with @song_artists
       @all_artists = Array.new Artist.all
       @all_genres = Array.new Genre.all
-      # @all_albums = Array.new Album.all
 
       # HACK: don't use raw SQL !!!
       query = "SELECT albums.*
@@ -100,7 +99,7 @@ class SongsController < ApplicationController
         query + " AND song.id = #{@song.id}"
       end
 
-      @all_albums = Album.find_by_sql(query)
+      @eligible_albums = Album.find_by_sql(query)
     end
 
     def set_song_attributes
