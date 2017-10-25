@@ -21,6 +21,11 @@
     <%= f.password_field :password %>
   </div>
 
+  <div>
+    <%= f.label :password_confirmation, "Confirmar contraseña" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
   <%= f.submit button_message %>
 <% end %>
 
