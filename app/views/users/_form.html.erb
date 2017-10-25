@@ -1,6 +1,11 @@
 <h1> <%= title %> </h1>
 
+<%= render '_errors/snippet',
+  errors: @user.errors,
+  show_just_one: true %>
+
 <%= form_for(user) do |f| %>
+
   <div>
     <%= f.label :first_name, "Nombre" %>
     <%= f.text_field :first_name %>
