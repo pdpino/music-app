@@ -1,5 +1,6 @@
 <%= render 'form',
   user: @user,
   title: "Editar datos personales",
+  include_basic_info: true,
   button_message: "Guardar Cambios",
   back_path: user_path(@user) %>
