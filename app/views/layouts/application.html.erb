@@ -9,10 +9,6 @@
   </head>
 
   <body>
-
-
-
-
       <nav>
         <div>
           <%= link_to "Home", root_path %>
@@ -20,7 +16,8 @@
 
         <% if current_user %>
           <ul>
-            <li><%= current_user.email %></li>
+            <li>Hola <%= current_user.first_name %> !</li>
+            <li><%= link_to "Mi perfil", user_path(current_user) %></li>
             <li><%= link_to "Salir", logout_path, method: "delete" %></li>
           </ul>
         <% else %>
