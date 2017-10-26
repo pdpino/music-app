@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  helper_method :belongs_to_song?
+
   before_action :set_song, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -35,6 +37,8 @@ class SongsController < ApplicationController
     create_params = song_params
     create_params[:owner_id] = current_user.id
 
+    puts "DURATION: #{create_params[:duration]}"
+
     @song = Song.new(create_params)
 
     if @song.save
@@ -55,6 +59,12 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     redirect_to songs_path
+  end
+
+  def belongs_to_song? all_from_song, searched
+    # Boolean inidicating if 'searched' is in 'all_from_song'
+    # all_from_song can be @song_albums, @song_genres, etc
+    all_from_song && all_from_song.index { |song_property| song_property.id == searched.id }
   end
 
   private
