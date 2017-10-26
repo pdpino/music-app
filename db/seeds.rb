@@ -7,13 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
-require 'bcrypt'
 
 admin = User.create(
   first_name: 'admin',
   last_name: 'admin',
   email: 'admin@admin.cl',
-  password_digest: BCrypt::Password.create('admin'),
+  password: 'Admin1234',
   role: 'admin',
   )
 
@@ -25,15 +24,15 @@ juan = User.create(
   first_name: 'juan',
   last_name: 'perez',
   email: 'juan@perez.cl',
-  password_digest: BCrypt::Password.create('juan'),
+  password: 'Juan1234',
   # role: '',
   )
 
-pedro = User.create(
+pedro = User.create!(
   first_name: 'pedro',
   last_name: 'perez',
   email: 'pedro@perez.cl',
-  password_digest: BCrypt::Password.create('pedro'),
+  password: 'Pedro1234',
   # role: '',
   )
 
