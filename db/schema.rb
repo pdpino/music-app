@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026213235) do
+ActiveRecord::Schema.define(version: 20171026214346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 20171026213235) do
     t.string   "description"
     t.date     "release_date"
     t.boolean  "is_single"
-    t.string   "artwork_img_name"
+    t.string   "image"
     t.integer  "owner_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["owner_id"], name: "index_albums_on_owner_id", using: :btree
   end
 

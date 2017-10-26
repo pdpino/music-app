@@ -20,8 +20,8 @@
   </div>
 
   <div>
-    <%= f.label :artwork_img_name, "Imagen" %>
-    <%= f.text_field :artwork_img_name %>
+    <%= f.label :image, "Imagen del albúm" %>
+    <%= f.file_field :image %>
   </div>
 
   <%= fields_for :album do |is_single_field| %>
