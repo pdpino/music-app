@@ -4,7 +4,9 @@
   errors: @user.errors,
   show_just_one: true %>
 
-<%= form_for(user) do |f| %>
+<%= form_for(user, url: {
+  action: local_assigns[:form_action] ? form_action : (@user.new_record? ? "create" : "update")
+  }) do |f| %>
 
   <% if local_assigns[:include_basic_info] %>
     <div>

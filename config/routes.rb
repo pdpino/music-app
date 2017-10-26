@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   # patch 'artists/:id' => 'artists#update'
   # delete 'artists/:id' => 'artists#destroy'
 
+  get 'users/:id/edit_password' => 'users#edit_password', as: 'edit_user_password'
+  patch 'users/:id/update_password' => 'users#update_password'
+
+  patch 'users/:id/admin' => 'users#grant_admin', as: 'grant_admin' # To grant admin permission
+
 end
 
 #### HELP COMMENTS FROM CODECADEMY

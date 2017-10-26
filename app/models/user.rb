@@ -6,18 +6,24 @@ PASSWORD_FORMAT = /\A
 /x
 
 class User < ApplicationRecord
+  attr_accessor :updating_password
+
   has_many :artists, foreign_key: :owner_id
   has_many :songs, foreign_key: :owner_id
+
   has_secure_password
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: { if: :password_required?, message: 'password missing.' }, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }
+  validates :first_name, presence: true, if: :info_required?
+  validates :last_name, presence: true, if: :info_required?
+  validates :email, presence: true, uniqueness: true, if: :info_required?
+  validates :password, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }, if: :password_required?
+
+  def info_required?
+    !password_required?
+  end
 
   def password_required?
-    # FIXME: true when updating password and creating, false when updating info
-    false
+    updating_password || new_record?
   end
 
 end

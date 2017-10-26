@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  before_action :require_admin, only: [:grant_admin]
   before_action :require_no_user, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :edit_password, :update_password, :destroy, :grant_admin]
+  before_action :correct_user, only: [:edit, :update, :edit_password, :update_password, :destroy]
 
   def index
     @users = User.all
@@ -10,6 +11,13 @@ class UsersController < ApplicationController
   def show
     @artists = @user.artists # Artists from the user
     @songs = @user.songs
+
+    is_shown_user_admin = is_user_admin? @user
+    is_logged_user_admin = is_current_user_admin?
+
+    @can_grant_admin = is_logged_user_admin && !is_shown_user_admin
+    @show_is_admin = is_logged_user_admin && is_shown_user_admin
+    # Only show that is admin to the other admins
   end
 
   def new
@@ -30,11 +38,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render :edit
-    end
+    @user.updating_password = false
+    update_user
+  end
+
+  def edit_password
+    render :edit_password
+  end
+
+  def update_password
+    @user.updating_password = true
+    update_user
   end
 
   def destroy
@@ -42,10 +56,15 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def grant_admin
+    success = @user.update({ role: 'admin' })
+    # TODO: show message indicating that is admin
+    redirect_to @user
+  end
+
   private
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-      # NOTE: do not permit :role param, so nobody can give admin role to an user
     end
 
     def set_user
@@ -56,5 +75,13 @@ class UsersController < ApplicationController
     def correct_user
       set_user
       redirect_to root_path unless @has_permission
+    end
+
+    def update_user
+      if @user.update(user_params)
+        redirect_to @user
+      else
+        render (@user.updating_password ? :edit_password : :edit)
+      end
     end
 end
