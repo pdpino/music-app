@@ -5,4 +5,6 @@ class Favorite < ApplicationRecord
   # could be a song, artist, album or list
 
   belongs_to :user
+
+  validates :favoritable_id, uniqueness: { scope: [:user, :favoritable_type] }
 end
