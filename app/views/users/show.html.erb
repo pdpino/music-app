@@ -5,9 +5,11 @@
   <%= @user.first_name %>
   <%= @user.last_name %>
   <% if @show_is_admin %>
-  <strong>Este usuario tiene permisos de administrador</strong>
+    <strong>Este usuario tiene permisos de administrador</strong>
   <% end %>
 </p>
+
+<img src="<%= @user.photo %>" alt="Foto">
 
 <p>
   <strong>Email:</strong>
