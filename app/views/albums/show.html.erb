@@ -31,6 +31,14 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<%= render '_favorites/update',
+  item: @album,
+  can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
+  can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
+  add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
+  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+  %>
+
 <h3>Artista (s):</h3>
 <% if @album_artists.length > 0 then %>
   <% @album_artists.each do |artist| %>

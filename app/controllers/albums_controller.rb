@@ -20,11 +20,6 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
-
-    # REVIEW: neccesary ??
-    # in _form this things are used,
-    @album_artists = Array.new # Empty array
-    @album_songs = Array.new # Empty array
   end
 
   def edit

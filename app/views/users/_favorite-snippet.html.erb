@@ -1,0 +1,35 @@
+<!-- Example:
+  resource_name: 'canciones',
+  favorite_items: @favorite_songs,
+  item_path: Proc.new { |song| song_path(song) },
+  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
+  is_female: true
+-->
+
+<%= puts "LOCAL ASSIGNS: #{local_assigns}" %>
+
+<h3><%= resource_name.capitalize %>
+  <%= (local_assigns[:is_female] && is_female) ? 'Favoritas:' : 'Favoritos:' %>
+</h3>
+
+<% if favorite_items.any? then %>
+  <% favorite_items.each do |favorite_item| %>
+    <li>
+      <%= link_to favorite_item.name, item_path.call(favorite_item) %>
+
+      <% if @has_permission %>
+        |
+        <%= link_to 'Eliminar de favoritos',
+          remove_favorite_item_path.call(@user, favorite_item),
+          method: :delete
+          %>
+      <% end %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este usuario no tiene
+      <%= resource_name %>
+      <%= (local_assigns[:is_female] && is_female) ? 'favoritas' : 'favoritos' %>
+    </p>
+<% end %>

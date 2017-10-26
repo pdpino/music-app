@@ -10,6 +10,9 @@ class Artist < ApplicationRecord
   has_many :album_artist
   has_many :albums, through: :album_artist
 
+  has_many :favorites, as: :favoritable
+  has_many :users, through: :favorites, as: :favoritable
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :owner_id, presence: true
   validates :active_since, presence: true

@@ -21,8 +21,6 @@ class ArtistsController < ApplicationController
 
   def new
     @artist = Artist.new
-
-    @artist_genres = Array.new # Empty array
   end
 
   def edit

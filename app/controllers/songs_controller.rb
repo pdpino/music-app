@@ -20,12 +20,6 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
-
-    # REVIEW: neccesary ??
-    # in _form this things are used,
-    @song_artists = Array.new # Empty array
-    @song_genres = Array.new
-    @song_albums = Array.new
   end
 
   def edit
@@ -34,8 +28,6 @@ class SongsController < ApplicationController
   def create
     create_params = song_params
     create_params[:owner_id] = current_user.id
-
-    puts "DURATION: #{create_params[:duration]}"
 
     @song = Song.new(create_params)
 
