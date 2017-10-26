@@ -9,8 +9,6 @@ class ArtistsController < ApplicationController
   before_action :set_artist_attributes, only: [:show, :edit, :update]
 
   def index
-    @has_create_permission = current_user || false
-
     @artists = Artist.all
   end
 

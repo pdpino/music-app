@@ -77,6 +77,10 @@
     </p>
 <% end %>
 
+<% if has_create_permission %>
+  <%= link_to 'Crear album', new_album_path({ artist_id: @artist.id }) %>
+<% end %>
+
 <h3>Canciones:</h3>
 <% if @artist_songs.length > 0 then %>
   <% @artist_songs.each do |song| %>
