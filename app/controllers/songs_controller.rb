@@ -17,6 +17,12 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
+
+    if params[:album_id] # An album wants to create this
+      album = Album.find(params[:album_id])
+      @song_albums = [ album ]
+      @eligible_albums << album
+    end
   end
 
   def edit

@@ -66,5 +66,11 @@
     </p>
 <% end %>
 
+<% if has_create_permission %>
+  <%= link_to 'Crear canción', new_song_path({ album_id: @album.id }) %>
+<% end %>
+
+<br>
+<!-- HACK: use CSS -->
 
 <%= link_to 'Volver', albums_path %>
