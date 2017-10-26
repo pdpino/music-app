@@ -21,3 +21,5 @@
 
 # rubymine ide assets
 .idea/*
+
+.DS_Store
