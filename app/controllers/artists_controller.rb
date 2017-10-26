@@ -15,13 +15,6 @@ class ArtistsController < ApplicationController
   end
 
   def show
-    logged_user = current_user
-
-    # HACK: this is copied in artists, album and song controllers
-    is_favorite_artist = logged_user && is_in?(logged_user.favorite_artists, @artist)
-    @can_add_favorite = logged_user && !is_favorite_artist
-    @can_remove_favorite = logged_user && is_favorite_artist
-
     @artist_songs = @artist.songs
     @artist_albums = @artist.albums
   end

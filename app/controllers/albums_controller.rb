@@ -16,11 +16,6 @@ class AlbumsController < ApplicationController
   end
 
   def show
-    logged_user = current_user
-
-    is_favorite_album = logged_user && is_in?(logged_user.favorite_albums, @album)
-    @can_add_favorite = logged_user && !is_favorite_album
-    @can_remove_favorite = logged_user && is_favorite_album
   end
 
   def new

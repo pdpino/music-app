@@ -16,12 +16,6 @@ class SongsController < ApplicationController
   end
 
   def show
-    logged_user = current_user
-    # REVIEW: necessary? the idea is to call the current_user method just once
-
-    is_favorite_song = logged_user && is_in?(logged_user.favorite_songs, @song)
-    @can_add_favorite = logged_user && !is_favorite_song
-    @can_remove_favorite = logged_user && is_favorite_song
   end
 
   def new

@@ -18,6 +18,8 @@
 
 <%= render '_favorites/update',
   item: @song,
+  can_add_favorite: Proc.new { |user, song| can_add_favorite_song(user, song) },
+  can_remove_favorite: Proc.new { |user, song| can_remove_favorite_song(user, song) },
   add_favorite_item_path: Proc.new { |user, song| add_favorite_song_path(user, song) },
   remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) }
   %>

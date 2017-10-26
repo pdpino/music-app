@@ -3,12 +3,13 @@ Provide:
   add_favorite_item_path
   remove_favorite_item_path,
   item
+You can also provide explictly
 -->
 
-<% if @can_add_favorite %>
+<% if can_add_favorite.call(current_user, item) %>
   <%= link_to 'Añadir a favoritos', add_favorite_item_path.call(current_user, item), method: :post %>
   <br>
-<% elsif @can_remove_favorite %>
+<% elsif can_remove_favorite.call(current_user, item) %>
   <%= link_to 'Eliminar de mis favoritos', remove_favorite_item_path.call(current_user, item), method: :delete %>
   <br>
 <% end %>
