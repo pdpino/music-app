@@ -9,7 +9,6 @@
   <% end %>
 </p>
 
-
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
@@ -25,21 +24,30 @@
   <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
 <% end %>
 
-<h3>Canciones Favoritas:</h3>
-<% if @favorite_songs.length > 0 then %>
-  <% @favorite_songs.each do |favorite_song| %>
-    <li>
-      <%= favorite_song.name %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no tiene canciones favoritas
-    </p>
-<% end %>
+<%= render 'favorite-snippet',
+  resource_name: 'canciones',
+  favorite_items: @favorite_songs,
+  item_path: Proc.new { |song| song_path(song) },
+  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
+  is_female: true
+  %>
 
-<% if @artists.length > 0 then %>
-  <h3>Artistas que ha creado el usuario:</h3>
+<%= render 'favorite-snippet',
+  resource_name: 'artistas',
+  favorite_items: @favorite_artists,
+  item_path: Proc.new { |artist| artist_path(artist) },
+  remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
+  %>
+
+<%= render 'favorite-snippet',
+  resource_name: 'albums',
+  favorite_items: @favorite_albums,
+  item_path: Proc.new { |album| album_path(album) },
+  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+  %>
+
+<h3>Artistas que ha creado el usuario:</h3>
+<% if @artists.any? %>
   <% @artists.each do |artist| %>
     <li>
       <%= artist.name %>
@@ -53,8 +61,8 @@
     </p>
 <% end %>
 
-<% if @songs.length > 0 then %>
-  <h3>Canciones que ha creado el usuario:</h3>
+<h3>Canciones que ha creado el usuario:</h3>
+<% if @songs.any? %>
   <% @songs.each do |song| %>
     <li>
       <%= song.name %>

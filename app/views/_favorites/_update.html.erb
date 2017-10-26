@@ -1,0 +1,14 @@
+<!-- Add or remove from favorites button
+Provide:
+  add_favorite_item_path
+  remove_favorite_item_path,
+  item
+-->
+
+<% if @can_add_favorite %>
+  <%= link_to 'Añadir a favoritos', add_favorite_item_path.call(current_user, item), method: :post %>
+  <br>
+<% elsif @can_remove_favorite %>
+  <%= link_to 'Eliminar de mis favoritos', remove_favorite_item_path.call(current_user, item), method: :delete %>
+  <br>
+<% end %>
