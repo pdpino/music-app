@@ -13,6 +13,8 @@ class Artist < ApplicationRecord
   has_many :favorites, as: :favoritable
   has_many :users, through: :favorites, as: :favoritable
 
+  mount_uploader :image, ImageUploader
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :owner_id, presence: true
   validates :active_since, presence: true
