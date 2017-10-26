@@ -3,35 +3,56 @@
   <head>
     <title>Grupo29</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
 
-
-
-
-      <nav>
-        <div>
-          <%= link_to "Home", root_path %>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href=<%= root_path %> >MusicApp29</a>
         </div>
 
-        <% if current_user %>
-          <ul>
-            <li><%= current_user.email %></li>
-            <li><%= link_to "Salir", logout_path, method: "delete" %></li>
-          </ul>
-        <% else %>
-          <ul>
-            <li><%= link_to "Login", login_path %></li>
-            <li><%= link_to "Registrarse", signup_path %></li>
-          </ul>
-        <% end %>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      </nav>
+          <ul class="nav navbar-nav">
+
+            <% if current_user %>
+                <li><%= link_to "Mi perfil", user_path(current_user) %></li>
+            <% end %>
+            <li><%= link_to "Usuarios", users_path %></li>
+            <li><%= link_to "Artistas", artists_path %></li>
+            <li><%= link_to "Canciones", songs_path %></li>
+            <li><%= link_to "Géneros", genres_path %></li>
+            <li><%= link_to "Álbumes", albums_path %></li>
+          </ul>
+
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+                <li><%= link_to "Salir", logout_path, method: "delete" %></li>
+            <% else %>
+                <li><%= link_to "Login", login_path %></li>
+                <li><%= link_to "Registrarse", signup_path %></li>
+            <% end %>
+          </ul>
+
+        </div>
+      </div>
+    </nav>
+    <!-- END BARRA DE NAVEGACIÓN -->
+
 
     <%= yield %>
+
   </body>
 </html>

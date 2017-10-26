@@ -10,22 +10,17 @@ class ArtistsController < ApplicationController
 
   def index
     @has_create_permission = current_user || false
-    # NOTE: this could go to a private method and a before_action, but is just used here
 
     @artists = Artist.all
   end
 
   def show
-    # NOTE: this could go to a before_action but is used only here
     @artist_songs = @artist.songs
     @artist_albums = @artist.albums
   end
 
   def new
     @artist = Artist.new
-
-    # REVIEW: neccesary ?? is used in _form
-    @artist_genres = Array.new # Empty array
   end
 
   def edit
@@ -60,7 +55,7 @@ class ArtistsController < ApplicationController
   private
     def artist_params
       # NOTE: do not permit :owner_id, an user would be able to fake the artist creator
-      permitted = params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until)
+      permitted = params.require(:artist).permit(:name, :description, :country, :members, :active_since, :active_until, :image)
 
       # OPTIMIZE or at least REFACTOR
       params[:all_genres] ||= Array.new
@@ -88,7 +83,7 @@ class ArtistsController < ApplicationController
     end
 
     def correct_user
-      # Assume this was called already, discomment if necessary
+      # Assume this was called already: (but uncomment if necessary)
       # set_artist
       # set_user
       redirect_to root_path unless @has_modify_permission

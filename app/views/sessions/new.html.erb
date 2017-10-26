@@ -1,7 +1,38 @@
-<h1>Log in</h1>
 
-<%= form_for(:session, url: login_path) do |f| %>
-  <%= f.email_field :email, :placeholder => "Email" %>
-  <%= f.password_field :password, :placeholder => "Contraseña" %>
-  <%= f.submit "Login" %>
-<% end %>
+<div class="col-lg-4">
+  <%= form_for(:session, url: login_path, :html => { :class => 'form-horizontal' } ) do |f| %>
+      <fieldset>
+        <legend>Log in</legend>
+
+        <div class="form-group">
+          <label for="session_email" class="col-lg-2 control-label">Username</label>
+          <div class="col-lg-10">
+            <%= f.email_field :email, :f => 'Email', :class => 'form-control', :placeholder => "Email" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="session[password]" class="col-lg-2 control-label">Password</label>
+          <div class="col-lg-10">
+            <%= f.password_field :password, :placeholder => "Contraseña", :class => "form-control" %>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <%= f.submit "Ingresar", :class => "btn btn-primary" %>
+          </div>
+
+        </div>
+
+
+      </fieldset>
+  <% end %>
+
+  <hr>
+  <%= link_to "No tengo cuenta.", signup_path %>
+
+
+</div>
+

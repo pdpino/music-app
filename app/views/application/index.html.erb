@@ -1,11 +1,7 @@
 <h1>Bienvenido a MusicApp29!!</h1>
 
-<%= link_to "Ver Usuarios", users_path %>
-<br>  <!-- HACK: use css !! -->
-<%= link_to "Ver Artistas", artists_path %>
-<br>
-<%= link_to "Ver Canciones", songs_path %>
-<br>
-<%= link_to "Ver Géneros", genres_path %>
-<br>
-<%= link_to "Ver Álbumes", albums_path %>
+<!--<%= debug current_user %>-->
+
+<% if current_user %>
+    <h3>Hola <%= current_user.first_name %> !</h3>
+<% end %>

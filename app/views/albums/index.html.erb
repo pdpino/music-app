@@ -4,9 +4,19 @@
   <% if @albums.length > 0 then %>
     <% @albums.each do |album| %>
     <li>
+      <img src="<%= album.image %>" alt="foto">
+
       <%= album.name %>
       |
       <%= link_to 'Mostrar', album %>
+      |
+      <%= render '_favorites/update',
+        item: album,
+        can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
+        can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
+        add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
+        remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+        %>
     </li>
     <% end %>
   <% else %>

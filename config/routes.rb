@@ -23,6 +23,19 @@ Rails.application.routes.draw do
   # patch 'artists/:id' => 'artists#update'
   # delete 'artists/:id' => 'artists#destroy'
 
+  get 'users/:id/edit_password' => 'users#edit_password', as: 'edit_user_password'
+  patch 'users/:id/update_password' => 'users#update_password'
+
+  patch 'users/:id/admin' => 'users#grant_admin', as: 'grant_admin' # To grant admin permission
+
+  post 'users/:user_id/favorites/songs/:song_id' => 'favorites#mark_song', as: 'add_favorite_song'
+  post 'users/:user_id/favorites/artists/:artist_id' => 'favorites#mark_artist', as: 'add_favorite_artist'
+  post 'users/:user_id/favorites/albums/:album_id' => 'favorites#mark_album', as: 'add_favorite_album'
+
+  delete 'users/:user_id/favorites/songs/:song_id' => 'favorites#remove_song', as: 'remove_favorite_song'
+  delete 'users/:user_id/favorites/artists/:artist_id' => 'favorites#remove_artist', as: 'remove_favorite_artist'
+  delete 'users/:user_id/favorites/albums/:album_id' => 'favorites#remove_album', as: 'remove_favorite_album'
+
 end
 
 #### HELP COMMENTS FROM CODECADEMY

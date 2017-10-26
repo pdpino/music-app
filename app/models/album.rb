@@ -6,4 +6,12 @@ class Album < ApplicationRecord
 
   has_many :album_artist
   has_many :artists, through: :album_artist
+
+  has_many :favorites, as: :favoritable
+  has_many :users, through: :favorites, as: :favoritable
+
+  mount_uploader :image, ImageUploader
+
+  validates :name, presence: true
+  validates :owner_id, presence: true
 end
