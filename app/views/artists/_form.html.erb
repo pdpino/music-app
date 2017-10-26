@@ -1,17 +1,8 @@
 <h1> <%= title %> </h1>
 
 <%= form_for(artist) do |f| %>
-  <% if artist.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(artist.errors.count, "error") %> No se pudo guardar este artista:</h2>
 
-      <ul>
-        <% artist.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render '_errors/snippet', errors: artist.errors %>
 
   <div>
     <%= f.label :name, "Nombre" %>
@@ -47,10 +38,7 @@
     <% if @all_genres.length > 0 then %>
       <h3>Elegir género (s):</h3>
       <% @all_genres.each do |genre| %>
-        <%= check_box_tag("all_genres[]", genre.id,
-          @artist_genres.index { |artist_genre| artist_genre.id == genre.id }
-          ) %>
-          <!-- OPTIMIZE index function ???  -->
+        <%= check_box_tag("all_genres[]", genre.id, is_in?(@artist_genres, genre) ) %>
         <%= label_tag(:all_genres, genre.name) %>
         <br> <!-- HACK: use CSS!!! -->
       <% end %>

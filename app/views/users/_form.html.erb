@@ -1,25 +1,39 @@
 <h1> <%= title %> </h1>
 
+<%= render '_errors/snippet',
+  errors: @user.errors,
+  show_just_one: true %>
+
 <%= form_for(user) do |f| %>
-  <div>
-    <%= f.label :first_name, "Nombre" %>
-    <%= f.text_field :first_name %>
-  </div>
 
-  <div>
-    <%= f.label :last_name, "Apellido" %>
-    <%= f.text_field :last_name %>
-  </div>
+  <% if local_assigns[:include_basic_info] %>
+    <div>
+      <%= f.label :first_name, "Nombre" %>
+      <%= f.text_field :first_name %>
+    </div>
 
-  <div>
-    <%= f.label :email, "Email" %>
-    <%= f.email_field :email %>
-  </div>
+    <div>
+      <%= f.label :last_name, "Apellido" %>
+      <%= f.text_field :last_name %>
+    </div>
 
-  <div>
-    <%= f.label :password, "Contraseña" %>
-    <%= f.password_field :password %>
-  </div>
+    <div>
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email %>
+    </div>
+  <% end %>
+
+  <% if local_assigns[:include_password] %>
+    <div>
+      <%= f.label :password, "Contraseña" %>
+      <%= f.password_field :password %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Confirmar contraseña" %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  <% end %>
 
   <%= f.submit button_message %>
 <% end %>

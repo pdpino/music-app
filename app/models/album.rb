@@ -6,4 +6,7 @@ class Album < ApplicationRecord
 
   has_many :album_artist
   has_many :artists, through: :album_artist
+
+  validates :name, presence: true
+  validates :owner_id, presence: true
 end

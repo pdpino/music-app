@@ -1,17 +1,8 @@
 <h1> <%= title %> </h1>
 
 <%= form_for(album) do |f| %>
-  <% if album.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(album.errors.count, "error") %> No se pudo guardar este álbum:</h2>
 
-      <ul>
-        <% album.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render '_errors/snippet', errors: album.errors %>
 
   <div>
     <%= f.label :name, "Nombre" %>
@@ -41,10 +32,7 @@
     <% if @all_artists.length > 0 then %>
       <h3>Elegir artista (s):</h3>
       <% @all_artists.each do |artist| %>
-        <%= check_box_tag("all_artists[]", artist.id,
-          @album_artists.index { |album_artist| album_artist.id == artist.id }
-          ) %>
-          <!-- OPTIMIZE index function ???  -->
+        <%= check_box_tag("all_artists[]", artist.id, is_in?(@album_artists, artist) ) %>
         <%= label_tag(:all_artists, artist.name) %>
         <br> <!-- HACK: use CSS!!! -->
       <% end %>

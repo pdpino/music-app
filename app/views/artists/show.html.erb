@@ -7,22 +7,28 @@
 
 <p>
   <strong>Descripción:</strong>
-  <%= @artist.description %>
+  <%= @artist.description.present? ? @artist.description : "Sin descripción" %>
 </p>
 
 <p>
   <strong>País de origen:</strong>
   <%= @artist.country %>
+  <%= @artist.country.present? ? @artist.country : "Desconocido" %>
 </p>
 
+
 <p>
-  <strong>Integrantes:</strong>
-  <%= @artist.members %>
+  <% if @artist.members.present? %>
+    <strong>Integrantes:</strong>
+    <%= @artist.members %>
+  <% else %>
+    Solista
+  <% end %>
 </p>
 
 <p>
   <strong>Actividad:</strong>
-  <%= @artist.active_since %> hasta <%= @artist.active_until %>
+  <%= @artist.active_since %> hasta <%= @artist.active_until.present? ? @artist.active_until : "presente" %>
 </p>
 
 <% if @has_modify_permission %>
