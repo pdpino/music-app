@@ -35,8 +35,6 @@ class SongsController < ApplicationController
     create_params = song_params
     create_params[:owner_id] = current_user.id
 
-    puts "DURATION: #{create_params[:duration]}"
-
     @song = Song.new(create_params)
 
     if @song.save

@@ -11,6 +11,12 @@ class User < ApplicationRecord
   has_many :artists, foreign_key: :owner_id
   has_many :songs, foreign_key: :owner_id
 
+  has_many :favorites, foreign_key: :user_id
+  has_many :favorite_songs, through: :favorites, source: :favoritable, source_type: 'Song'
+  has_many :favorite_albums, through: :favorites, source: :favoritable, source_type: 'Album'
+  has_many :favorite_artists, through: :favorites, source: :favoritable, source_type: 'Artist'
+  # NOTE: source_types must be capitalized string, it doesn't work with symbols
+
   has_secure_password
 
   validates :first_name, presence: true, if: :info_required?

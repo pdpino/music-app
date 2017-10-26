@@ -25,6 +25,19 @@
   <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
 <% end %>
 
+<h3>Canciones Favoritas:</h3>
+<% if @favorite_songs.length > 0 then %>
+  <% @favorite_songs.each do |favorite_song| %>
+    <li>
+      <%= favorite_song.name %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este usuario no tiene canciones favoritas
+    </p>
+<% end %>
+
 <% if @artists.length > 0 then %>
   <h3>Artistas que ha creado el usuario:</h3>
   <% @artists.each do |artist| %>
