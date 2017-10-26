@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :is_current_user_admin? # makes methods available in the views
 
   def current_user
+    # REVIEW: this method is called a lot of times, the query is being done again and again?
+    # ruby optimizes it?
     begin
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
     rescue ActiveRecord::RecordNotFound # Can't find user
