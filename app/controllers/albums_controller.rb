@@ -53,7 +53,7 @@ class AlbumsController < ApplicationController
 
   private
     def album_params
-      permitted = params.require(:album).permit(:name, :description, :release_date, :is_single, :artwork_img_name)
+      permitted = params.require(:album).permit(:name, :description, :release_date, :is_single, :image)
 
       # OPTIMIZE
       params[:all_artists] ||= Array.new

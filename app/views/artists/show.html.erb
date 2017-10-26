@@ -5,6 +5,8 @@
   <%= @artist.name %>
 </p>
 
+<img src="<%= @artist.image %>" alt="Imagen">
+
 <p>
   <strong>Descripción:</strong>
   <%= @artist.description.present? ? @artist.description : "Sin descripción" %>

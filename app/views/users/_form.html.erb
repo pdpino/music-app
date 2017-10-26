@@ -23,6 +23,12 @@
       <%= f.label :email, "Email" %>
       <%= f.email_field :email %>
     </div>
+
+    <div>
+      <%= f.label :photo, "Foto de perfil" %>
+      <%= f.file_field :photo %>
+    </div>
+
   <% end %>
 
   <% if local_assigns[:include_password] %>

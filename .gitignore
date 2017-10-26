@@ -21,3 +21,6 @@
 
 # rubymine ide assets
 .idea/*
+
+# Uploaded files # do not overload github!
+public/uploads/

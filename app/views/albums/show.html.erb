@@ -15,10 +15,7 @@
   <%= @album.release_date %>
 </p>
 
-<p>
-  <strong>Imagen:</strong>
-  <%= @album.artwork_img_name %>
-</p>
+<img src="<%= @album.image %>" alt="Imagen">
 
 <p>
   <%= @album.is_single ? "Es un single" : "No es un single" %>
