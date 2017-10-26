@@ -9,9 +9,6 @@ class SongsController < ApplicationController
   before_action :set_song_attributes, only: [:show, :edit, :update]
 
   def index
-    @has_create_permission = current_user || false
-    # NOTE: This could be a before_action but is only used here
-
     @songs = Song.all
   end
 

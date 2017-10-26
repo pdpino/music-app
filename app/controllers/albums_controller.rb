@@ -9,9 +9,6 @@ class AlbumsController < ApplicationController
   before_action :set_album_attributes, only: [:show, :edit, :update]
 
   def index
-    @has_create_permission = current_user || false
-    # NOTE: This could be a before_action but is only used here
-
     @albums = Album.all
   end
 
@@ -20,6 +17,10 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
+
+    if params[:artist_id] # An artist wants to create this
+      @album_artists = [Artist.find(params[:artist_id])]
+    end
   end
 
   def edit
