@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20171026211038) do
     t.string   "role"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "picture"
+    t.string   "photo"
   end
 
   add_foreign_key "albums", "users", column: "owner_id", on_delete: :cascade
