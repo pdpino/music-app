@@ -19,7 +19,7 @@
       <h3>Elegir artista (s):</h3>
 
       <% @all_artists.each do |artist| %>
-        <%= check_box_tag("all_artists[]", artist.id, belongs_to_song?(@song_artists, artist) ) %>
+        <%= check_box_tag("all_artists[]", artist.id, is_in?(@song_artists, artist) ) %>
         <%= label_tag(:all_artists, artist.name) %>
 
         <br> <!-- HACK: use CSS!!! -->
@@ -38,7 +38,7 @@
       <h3>Elegir género (s):</h3>
 
       <% @all_genres.each do |genre| %>
-        <%= check_box_tag("all_genres[]", genre.id, belongs_to_song?(@song_genres, genre) ) %>
+        <%= check_box_tag("all_genres[]", genre.id, is_in?(@song_genres, genre) ) %>
         <%= label_tag(:all_genres, genre.name) %>
         <br> <!-- HACK: use CSS!!! -->
       <% end %>
@@ -55,7 +55,7 @@
       <h3>Elegir álbum (s):</h3>
 
       <% @eligible_albums.each do |album| %>
-        <%= check_box_tag("eligible_albums[]", album.id, belongs_to_song?(@song_albums, album) ) %>
+        <%= check_box_tag("eligible_albums[]", album.id, is_in?(@song_albums, album) ) %>
         <%= label_tag(:eligible_albums, album.name) %>
         <br> <!-- HACK: use CSS!!! -->
       <% end %>

@@ -2,8 +2,7 @@
 
 <%= form_for(artist) do |f| %>
 
-  <%= render '_errors/snippet',
-    errors: artist.errors %>
+  <%= render '_errors/snippet', errors: artist.errors %>
 
   <div>
     <%= f.label :name, "Nombre" %>
@@ -39,10 +38,7 @@
     <% if @all_genres.length > 0 then %>
       <h3>Elegir género (s):</h3>
       <% @all_genres.each do |genre| %>
-        <%= check_box_tag("all_genres[]", genre.id,
-          @artist_genres.index { |artist_genre| artist_genre.id == genre.id }
-          ) %>
-          <!-- OPTIMIZE index function ???  -->
+        <%= check_box_tag("all_genres[]", genre.id, is_in?(@artist_genres, genre) ) %>
         <%= label_tag(:all_genres, genre.name) %>
         <br> <!-- HACK: use CSS!!! -->
       <% end %>
