@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user # makes current_user available in the views
+  helper_method :current_user, :is_current_user_admin? # makes methods available in the views
 
   def current_user
     begin
@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
   end
 
   def is_current_user_admin?
-    current_user && current_user.role == 'admin'
+    current_user && is_user_admin?(current_user)
+  end
+
+  def is_user_admin? user
+    user.role == 'admin'
   end
 
   def require_user
@@ -30,6 +34,10 @@ class ApplicationController < ActionController::Base
   def require_no_user
     # TODO: message
     redirect_to root_path if current_user
+  end
+
+  def require_admin
+    redirect_to root_path unless is_current_user_admin?
   end
 
   def index

@@ -4,7 +4,11 @@
   <strong>Nombre:</strong>
   <%= @user.first_name %>
   <%= @user.last_name %>
+  <% if @show_is_admin %>
+  <strong>Este usuario tiene permisos de administrador</strong>
+  <% end %>
 </p>
+
 
 <p>
   <strong>Email:</strong>
@@ -13,9 +17,13 @@
 
 <% if @has_permission %>
   <%= link_to 'Editar', edit_user_path(@user) %>
-  <%= link_to 'Eliminar', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <%= link_to 'Editar Contraseña', edit_user_password_path(@user) %>
+  <%= link_to 'Eliminar Usuario', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
 <% end %>
 
+<% if @can_grant_admin %>
+  <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
+<% end %>
 
 <% if @artists.length > 0 then %>
   <h3>Artistas que ha creado el usuario:</h3>
