@@ -10,13 +10,11 @@ class ArtistsController < ApplicationController
 
   def index
     @has_create_permission = current_user || false
-    # NOTE: this could go to a private method and a before_action, but is just used here
 
     @artists = Artist.all
   end
 
   def show
-    # NOTE: this could go to a before_action but is used only here
     @artist_songs = @artist.songs
     @artist_albums = @artist.albums
   end
@@ -24,7 +22,6 @@ class ArtistsController < ApplicationController
   def new
     @artist = Artist.new
 
-    # REVIEW: neccesary ?? is used in _form
     @artist_genres = Array.new # Empty array
   end
 

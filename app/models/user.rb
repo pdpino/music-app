@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: { if: :password_required?, message: 'is forgotten.' }, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }
+  validates :password, presence: { if: :password_required?, message: 'password missing.' }, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }
 
   def password_required?
     # FIXME: true when updating password and creating, false when updating info
