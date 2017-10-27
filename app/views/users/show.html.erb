@@ -57,7 +57,8 @@
         <li>
           <%= link_to user_follows.followed.full_name, user_path(user_follows.followed) %>
 
-          <% if @has_permission { ' | ' + link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete) } %>
+          <%= @has_permission ?  (' | ' + link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete)) : '' %>
+          
         </li>
     <% end %>
   <% else %>
@@ -141,7 +142,7 @@
       <%= link_to 'Mostrar', song %>
     </li>
   <% end %>
-
+<% end %>
   <hr>
 </div>
 
