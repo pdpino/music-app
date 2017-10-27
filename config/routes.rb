@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :genres
   resources :albums
   resources :artists
+  ###Luciano is working here:
+  resources :playlists
+  ###Luciano's work stops here.
   ## resources is equivalent to:
   # get 'artists' => 'artists#index'
   # get 'artists/new' => 'artists#new', as: 'new_artist'
