@@ -1,7 +1,70 @@
-<%= render 'form',
-  user: @user,
-  title: "Registrarse",
-  include_basic_info: true,
-  include_password: true,
-  button_message: "Registrarse",
-  back_path: root_path %>
+<div class="row padding-first-row">
+    <div class="col-lg-5">
+      <%= form_for :user, url: users_path, :html => { :class => 'form-horizontal' } do |f| %>
+        <fieldset>
+          <legend>Registrarse</legend>
+
+            <div class="form-group">
+              <label for="Email" class="col-lg-2 control-label">Email</label>
+              <div class="col-lg-10">
+                <%= f.email_field :email, :class => 'form-control', :placeholder => "Email" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="user_first_name" class="col-lg-2 control-label">Nombre</label>
+              <div class="col-lg-10">
+                <%= f.text_field :first_name, :class => 'form-control', :placeholder => "Nombre" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="user_last_name" class="col-lg-2 control-label">Apellido</label>
+              <div class="col-lg-10">
+                <%= f.text_field :last_name, :class => 'form-control', :placeholder => "Apellido" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="user_photo" class="col-lg-2 control-label">Foto de perfil</label>
+              <div class="col-lg-10">
+                <%= f.file_field :photo, :class => 'form-control' %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="user_password" class="col-lg-2 control-label">Contraseña</label>
+              <div class="col-lg-10">
+                <%= f.password_field :password, :class => 'form-control', :placeholder => "Contraseña" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="user_password_confirmation" class="col-lg-2 control-label">Confirmar contraseña</label>
+              <div class="col-lg-10">
+                <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => "Confirmar contraseña" %>
+              </div>
+            </div>
+
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <%= f.submit "Crear mi usuario", :class => "btn btn-primary" %>
+            </div>
+          </div>
+        </fieldset>
+      <% end %>
+
+      <hr>
+      <%= link_to "Ya tengo una cuenta.", login_path %>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
