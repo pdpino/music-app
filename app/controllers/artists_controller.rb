@@ -15,6 +15,8 @@ class ArtistsController < ApplicationController
   def show
     @artist_songs = @artist.songs
     @artist_albums = @artist.albums
+
+    @artist_comments = @artist.comments
   end
 
   def new

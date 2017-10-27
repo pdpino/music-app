@@ -69,6 +69,11 @@
     </p>
 <% end %>
 
+<%= render '_comments/index',
+  item_id: @song.id,
+  comments: @song_comments
+  %>
 
+<%= render '_comments/new', comment_create_path: comment_song_path(@song) %>
 
 <%= link_to 'Volver', songs_path %>

@@ -13,6 +13,7 @@ class SongsController < ApplicationController
   end
 
   def show
+    @song_comments = @song.comments
   end
 
   def new

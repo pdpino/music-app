@@ -13,6 +13,7 @@ class AlbumsController < ApplicationController
   end
 
   def show
+    @album_comments = @album.comments
   end
 
   def new

@@ -17,6 +17,11 @@ class User < ApplicationRecord
   has_many :favorite_artists, through: :favorites, source: :favoritable, source_type: 'Artist'
   # NOTE: source_types must be capitalized string, it doesn't work with symbols
 
+  has_many :comments, foreign_key: :user_id
+  has_many :comment_songs, through: :comments, source: :commentable, source_type: 'Song'
+  has_many :comment_albums, through: :comments, source: :commentable, source_type: 'Album'
+  has_many :comment_artists, through: :comments, source: :commentable, source_type: 'Artist'
+
   mount_uploader :photo, ImageUploader
 
   validates :first_name, presence: true, if: :info_required?

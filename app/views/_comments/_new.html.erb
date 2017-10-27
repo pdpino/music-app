@@ -1,0 +1,14 @@
+<!-- Display a new comment snippet
+  provide: comment_create_path  -->
+
+<% if has_create_permission %>
+  <%= form_for(:comment, method: :post, url: comment_create_path) do |f| %>
+    <div>
+      <%= f.label :content, "Comentario" %>
+      <%= f.text_area :content %>
+    </div>
+    <div>
+      <%= f.submit "Comentar" %>
+    </div>
+  <% end %>
+<% end %>
