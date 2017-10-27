@@ -9,6 +9,7 @@
     <%= link_to 'Crear género', new_genre_path %>
   <% end%>
 
+<<<<<<< HEAD
   <% if @genres.length > 0 then %>
 
     <table class="table table-striped table-hover ">
@@ -25,6 +26,17 @@
       </tbody>
     </table>
 
+=======
+<ul>
+  <% if @genres.any? %>
+    <% @genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+      |
+      <%= link_to 'Mostrar', genre %>
+    </li>
+    <% end %>
+>>>>>>> develop
   <% else %>
       <p>
         No hay géneros para mostrar

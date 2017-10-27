@@ -47,14 +47,14 @@ class FavoritesController < ApplicationController
       end
 
       # TODO: message to the user if can't add favorite
-      redirect_to user_path(@user)
+      redirect_to :back
     end
 
     def remove_favorite(item_model, user_items, item_key)
       user_items.delete(item_model.find(params[item_key]))
       # TODO: message to the user if doesn't exist (so is not deleted)
       # delete() it doesn't fail anyway
-      redirect_to user_path(@user)
+      redirect_to :back
     end
 
 end

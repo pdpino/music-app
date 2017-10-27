@@ -9,6 +9,7 @@ class User < ApplicationRecord
   attr_accessor :updating_password
 
   has_many :artists, foreign_key: :owner_id
+  has_many :albums, foreign_key: :owner_id
   has_many :songs, foreign_key: :owner_id
 
   has_many :favorites, foreign_key: :user_id
@@ -32,6 +33,11 @@ class User < ApplicationRecord
   has_many :received_messages, foreign_key: :receiver_id, class_name: 'WallMessage'
   has_many :receive_messages, through: :received_messages, source: :receiver
 
+  has_many :following, foreign_key: :follower_id, class_name: 'Follow' # I am following
+  has_many :following_users, through: :following, source: :follower
+  has_many :followers, foreign_key: :followed_id, class_name: 'Follow' # Followers of mine
+  has_many :followers_users, through: :followers, source: :followed
+
   mount_uploader :photo, ImageUploader
 
   validates :first_name, presence: true, if: :info_required?
@@ -51,6 +57,10 @@ class User < ApplicationRecord
 
   def password_required?
     updating_password || new_record?
+  end
+
+  def full_name
+    first_name.capitalize + ' ' + last_name
   end
 
 end

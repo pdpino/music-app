@@ -52,7 +52,7 @@
 </p>
 
 <h3>Género (s):</h3>
-<% if @artist_genres.length > 0 then %>
+<% if @artist_genres.any? %>
   <% @artist_genres.each do |genre| %>
     <li>
       <%= genre.name %>
@@ -93,7 +93,6 @@
         <%= link_to song.name, song %>
       </li>
     <% end %>
-  </ul>
 <% else %>
     <p>
       Este artista no tiene canciones
