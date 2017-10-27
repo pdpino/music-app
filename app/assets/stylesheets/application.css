@@ -41,8 +41,8 @@ body
 
 .custom-thumbnail {
     display: block;
-    width: 70px;
-    max-height: 70px;
+    width: 120px;
+    max-height: 150px;
     height: auto;
 }
 
