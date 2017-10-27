@@ -42,7 +42,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }, if: :password_required?
 
   def info_required?
-    !password_required?
+    !updating_password || new_record?
   end
 
   def password_required?
