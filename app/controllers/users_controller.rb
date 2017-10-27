@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @artists = @user.artists # Artists from the user
+    @albums = @user.albums
     @songs = @user.songs
 
     @favorite_songs = @user.favorite_songs

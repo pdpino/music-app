@@ -99,6 +99,21 @@
     </p>
 <% end %>
 
+<h3>Albums que ha creado el usuario:</h3>
+<% if @albums.any? %>
+  <% @albums.each do |album| %>
+    <li>
+      <%= album.name %>
+      |
+      <%= link_to 'Mostrar', album %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Este usuario no ha creado albums
+    </p>
+<% end %>
+
 <h3>Canciones que ha creado el usuario:</h3>
 <% if @songs.any? %>
   <% @songs.each do |song| %>

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   attr_accessor :updating_password
 
   has_many :artists, foreign_key: :owner_id
+  has_many :albums, foreign_key: :owner_id
   has_many :songs, foreign_key: :owner_id
 
   has_many :favorites, foreign_key: :user_id
