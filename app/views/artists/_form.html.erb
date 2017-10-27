@@ -40,7 +40,7 @@
   </div>
 
   <div>
-    <% if @all_genres.length > 0 then %>
+    <% if @all_genres.any? %>
       <h3>Elegir género (s):</h3>
       <% @all_genres.each do |genre| %>
         <%= check_box_tag("all_genres[]", genre.id, is_in?(@artist_genres, genre) ) %>

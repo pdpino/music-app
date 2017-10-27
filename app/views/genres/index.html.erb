@@ -1,7 +1,7 @@
 <h1> Index de géneros </h1>
 
 <ul>
-  <% if @genres.length > 0 then %>
+  <% if @genres.any? %>
     <% @genres.each do |genre| %>
     <li>
       <%= genre.name %>

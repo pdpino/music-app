@@ -29,7 +29,7 @@
   <% end %>
 
   <div>
-    <% if @all_artists.length > 0 then %>
+    <% if @all_artists.any? %>
       <h3>Elegir artista (s):</h3>
       <% @all_artists.each do |artist| %>
         <%= check_box_tag("all_artists[]", artist.id, is_in?(@album_artists, artist) ) %>

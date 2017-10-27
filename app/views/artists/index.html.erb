@@ -9,7 +9,7 @@
       <%= link_to 'Crear artista', new_artist_path %>
   <% end%>
 
-  <% if @artists.length > 0 then %>
+  <% if @artists.any? %>
     <table class="table table-striped table-hover ">
       <thead>
         <tr>

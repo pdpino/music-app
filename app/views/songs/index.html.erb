@@ -1,7 +1,7 @@
 <h1> Canciones </h1>
 
 <ul>
-  <% if @songs.length > 0 then %>
+  <% if @songs.any? %>
     <% @songs.each do |song| %>
     <li>
       <%= song.name %>

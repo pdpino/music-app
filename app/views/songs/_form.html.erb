@@ -15,7 +15,7 @@
   </div>
 
   <div>
-    <% if @all_artists.length > 0 then %>
+    <% if @all_artists.any? %>
       <h3>Elegir artista (s):</h3>
 
       <% @all_artists.each do |artist| %>
@@ -34,7 +34,7 @@
   </div>
 
   <div>
-    <% if @all_genres.length > 0 then %>
+    <% if @all_genres.any? %>
       <h3>Elegir género (s):</h3>
 
       <% @all_genres.each do |genre| %>
@@ -51,7 +51,7 @@
   </div>
 
   <div>
-    <% if @eligible_albums.length > 0 then %>
+    <% if @eligible_albums.any? %>
       <h3>Elegir álbum (s):</h3>
 
       <% @eligible_albums.each do |album| %>

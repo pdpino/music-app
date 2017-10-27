@@ -42,7 +42,7 @@
   %>
 
 <h3>Artista (s):</h3>
-<% if @album_artists.length > 0 then %>
+<% if @album_artists.any? %>
   <% @album_artists.each do |artist| %>
     <li>
       <%= artist.name %>
@@ -57,7 +57,7 @@
 <% end %>
 
 <h3>Canciones (s):</h3>
-<% if @album_songs.length > 0 then %>
+<% if @album_songs.any? %>
   <% @album_songs.each do |song| %>
     <li>
       <%= song.name %>

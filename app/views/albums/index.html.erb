@@ -1,7 +1,7 @@
 <h1> Index de álbumes </h1>
 
 <ul>
-  <% if @albums.length > 0 then %>
+  <% if @albums.any? %>
     <% @albums.each do |album| %>
     <li>
       <img src="<%= album.image %>" alt="foto">

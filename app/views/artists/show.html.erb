@@ -53,7 +53,7 @@
   %>
 
 <h3>Género (s):</h3>
-<% if @artist_genres.length > 0 then %>
+<% if @artist_genres.any? %>
   <% @artist_genres.each do |genre| %>
     <li>
       <%= genre.name %>
@@ -68,7 +68,7 @@
 <% end %>
 
 <h3>Álbum (s):</h3>
-<% if @artist_albums.length > 0 then %>
+<% if @artist_albums.any? %>
   <% @artist_albums.each do |album| %>
     <li>
       <%= album.name %>
@@ -87,7 +87,7 @@
 <% end %>
 
 <h3>Canciones:</h3>
-<% if @artist_songs.length > 0 then %>
+<% if @artist_songs.any? %>
   <% @artist_songs.each do |song| %>
     <li>
       <%= song.name %>
