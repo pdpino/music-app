@@ -1,56 +1,55 @@
-<h1>Artista</h1>
+<div class="row padding-first-element">
+  <img src="<%= (@artist.image.blank? ? asset_path('artist-default.png') : @artist.image) %>"
+       class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="user profile image" />
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @artist.name %>
-</p>
+   <div class="col-lg-3 col-md-3 col-sm-4">
+    <ul class="list-group">
+      <% if @has_modify_permission %>
+        <li class="list-group-item"><%= link_to 'Editar', edit_artist_path(@artist) %></li>
+        <li class="list-group-item"><%= link_to 'Eliminar', @artist, method: :delete, data: { confirm: 'Está seguro?' } %></li>
+      <% end %>
+      <li class="list-group-item">
+        <%= render 'favorites/update',
+          item: @artist,
+          can_add_favorite: Proc.new { |user, artist| can_add_favorite_artist(user, artist) },
+          can_remove_favorite: Proc.new { |user, artist| can_remove_favorite_artist(user, artist) },
+          add_favorite_item_path: Proc.new { |user, artist| add_favorite_artist_path(user, artist) },
+          remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
+          %>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<img src="<%= @artist.image %>" alt="Imagen">
+<div class="row">
 
-<p>
-  <strong>Descripción:</strong>
-  <%= @artist.description.present? ? @artist.description : "Sin descripción" %>
-</p>
+  <h1><%= @artist.name %></h1>
+  <p class="lead">
+    <%= @artist.description.present? ? @artist.description : "Sin descripción." %>
+  </p>
+  <hr>
+  <p>
+    <strong>Rating:</strong>
+    <%= @artist_rating %>
+  </p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @artist_rating %>
-</p>
+  <p>
+    <strong>País de origen:</strong>
+    <%= @artist.country %>
+    <%= @artist.country.present? ? @artist.country : "Desconocido" %>
+  </p>
 
-<p>
-  <strong>País de origen:</strong>
-  <%= @artist.country %>
-  <%= @artist.country.present? ? @artist.country : "Desconocido" %>
-</p>
-
-
-<p>
   <% if @artist.members.present? %>
-    <strong>Integrantes:</strong>
+    <h3>Integrantes: </h3>
     <%= @artist.members %>
   <% else %>
-    Solista
+    <strong>Solista</strong>
   <% end %>
-</p>
 
 <p>
   <strong>Actividad:</strong>
   <%= @artist.active_since %> hasta <%= @artist.active_until.present? ? @artist.active_until : "presente" %>
 </p>
-
-<% if @has_modify_permission %>
-  <%= link_to 'Editar', edit_artist_path(@artist) %>
-  <%= link_to 'Eliminar', @artist, method: :delete, data: { confirm: 'Está seguro?' } %>
-  <br> <!-- HACK: use CSS instead of this -->
-<% end %>
-
-<%= render 'favorites/update',
-  item: @artist,
-  can_add_favorite: Proc.new { |user, artist| can_add_favorite_artist(user, artist) },
-  can_remove_favorite: Proc.new { |user, artist| can_remove_favorite_artist(user, artist) },
-  add_favorite_item_path: Proc.new { |user, artist| add_favorite_artist_path(user, artist) },
-  remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
-  %>
 
 <h3>Género (s):</h3>
 <% if @artist_genres.length > 0 then %>
@@ -69,13 +68,13 @@
 
 <h3>Álbum (s):</h3>
 <% if @artist_albums.length > 0 then %>
-  <% @artist_albums.each do |album| %>
-    <li>
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-    </li>
-  <% end %>
+  <ul class="ul-no-bullet"
+    <% @artist_albums.each do |album| %>
+      <li>
+        <%= link_to album.name, album %>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
     <p>
       Sin álbumes
@@ -88,13 +87,13 @@
 
 <h3>Canciones:</h3>
 <% if @artist_songs.length > 0 then %>
-  <% @artist_songs.each do |song| %>
-    <li>
-      <%= song.name %>
-      |
-      <%= link_to 'Mostrar', song %>
-    </li>
-  <% end %>
+  <ul class="ul-no-bullet"
+    <% @artist_songs.each do |song| %>
+      <li>
+        <%= link_to song.name, song %>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
     <p>
       Este artista no tiene canciones
@@ -103,5 +102,3 @@
 
 <%= render 'comments/index', item_id: @artist.id, comments: @artist_comments %>
 <%= render 'comments/new', comment_create_path: comment_artist_path(@artist) %>
-
-<%= link_to 'Volver', artists_path %>

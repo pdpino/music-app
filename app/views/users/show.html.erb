@@ -1,87 +1,109 @@
-<h1>Usuario</h1>
+<div class="row padding-first-element">
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @user.first_name %>
-  <%= @user.last_name %>
+
+  <img src="<%= (@user.photo.blank? ? asset_path('user-default.png') : @user.photo) %>"
+       class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="user profile image" />
+
+  <div class="col-lg-3 col-md-3 col-sm-4">
+    <ul class="list-group">
+      <% if @has_permission %>
+          <li class="list-group-item">
+            <%= link_to 'Editar Perfil', edit_user_path(@user)%>
+          </li>
+          <li class="list-group-item">
+            <%= link_to 'Editar Contraseña', edit_user_password_path(@user) %>
+          </li>
+          <li class="list-group-item">
+            <%= link_to 'Eliminar Usuario', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
+          </li>
+      <% end %>
+
+      <% if @can_grant_admin %>
+          <li class="list-group-item">
+            <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
+          </li>
+      <% elsif @can_revoke_admin %>
+          <li class="list-group-item">
+            <%= link_to 'Quitar permisos de administrador', revoke_admin_path(@user), method: :delete, data: { confirm: 'Está seguro? Esto no se puede deshacer' }%>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
+  <p class="lead"><%= @user.email %></p>
+
   <% if @show_is_admin %>
-    <strong>Este usuario tiene permisos de administrador</strong>
+
+      <div class="alert alert-warning">
+        <h4>Precaución!</h4>
+        <p>Este usuario tiene permisos de administrador.</p>
+      </div>
   <% end %>
-</p>
 
-<img src="<%= @user.photo %>" alt="Foto">
+  <hr>
+</div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<div class="row">
+  <%= render 'wall_messages/new' %>
+  <%= render 'wall_messages/index' %>
+  <hr>
+</div>
 
-<% if @has_permission %>
-  <%= link_to 'Editar', edit_user_path(@user) %>
-  <%= link_to 'Editar Contraseña', edit_user_password_path(@user) %>
-  <%= link_to 'Eliminar Usuario', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
-<% end %>
+<div class="row">
 
-<% if @can_grant_admin %>
-  <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
-<% elsif @can_revoke_admin %>
-  <%= link_to 'Quitar permisos de administrador', revoke_admin_path(@user), method: :delete, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
-<% end %>
+  <%= render 'favorites/index',
+    resource_name: 'canciones',
+    favorite_items: @favorite_songs,
+    item_path: Proc.new { |song| song_path(song) },
+    remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
+    is_female: true
+    %>
 
-<%= render 'favorites/index',
-  resource_name: 'canciones',
-  favorite_items: @favorite_songs,
-  item_path: Proc.new { |song| song_path(song) },
-  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
-  is_female: true
-  %>
+  <%= render 'favorites/index',
+    resource_name: 'artistas',
+    favorite_items: @favorite_artists,
+    item_path: Proc.new { |artist| artist_path(artist) },
+    remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
+    %>
 
-<%= render 'favorites/index',
-  resource_name: 'artistas',
-  favorite_items: @favorite_artists,
-  item_path: Proc.new { |artist| artist_path(artist) },
-  remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
-  %>
+  <%= render 'favorites/index',
+    resource_name: 'albums',
+    favorite_items: @favorite_albums,
+    item_path: Proc.new { |album| album_path(album) },
+    remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+    %>
 
-<%= render 'favorites/index',
-  resource_name: 'albums',
-  favorite_items: @favorite_albums,
-  item_path: Proc.new { |album| album_path(album) },
-  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-  %>
-
-<h3>Artistas que ha creado el usuario:</h3>
-<% if @artists.any? %>
-  <% @artists.each do |artist| %>
-    <li>
-      <%= artist.name %>
-      |
-      <%= link_to 'Mostrar', artist %>
-    </li>
+  <h3>Artistas que ha creado el usuario:</h3>
+  <% if @artists.any? %>
+    <% @artists.each do |artist| %>
+      <li>
+        <%= artist.name %>
+        |
+        <%= link_to 'Mostrar', artist %>
+      </li>
+    <% end %>
+  <% else %>
+      <p>
+        Este usuario no ha creado artistas
+      </p>
   <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado artistas
-    </p>
-<% end %>
 
-<h3>Canciones que ha creado el usuario:</h3>
-<% if @songs.any? %>
-  <% @songs.each do |song| %>
-    <li>
-      <%= song.name %>
-      |
-      <%= link_to 'Mostrar', song %>
-    </li>
+  <h3>Canciones que ha creado el usuario:</h3>
+  <% if @songs.any? %>
+    <% @songs.each do |song| %>
+      <li>
+        <%= song.name %>
+        |
+        <%= link_to 'Mostrar', song %>
+      </li>
+    <% end %>
+  <% else %>
+      <p>
+        Este usuario no ha creado canciones
+      </p>
   <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado canciones
-    </p>
-<% end %>
 
-<%= render 'wall_messages/index' %>
-
-<%= render 'wall_messages/new' %>
-
-<%= link_to 'Volver', users_path %>
+</div>

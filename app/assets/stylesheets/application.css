@@ -46,6 +46,18 @@ body
     height: auto;
 }
 
+.profile-image {
+    display: block;
+    height: 300px;
+}
+
 .table > tbody > tr > td {
     vertical-align: middle;
+}
+
+.ul-no-bullet {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	padding-left: 10px;
 }

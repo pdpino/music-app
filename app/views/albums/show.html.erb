@@ -1,83 +1,88 @@
-<h1>Álbum</h1>
+<div class="row padding-first-element">
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @album.name %>
-</p>
+  <img src="<%= (@album.image.blank? ? asset_path('album-default.png') : @album.image) %>" class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="album artwork" />
 
-<p>
-  <strong>Descripción:</strong>
-  <%= @album.description %>
-</p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @album_rating %>
-</p>
+  <div class="col-lg-3 col-md-3 col-sm-4">
+    <ul class="list-group">
+      <% if @has_modify_permission %>
+        <li class="list-group-item"><%= link_to 'Editar', edit_album_path(@album) %></li>
+        <li class="list-group-item"><%= link_to 'Eliminar', @album, method: :delete, data: { confirm: 'Está seguro?' } %></li>
+      <% end %>
+      <li class="list-group-item">
+        <%= render 'favorites/update',
+          item: @album,
+          can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
+          can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
+          add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
+          remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) } %>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<p>
-  <strong>Fecha de lanzamiento:</strong>
-  <%= @album.release_date %>
-</p>
+<div class="row">
+  <h1><%= @album.name %></h1>
+  
+  <p class="lead">
+    <%= @album.description.blank? ? '' : @album.description %>
+  </p>  
 
-<img src="<%= @album.image %>" alt="Imagen">
+  <hr>
 
-<p>
-  <%= @album.is_single ? "Es un single" : "No es un single" %>
-  <!-- CHGME: really creative... -->
-</p>
 
-<% if @has_modify_permission %>
-  <%= link_to 'Editar', edit_album_path(@album) %>
-  <%= link_to 'Eliminar', @album, method: :delete, data: { confirm: 'Está seguro?' } %>
-  <br> <!-- HACK: use CSS instead of this -->
-<% end %>
+  <p>
+    <strong>Rating:</strong>
+    <%= @album_rating %>
+  </p>
 
-<%= render 'favorites/update',
-  item: @album,
-  can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
-  can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
-  add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
-  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-  %>
+  <p>
+    <strong>Fecha de lanzamiento:</strong>
+    <%= @album.release_date %>
+  </p>
 
-<h3>Artista (s):</h3>
-<% if @album_artists.length > 0 then %>
-  <% @album_artists.each do |artist| %>
-    <li>
-      <%= artist.name %>
-      |
-      <%= link_to 'Mostrar', artist %>
-    </li>
+
+  <p>
+    <%= @album.is_single ? "Es un single" : "No es un single" %>
+    <!-- CHGME: really creative... -->
+  </p>
+
+  <h3>Artista (s):</h3>
+  <% if @album_artists.length > 0 then %>
+    <ul class="ul-no-bullet">
+      <% @album_artists.each do |artist| %>
+        <li>
+          <%= link_to artist.name, artist %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+      <p>
+        Sin artistas
+      </p>
   <% end %>
-<% else %>
-    <p>
-      Sin artistas
-    </p>
-<% end %>
 
-<h3>Canciones (s):</h3>
-<% if @album_songs.length > 0 then %>
-  <% @album_songs.each do |song| %>
-    <li>
-      <%= song.name %>
-      |
-      <%= link_to 'Mostrar', song %>
-    </li>
+  <h3>Canciones (s):</h3>
+  <% if @album_songs.length > 0 then %>
+    <ul class="ul-no-bullet">
+      <% @album_songs.each do |song| %>
+        <li>
+          <%= link_to song.name, song %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+      <p>
+        Sin canciones
+      </p>
   <% end %>
-<% else %>
-    <p>
-      Sin canciones
-    </p>
-<% end %>
 
-<% if has_create_permission %>
-  <%= link_to 'Crear canción', new_song_path({ album_id: @album.id }) %>
-<% end %>
+  <% if has_create_permission %>
+    <%= link_to 'Crear canción', new_song_path({ album_id: @album.id }) %>
+  <% end %>
 
-<br> <!-- HACK: use CSS -->
+  <br>
 
-<%= render 'comments/index', item_id: @album.id, comments: @album_comments %>
-<%= render 'comments/new', comment_create_path: comment_album_path(@album) %>
-
-<%= link_to 'Volver', albums_path %>
+  <%= render 'comments/index', item_id: @album.id, comments: @album_comments %>
+  <%= render 'comments/new', comment_create_path: comment_album_path(@album) %>
+</div>

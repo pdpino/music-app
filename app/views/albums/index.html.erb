@@ -1,31 +1,54 @@
-<h1> Index de álbumes </h1>
+<div class="row padding-first-element">
+  <h1>Álbumes disponibles</h1>
+  <hr>
+</div>
 
-<ul>
+<div class="row padding-first-element">
+
+  <% if has_create_permission %>
+    <%= link_to 'Crear álbum', new_album_path %>
+  <% end%>
+
   <% if @albums.length > 0 then %>
-    <% @albums.each do |album| %>
-    <li>
-      <img src="<%= album.image %>" alt="foto">
+    <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th class="col-xl-2 col-lg-2 col-md-3 col-sm-6"></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-      |
-      <%= render 'favorites/update',
-        item: album,
-        can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
-        can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
-        add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
-        remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-        %>
-    </li>
-    <% end %>
+      <tbody>
+
+        <% @albums.each do |album| %>
+          <tr>
+            <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
+              <img src="<%= (album.image.blank? ? asset_path('album-default.jpeg') : album.image) %>"
+                   class="img-thumbnail rounded float-left custom-thumbnail" alt="album thumbnail" />
+            </td>
+
+            <td>
+              <%= link_to album.name, album %>
+            </td>
+            
+            <td>
+              <%= render 'favorites/update',
+                item: album,
+                can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
+                can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
+                add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
+                remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+                %>
+              </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% else %>
       <p>
         No hay álbumes para mostrar
       </p>
   <% end %>
-</ul>
 
-<% if has_create_permission %>
-  <%= link_to 'Crear álbum', new_album_path %>
-<% end%>
+</div>
