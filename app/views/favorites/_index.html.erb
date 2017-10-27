@@ -6,8 +6,6 @@
   is_female: true
 -->
 
-<%= puts "LOCAL ASSIGNS: #{local_assigns}" %>
-
 <h3><%= resource_name.capitalize %>
   <%= (local_assigns[:is_female] && is_female) ? 'Favoritas:' : 'Favoritos:' %>
 </h3>

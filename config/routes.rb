@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :genres
   resources :albums
   resources :artists
+  resources :playlists
 
   # Edit password
   get 'users/:id/edit_password' => 'users#edit_password', as: 'edit_user_password'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
 
   # Grant admin permissions
   patch 'users/:id/admin' => 'users#grant_admin', as: 'grant_admin'
+  delete 'users/:id/admin' => 'users#revoke_admin', as: 'revoke_admin'
 
   # Favorites
   post 'users/:user_id/favorites/songs/:song_id' => 'favorites#mark_song', as: 'add_favorite_song'
@@ -39,6 +41,14 @@ Rails.application.routes.draw do
   delete 'songs/:song_id/comments/:comment_id' => 'comments#remove_comment_song', as: 'remove_comment_song'
   delete 'artists/:artist_id/comments/:comment_id' => 'comments#remove_comment_artist', as: 'remove_comment_artist'
   delete 'albums/:album_id/comments/:comment_id' => 'comments#remove_comment_album', as: 'remove_comment_album'
+
+  # User wall
+  post 'users/:receiver_id/wall_messages' => 'wall_messages#new_wall_message', as: 'new_wall_message'
+
+  delete 'users/:receiver_id/wall_messages/:message_id' => 'wall_messages#remove_wall_message', as: 'remove_wall_message'
+
+  # Ratings
+  post 'songs/:song_id/ratings' => 'ratings#rate_song', as: 'rate_song'
 
 end
 

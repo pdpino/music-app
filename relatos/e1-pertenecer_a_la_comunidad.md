@@ -100,3 +100,19 @@ Yo como usuario (estándar o administrador) quiero poder agregar, cambiar o elim
 ### Validación:
 * Si agregó/reemplazó una imagen, ésta es visible como tal.
 * Imagen anterior (si es que había) desaparece completamente del sistema, no hay forma de verla.
+
+*** 
+
+## Relato 12: Crear Admins. 
+### Historia:
+Yo como super usuario poder crear y eliminar cuentas de administrador, para poder delegar y gestionar el trabajo de administración sobre la plataforma.
+
+### Validación:
+* Nuevo administrador puede ingresar usando par mail/contraseña creado. 
+* Si el correo ya tenía una cuenta estándar asociada, se asocia una cuenta de administrador, adicional a la anterior. Usuario correpondiente puede seleccionar cuenta con la que quiere ingresar. 
+* Si el superusuario 'elimina' a un administrador, este no puede ingresar a dicha cuenta. Si tenía asociada una cuenta de usuario estándar, aún puede ingresar a ésta.
+* Administradores no pueden crear/eliminar a otros administradores.
+* Superusuario no puede crear otros super usuarios. 
+* Superusuario no puede eliminarse a sí mismo.
+
+

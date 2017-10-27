@@ -1,0 +1,14 @@
+<!-- Display a new comment snippet
+  provide: rating_create_path  -->
+
+<% if has_create_permission %>
+  <%= form_for(:rating, method: :post, url: rating_create_path) do |f| %>
+    <div>
+      <%= f.label :stars, "Estrellas" %>
+      <%= f.number_field :stars %>
+    </div>
+    <div>
+      <%= f.submit "Calificar" %>
+    </div>
+  <% end %>
+<% end %>

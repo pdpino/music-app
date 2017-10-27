@@ -1,0 +1,32 @@
+<h1>
+  <%=@playlist.name%>
+</h1>
+<p>
+  <%= link_to "Eliminar Playlist ID: #{@playlist.id}", @playlist, method: :delete %>
+</p>
+
+
+  <div>
+    <p>
+      <% vx = @playlist.id %>
+      <%= "Id de la playlist: #{vx}" %>
+    </p>
+    <p>
+      <% vx = @playlist.description %>
+      <%= "Descripción de la playlist: #{vx}" %>
+    </p>
+    <p>
+      <% vx = @playlist.owner_id %>
+      <%= "Id del Usuario Creador: #{vx}" %>
+    </p>
+    <p>
+      <% vx1 = @playlist.ranking %>
+      <%= "Ranking de esta playlist: #{vx1}" %>
+    </p>
+    <li>
+      <!--me rutea a la 3000/playlists-->
+      <%= link_to "Volver a Playlists", playlists_path %>
+    </li>
+
+
+  </div>
