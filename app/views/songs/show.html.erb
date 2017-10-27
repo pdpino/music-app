@@ -10,6 +10,11 @@
   <%= @song.duration %>
 </p>
 
+<p>
+  <strong>Rating:</strong>
+  <%= @song_rating %>
+</p>
+
 <% if @has_modify_permission %>
   <%= link_to 'Editar', edit_song_path(@song) %>
   <%= link_to 'Eliminar', @song, method: :delete, data: { confirm: 'Está seguro?' } %>

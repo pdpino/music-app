@@ -17,7 +17,6 @@ class ArtistsController < ApplicationController
     @artist_albums = @artist.albums
 
     @artist_comments = @artist.comments
-    @artist_ratings = @artist.ratings
   end
 
   def new

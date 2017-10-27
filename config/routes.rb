@@ -49,8 +49,6 @@ Rails.application.routes.draw do
 
   # Ratings
   post 'songs/:song_id/ratings' => 'ratings#rate_song', as: 'rate_song'
-  post 'artists/:artist_id/ratings' => 'ratings#rate_artist', as: 'rate_artist'
-  post 'albums/:album_id/ratings' => 'ratings#rate_album', as: 'rate_album'
 
 end
 

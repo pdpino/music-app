@@ -75,8 +75,4 @@
 <%= render 'comments/index', item_id: @album.id, comments: @album_comments %>
 <%= render 'comments/new', comment_create_path: comment_album_path(@album) %>
 
-<%= render 'ratings/index', ratings: @album_ratings %>
-<%= render 'ratings/new', rating_create_path: rate_album_path(@album) %>
-
-
 <%= link_to 'Volver', albums_path %>

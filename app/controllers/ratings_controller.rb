@@ -6,14 +6,6 @@ class RatingsController < ApplicationController
     rate_item(Song.find(params[:song_id]))
   end
 
-  def rate_artist
-    rate_item(Artist.find(params[:artist_id]))
-  end
-
-  def rate_album
-    rate_item(Album.find(params[:album_id]))
-  end
-
   private
     def rating_params
       @params = params.require(:rating).permit(:stars)

@@ -15,6 +15,7 @@ class SongsController < ApplicationController
   def show
     @song_comments = @song.comments
     @song_ratings = @song.ratings
+    @song_rating = @song_ratings.average(:stars).round(2)
   end
 
   def new
