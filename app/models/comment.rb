@@ -5,4 +5,6 @@ class Comment < ApplicationRecord
   # could be a song, artist, album or list
 
   belongs_to :user
+
+  default_scope { order(created_at: :desc) }
 end
