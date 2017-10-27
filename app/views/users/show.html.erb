@@ -28,7 +28,7 @@
   <%= link_to 'Quitar permisos de administrador', revoke_admin_path(@user), method: :delete, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
 <% end %>
 
-<%= render 'favorite-snippet',
+<%= render 'favorites/index',
   resource_name: 'canciones',
   favorite_items: @favorite_songs,
   item_path: Proc.new { |song| song_path(song) },
@@ -36,14 +36,14 @@
   is_female: true
   %>
 
-<%= render 'favorite-snippet',
+<%= render 'favorites/index',
   resource_name: 'artistas',
   favorite_items: @favorite_artists,
   item_path: Proc.new { |artist| artist_path(artist) },
   remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
   %>
 
-<%= render 'favorite-snippet',
+<%= render 'favorites/index',
   resource_name: 'albums',
   favorite_items: @favorite_albums,
   item_path: Proc.new { |album| album_path(album) },
