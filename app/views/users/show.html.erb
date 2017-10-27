@@ -28,6 +28,8 @@
   <%= link_to 'Quitar permisos de administrador', revoke_admin_path(@user), method: :delete, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
 <% end %>
 
+<%= render 'follows/update', user: @user %>
+
 <%= render 'favorites/index',
   resource_name: 'canciones',
   favorite_items: @favorite_songs,

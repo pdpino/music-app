@@ -32,6 +32,11 @@ class User < ApplicationRecord
   has_many :received_messages, foreign_key: :receiver_id, class_name: 'WallMessage'
   has_many :receive_messages, through: :received_messages, source: :receiver
 
+  has_many :following, foreign_key: :follower_id, class_name: 'Follow' # I am following
+  has_many :following_users, through: :following, source: :follower
+  has_many :followers, foreign_key: :followed_id, class_name: 'Follow' # Followers of mine
+  has_many :followers_users, through: :followers, source: :followed
+
   mount_uploader :photo, ImageUploader
 
   validates :first_name, presence: true, if: :info_required?

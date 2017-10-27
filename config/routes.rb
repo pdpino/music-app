@@ -50,6 +50,12 @@ Rails.application.routes.draw do
   # Ratings
   post 'songs/:song_id/ratings' => 'ratings#rate_song', as: 'rate_song'
 
+  # Following
+  post 'users/:follower_id/follows/:followed_id' => 'follows#follow', as: 'follow'
+
+  delete 'users/:follower_id/follows/:followed_id' => 'follows#unfollow', as: 'unfollow'
+
+
 end
 
 #### HELP COMMENTS FROM CODECADEMY

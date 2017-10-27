@@ -1,0 +1,9 @@
+<!-- Follow or unfollow button -->
+
+<% if can_follow(user) %>
+  <%= link_to 'Seguir', follow_path(current_user, user), method: :post %>
+  <br>
+<% elsif can_unfollow(user) %>
+  <%= link_to 'Dejar de seguir', unfollow_path(current_user, user), method: :delete %>
+  <br>
+<% end %>
