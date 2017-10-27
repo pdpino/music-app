@@ -1,0 +1,17 @@
+<!-- Display comments
+  provide: 'comments' -->
+
+<h3>Comentarios:</h3>
+<% if comments.any? %>
+  <% comments.each do |comment| %>
+    <li>
+      <%= comment.user.first_name %>:
+      <br>
+      <%= comment.content %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      No hay comentarios
+    </p>
+<% end %>
