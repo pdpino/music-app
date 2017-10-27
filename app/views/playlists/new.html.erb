@@ -1,33 +1,6 @@
 <h1>Crear tu PlayList</h1>
+<div>
+    <%= link_to "Volver", playlists_path%>
+</div>
 
-<%= form_for(@playlist) do |f| %>
-  <% @playlist.errors.full_messages.each do |message| %>
-    <!--para cada error desplegará el siguiente código -->
-    <div>
-      * <%= message %>
-
-    </div>
-    <%=" "%>
-  <%end%>
-  <div >
-    <%= f.text_field :name, placeholder: "Nombre" %>
-  </div>
-  <div >
-    <%= f.text_field :owner_id, placeholder: "Id del Usuario Creador" %>
-  </div>
-  <div >
-    <%= f.text_field :ranking, placeholder: "Ranking" %>
-  </div>
-  <div>
-    <%= f.text_area :description, placeholder: "Descripción",
-    style:"height:250px;"%>
-  </div>
-  <div>
-    <!-- boton para ingresar datos -->
-    <%= f.submit "¡Crear!" %>
-  </div>
-  <li>
-    <%= link_to "Volver a Playlists", playlists_path %>
-  </li>
-  
-<%end%>
+<%= render "playlists/form" %>

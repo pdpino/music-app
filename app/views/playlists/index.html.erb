@@ -4,7 +4,7 @@
 <li>
   <h3><%= link_to "Crear Playlist", new_playlist_path %></h3>
 </li>
-<% @playlists.each do |playlist1| %>
+<% @playlists_by_ranking.each do |playlist1| %>
   <h3><%= playlist1.name %></h3>
   <div>
     <!--

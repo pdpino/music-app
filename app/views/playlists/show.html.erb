@@ -1,6 +1,9 @@
 <h1>
   <%=@playlist.name%>
 </h1>
+<div>
+  <%= link_to "Editar", edit_playlist_path(@playlist) %>
+</div>
 <p>
   <%= link_to "Eliminar Playlist ID: #{@playlist.id}", @playlist, method: :delete %>
 </p>

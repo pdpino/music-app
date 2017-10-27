@@ -2,6 +2,7 @@ class PlaylistsController < ApplicationController
 
   def index
     @playlists = Playlist.all
+    @playlists_by_ranking = @playlists.order(:ranking)
   end
   def show
     @playlist = Playlist.find(params[:id])
@@ -9,6 +10,12 @@ class PlaylistsController < ApplicationController
 
   def new
     @playlist = Playlist.new
+  end
+
+  def edit
+    #recibe el artículo segun id que queremos modificar
+    #hay que crear vista edit.html.erb
+    @playlist = Playlist.find(params[:id])
   end
 
   def create
@@ -33,6 +40,13 @@ class PlaylistsController < ApplicationController
   #UPDATE article
   #PUT /articles/:id
   def update
+    @playlist = Playlist.find(params[:id])
+    #le pasamos los strong params
+    if @playlist.update(playlist_params)
+      redirect_to @playlist
+    else
+      render :edit
+    end
 
   end
 
