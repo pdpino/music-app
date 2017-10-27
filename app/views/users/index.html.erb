@@ -10,6 +10,7 @@
           <tr>
             <th class="col-xl-2 col-lg-2 col-md-3 col-sm-6"></th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
 
@@ -21,9 +22,11 @@
                 <img src="<%= (user.photo.blank? ? asset_path('user-default.png') : user.photo) %>"
                      class="img-thumbnail rounded float-left custom-thumbnail" alt="user thumbnail" />
               </td>
-              <td><%= link_to user.full_name, user  %>
-          	      |
-                  <%= render 'follows/update', user: user %>
+              <td>
+                <%= link_to user.full_name, user  %>
+          	  </td>
+              <td>
+                <%= render 'follows/update', user: user %>
           		</td>
             </tr>
           <% end %>
