@@ -30,6 +30,38 @@
 
 <%= render 'follows/update', user: @user %>
 
+<h3> Siguiendo </h3>
+<% if @user_following.any? then %>
+  <% @user_following.each do |user_follows| %>
+    <li>
+      <%= link_to user_follows.followed.full_name, user_path(user_follows.followed) %>
+
+      <% if @has_permission %>
+        |
+        <%= link_to 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete %>
+      <% end %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      No sigue a nadie.
+    </p>
+<% end %>
+
+<h3> Seguidores </h3>
+<% if @user_followers.any? then %>
+  <% @user_followers.each do |user_follower| %>
+    <li>
+      <%= link_to user_follower.follower.full_name, user_path(user_follower.follower) %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      No tiene.
+    </p>
+<% end %>
+
+
 <%= render 'favorites/index',
   resource_name: 'canciones',
   favorite_items: @favorite_songs,
