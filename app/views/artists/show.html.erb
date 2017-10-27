@@ -13,6 +13,11 @@
 </p>
 
 <p>
+  <strong>Rating:</strong>
+  <%= @artist_rating %>
+</p>
+
+<p>
   <strong>País de origen:</strong>
   <%= @artist.country %>
   <%= @artist.country.present? ? @artist.country : "Desconocido" %>
@@ -39,7 +44,7 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
-<%= render '_favorites/update',
+<%= render 'favorites/update',
   item: @artist,
   can_add_favorite: Proc.new { |user, artist| can_add_favorite_artist(user, artist) },
   can_remove_favorite: Proc.new { |user, artist| can_remove_favorite_artist(user, artist) },
@@ -96,12 +101,7 @@
     </p>
 <% end %>
 
-<%= render '_comments/index',
-  item_id: @artist.id,
-  comments: @artist_comments
-  %>
-
-<%= render '_comments/new', comment_create_path: comment_artist_path(@artist) %>
-
+<%= render 'comments/index', item_id: @artist.id, comments: @artist_comments %>
+<%= render 'comments/new', comment_create_path: comment_artist_path(@artist) %>
 
 <%= link_to 'Volver', artists_path %>

@@ -1,0 +1,21 @@
+<!-- Display ratings
+  provide: 'ratings' -->
+
+<h3>Últimos ratings:</h3>
+<% if ratings.any? %>
+  <% ratings.each do |rating| %>
+    <li>
+      <%= rating.user.first_name %>
+      -
+      <%= rating.created_at.strftime("%Y-%b-%d %H:%M") %>
+      :
+      <br>
+      <%= rating.stars %> estrellas
+    </li>
+    <br>
+  <% end %>
+<% else %>
+    <p>
+      No hay ratings
+    </p>
+<% end %>

@@ -10,7 +10,7 @@
       |
       <%= link_to 'Mostrar', artist %>
       |
-      <%= render '_favorites/update',
+      <%= render 'favorites/update',
         item: artist,
         can_add_favorite: Proc.new { |user, artist| can_add_favorite_artist(user, artist) },
         can_remove_favorite: Proc.new { |user, artist| can_remove_favorite_artist(user, artist) },

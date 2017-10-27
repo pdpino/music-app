@@ -16,6 +16,9 @@ class Artist < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :user_comments, through: :comments, as: :commentable
 
+  has_many :ratings, as: :rateable
+  has_many :user_ratings, through: :ratings, as: :rateable
+
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
@@ -38,5 +41,12 @@ class Artist < ApplicationRecord
         errors.add(:active_until, "debe ser después que la fecha de inicio")
       end
     end
+  end
+
+  def avg_rating
+    # REVIEW: change by a oneline rubyish way to do this
+    avg = 0
+    albums.each { |album| avg += album.avg_rating }
+    avg
   end
 end

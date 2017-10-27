@@ -22,14 +22,14 @@ class User < ApplicationRecord
   has_many :comment_albums, through: :comments, source: :commentable, source_type: 'Album'
   has_many :comment_artists, through: :comments, source: :commentable, source_type: 'Artist'
 
-  # has_many :wall_message
-  # has_many :written_messages, through: :wall_message, foreign_key: :writer_id
-  # has_many :received_messages, through: :wall_message, foreign_key: :receiver_id
+  has_many :ratings, foreign_key: :user_id
+  has_many :rated_songs, through: :ratings, source: :rateable, source_type: 'Song'
+  has_many :rated_albums, through: :ratings, source: :rateable, source_type: 'Album'
+  has_many :rated_artists, through: :ratings, source: :rateable, source_type: 'Artist'
 
-  has_many :written_messages, foreign_key: :writer_id, class_name: "WallMessage"
+  has_many :written_messages, foreign_key: :writer_id, class_name: 'WallMessage'
   has_many :write_messages, through: :written_messages, source: :writer
-
-  has_many :received_messages, foreign_key: :receiver_id, class_name: "WallMessage"
+  has_many :received_messages, foreign_key: :receiver_id, class_name: 'WallMessage'
   has_many :receive_messages, through: :received_messages, source: :receiver
 
   mount_uploader :photo, ImageUploader
@@ -39,7 +39,11 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, if: :info_required?
 
   has_secure_password
-  validates :password, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }, if: :password_required?
+  validates :password,
+    confirmation: true,
+    length: { minimum: 8 },
+    format: { with: PASSWORD_FORMAT },
+    if: :password_required?
 
   def info_required?
     !updating_password || new_record?

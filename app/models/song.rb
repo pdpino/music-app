@@ -16,6 +16,9 @@ class Song < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :user_comments, through: :comments, as: :commentable
 
+  has_many :ratings, as: :rateable
+  has_many :user_ratings, through: :ratings, as: :rateable
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :duration, format: {
     with: /\A\d*:[0-5][0-9]\z/,
@@ -23,4 +26,14 @@ class Song < ApplicationRecord
     message: "tiene que ser de la forma minutos:segundos"
   }
   validates :owner_id, presence: true
+
+  def avg_rating
+    rating = ratings.average(:stars)
+    if rating
+      rating.round(2)
+    else
+      0
+    end
+  end
+
 end

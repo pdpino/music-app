@@ -14,6 +14,7 @@ class AlbumsController < ApplicationController
 
   def show
     @album_comments = @album.comments
+    @album_rating = @album.avg_rating
   end
 
   def new
