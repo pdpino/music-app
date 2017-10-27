@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   # Comments
   post 'songs/:song_id/comments' => 'comments#comment_song', as: 'comment_song'
 
+  delete 'songs/:song_id/comments/:comment_id' => 'comments#remove_comment_song', as: 'remove_comment_song'
+
 end
 
 #### HELP COMMENTS FROM CODECADEMY

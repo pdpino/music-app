@@ -1,5 +1,5 @@
 <!-- Display comments
-  provide: 'comments' -->
+  provide: 'comments', 'item_id' -->
 
 <h3>Comentarios:</h3>
 <% if comments.any? %>
@@ -8,6 +8,10 @@
       <%= comment.user.first_name %>:
       <br>
       <%= comment.content %>
+      <br>
+      <% if can_remove_comment(comment) %>
+        <%= link_to 'Borrar comentario', remove_comment_song_path(item_id, comment.id), method: :delete %>
+      <% end %>
     </li>
   <% end %>
 <% else %>

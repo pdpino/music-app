@@ -69,7 +69,10 @@
     </p>
 <% end %>
 
-<%= render '_comments/index', comments: @song_comments %>
+<%= render '_comments/index',
+  item_id: @song.id,
+  comments: @song_comments
+  %>
 
 <%= render '_comments/new', comment_path: comment_song_path(@song) %>
 

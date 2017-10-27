@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # makes methods available in the views
-  helper_method :current_user, :is_current_user_admin?, :is_in?, :has_create_permission
+  helper_method :current_user, :is_current_user_admin?, :is_in?, :has_create_permission, :has_modify_permission?
 
   def current_user
     # REVIEW: this method is called a lot of times, the query is being done again and again?
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def has_create_permission
-    # NOTE: this method could seem like an overkill (current_user could be used), but adds semantic to the calling and may be useful in the future
+    # NOTE: this method could seem like an overkill (just 'current_user' could be used), but adds semantic to the calling and may need to be more powerful in the future (e.g., checking roles)
     current_user || false
   end
 
