@@ -70,7 +70,14 @@
   <%= link_to 'Crear canción', new_song_path({ album_id: @album.id }) %>
 <% end %>
 
-<br>
-<!-- HACK: use CSS -->
+<br> <!-- HACK: use CSS -->
+
+<%= render '_comments/index',
+  item_id: @album.id,
+  comments: @album_comments
+  %>
+
+<%= render '_comments/new', comment_create_path: comment_album_path(@album) %>
+
 
 <%= link_to 'Volver', albums_path %>

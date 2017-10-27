@@ -96,5 +96,12 @@
     </p>
 <% end %>
 
+<%= render '_comments/index',
+  item_id: @artist.id,
+  comments: @artist_comments
+  %>
+
+<%= render '_comments/new', comment_create_path: comment_artist_path(@artist) %>
+
 
 <%= link_to 'Volver', artists_path %>

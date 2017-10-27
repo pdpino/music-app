@@ -33,8 +33,12 @@ Rails.application.routes.draw do
 
   # Comments
   post 'songs/:song_id/comments' => 'comments#comment_song', as: 'comment_song'
+  post 'artists/:artist_id/comments' => 'comments#comment_artist', as: 'comment_artist'
+  post 'albums/:album_id/comments' => 'comments#comment_album', as: 'comment_album'
 
   delete 'songs/:song_id/comments/:comment_id' => 'comments#remove_comment_song', as: 'remove_comment_song'
+  delete 'artists/:artist_id/comments/:comment_id' => 'comments#remove_comment_artist', as: 'remove_comment_artist'
+  delete 'albums/:album_id/comments/:comment_id' => 'comments#remove_comment_album', as: 'remove_comment_album'
 
 end
 
