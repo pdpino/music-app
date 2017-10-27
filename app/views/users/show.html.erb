@@ -80,41 +80,8 @@
     </p>
 <% end %>
 
+<%= render 'wall_messages/index' %>
 
-<h3>Muro</h3>
-<% if @user_wall.any? %>
-  <% @user_wall.each do |wall_message| %>
-    <li>
-      <%= wall_message.writer.first_name %>
-      -
-      <%= wall_message.created_at.strftime("%Y-%b-%d %H:%M") %>
-      :
-      <br>
-      <%= wall_message.message %>
-      <br>
-    </li>
-    <% if can_remove_wall_message(wall_message) %>
-      <%= link_to 'Borrar mensaje', remove_wall_message_path({ receiver_id: @user.id, message_id: wall_message.id }), method: :delete %>
-    <% end %>
-    <br>
-  <% end %>
-<% else %>
-    <p>
-      No hay publicaciones
-    </p>
-<% end %>
-
-<% if has_create_permission %>
-  <%= form_for(:wall_message, method: :post, url: new_wall_message_path(@user)) do |f| %>
-    <div>
-      <%= f.label :message, "Mensaje" %>
-      <%= f.text_area :message %>
-    </div>
-    <div>
-      <%= f.submit "Publicar" %>
-    </div>
-  <% end %>
-<% end %>
-
+<%= render 'wall_messages/new' %>
 
 <%= link_to 'Volver', users_path %>

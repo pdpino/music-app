@@ -1,0 +1,13 @@
+<!-- New wall message -->
+
+<% if has_create_permission %>
+  <%= form_for(:wall_message, method: :post, url: new_wall_message_path(@user)) do |f| %>
+    <div>
+      <%= f.label :message, "Mensaje" %>
+      <%= f.text_area :message %>
+    </div>
+    <div>
+      <%= f.submit "Publicar" %>
+    </div>
+  <% end %>
+<% end %>
