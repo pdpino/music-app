@@ -203,3 +203,14 @@ Yo como usuario administrador, quiero poder modificar playlists (agregar, quitar
 * Si playlist era privada y pasa a ser pública, todos los usuarios (visitas, administrador, adminsitrador) pueden verla y acceder a ella.
 * Si modificación es en bache, todos los cambios se aplican a la lista una vez que el administrador haya terminado de hacer los cambios.
 * Si modificación es 'uno a uno', las modificaciones se van aplicando y visualizando en la medida que se hacen.
+
+*** 
+
+## Relato 23: Agregar/editar imagen de álbum.
+### Historia: 
+Yo como usuario 'dueño' de un álbum (administrador, o estándar que lo creo), quiero poder agregar o modificar la imagen de portada de un álbum, para denotar correctamente el contenido del álum y obtener satisfacción por eso.
+### Validación
+* Cambios de imagen son visibles para todo usuario en el sistema.
+* No hay posibilidad de acceder a la imagen anterior (si es que había). 
+* Usuario estándar no puede modificar la imagen de un álbum que no haya creado. 
+* Usuario visitante no puede modificar ninguna imagen.
