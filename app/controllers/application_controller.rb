@@ -48,6 +48,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_path unless is_current_user_admin?
   end
 
+  def require_self(user)
+    redirect_to :back unless user == current_user
+  end
+
   def is_in? instance_array, searched_instance
     # Helper method:
     # Boolean inidicating if 'searched_instance' is in 'instance_array', searching with the id

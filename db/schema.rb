@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026233704) do
+ActiveRecord::Schema.define(version: 20171027025302) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -138,6 +138,16 @@ ActiveRecord::Schema.define(version: 20171026233704) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "photo"
+  end
+
+  create_table "wall_messages", force: :cascade do |t|
+    t.integer  "writer_id"
+    t.integer  "receiver_id"
+    t.text     "message"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["receiver_id"], name: "index_wall_messages_on_receiver_id", using: :btree
+    t.index ["writer_id"], name: "index_wall_messages_on_writer_id", using: :btree
   end
 
   add_foreign_key "albums", "users", column: "owner_id", on_delete: :cascade
