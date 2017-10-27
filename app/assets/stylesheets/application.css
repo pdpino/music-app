@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+body
+{
+    padding-top: 50px
+}
+.page-header h1 {
+    font-size: 4em;
+}
+
+.page-header {
+    /*border-bottom: none;*/
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.padding-first-row {
+    padding-top: 50px;
+}
