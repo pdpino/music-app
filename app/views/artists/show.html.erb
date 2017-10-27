@@ -96,12 +96,11 @@
     </p>
 <% end %>
 
-<%= render 'comments/index',
-  item_id: @artist.id,
-  comments: @artist_comments
-  %>
-
+<%= render 'comments/index', item_id: @artist.id, comments: @artist_comments %>
 <%= render 'comments/new', comment_create_path: comment_artist_path(@artist) %>
+
+<%= render 'ratings/index', ratings: @artist_ratings %>
+<%= render 'ratings/new', rating_create_path: rate_artist_path(@artist) %>
 
 
 <%= link_to 'Volver', artists_path %>

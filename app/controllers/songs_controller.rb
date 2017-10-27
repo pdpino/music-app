@@ -14,6 +14,7 @@ class SongsController < ApplicationController
 
   def show
     @song_comments = @song.comments
+    @song_ratings = @song.ratings
   end
 
   def new

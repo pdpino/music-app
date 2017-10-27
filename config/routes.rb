@@ -47,6 +47,11 @@ Rails.application.routes.draw do
 
   delete 'users/:receiver_id/wall_messages/:message_id' => 'wall_messages#remove_wall_message', as: 'remove_wall_message'
 
+  # Ratings
+  post 'songs/:song_id/ratings' => 'ratings#rate_song', as: 'rate_song'
+  post 'artists/:artist_id/ratings' => 'ratings#rate_artist', as: 'rate_artist'
+  post 'albums/:album_id/ratings' => 'ratings#rate_album', as: 'rate_album'
+
 end
 
 #### HELP COMMENTS FROM CODECADEMY
