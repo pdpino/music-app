@@ -16,7 +16,7 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
-<%= render '_favorites/update',
+<%= render 'favorites/update',
   item: @song,
   can_add_favorite: Proc.new { |user, song| can_add_favorite_song(user, song) },
   can_remove_favorite: Proc.new { |user, song| can_remove_favorite_song(user, song) },
@@ -84,11 +84,11 @@
     </p>
 <% end %>
 
-<%= render '_comments/index',
+<%= render 'comments/index',
   item_id: @song.id,
   comments: @song_comments
   %>
 
-<%= render '_comments/new', comment_create_path: comment_song_path(@song) %>
+<%= render 'comments/new', comment_create_path: comment_song_path(@song) %>
 
 <%= link_to 'Volver', songs_path %>
