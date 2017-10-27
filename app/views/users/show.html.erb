@@ -24,6 +24,8 @@
 
 <% if @can_grant_admin %>
   <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
+<% elsif @can_revoke_admin %>
+  <%= link_to 'Quitar permisos de administrador', revoke_admin_path(@user), method: :delete, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
 <% end %>
 
 <%= render 'favorite-snippet',

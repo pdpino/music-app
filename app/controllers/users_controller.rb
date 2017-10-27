@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :require_admin, only: [:grant_admin]
   before_action :require_no_user, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :edit_password, :update_password, :destroy, :grant_admin]
+  before_action :set_user, only: [:show, :edit, :update, :edit_password, :update_password, :destroy, :grant_admin, :revoke_admin]
   before_action :correct_user, only: [:edit, :update, :edit_password, :update_password, :destroy]
 
   def index
@@ -21,8 +21,9 @@ class UsersController < ApplicationController
     is_shown_user_admin = is_user_admin? @user
     is_logged_user_admin = is_current_user_admin?
 
-    @can_grant_admin = is_logged_user_admin && !is_shown_user_admin
     @show_is_admin = is_logged_user_admin && is_shown_user_admin
+    @can_grant_admin = is_logged_user_admin && !is_shown_user_admin
+    @can_revoke_admin = is_logged_user_admin && current_user == @user
     # Only show that is admin to the other admins
   end
 
@@ -66,6 +67,23 @@ class UsersController < ApplicationController
     success = @user.update({ role: 'admin' })
     # TODO: show message indicating that is admin
     redirect_to @user
+  end
+
+  def revoke_admin
+    # NOTE: only yourself can revoke admin permission. If any admin could, admin wars!
+    require_self(@user)
+
+    # NOTE: leave at least one admin in the app!
+    admins_left = User.where(role: 'admin').count
+    if admins_left <= 1
+      # TODO: show message indicating that can't do that
+      redirect_to :back
+    else
+      success = @user.update({ role: '' })
+      # TODO: show message indicating that is no longer admin
+      redirect_to @user
+    end
+
   end
 
   private

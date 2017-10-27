@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   # Grant admin permissions
   patch 'users/:id/admin' => 'users#grant_admin', as: 'grant_admin'
+  delete 'users/:id/admin' => 'users#revoke_admin', as: 'revoke_admin'
 
   # Favorites
   post 'users/:user_id/favorites/songs/:song_id' => 'favorites#mark_song', as: 'add_favorite_song'
