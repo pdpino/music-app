@@ -16,6 +16,9 @@ class Song < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :user_comments, through: :comments, as: :commentable
 
+  has_many :ratings, as: :rateable
+  has_many :user_ratings, through: :ratings, as: :rateable
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :duration, format: {
     with: /\A\d*:[0-5][0-9]\z/,
