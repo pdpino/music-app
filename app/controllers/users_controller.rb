@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     @favorite_artists = @user.favorite_artists
     @favorite_albums = @user.favorite_albums
 
+    @user_wall = @user.received_messages
+
     is_shown_user_admin = is_user_admin? @user
     is_logged_user_admin = is_current_user_admin?
 

@@ -41,6 +41,11 @@ Rails.application.routes.draw do
   delete 'artists/:artist_id/comments/:comment_id' => 'comments#remove_comment_artist', as: 'remove_comment_artist'
   delete 'albums/:album_id/comments/:comment_id' => 'comments#remove_comment_album', as: 'remove_comment_album'
 
+  # User wall
+  post 'users/:receiver_id/wall_messages' => 'wall_messages#new_wall_message', as: 'new_wall_message'
+
+  delete 'users/:receiver_id/wall_messages/:message_id' => 'wall_messages#remove_wall_message', as: 'remove_wall_message'
+
 end
 
 #### HELP COMMENTS FROM CODECADEMY
