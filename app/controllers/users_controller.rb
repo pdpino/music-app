@@ -18,6 +18,9 @@ class UsersController < ApplicationController
 
     @user_wall = @user.received_messages
 
+    @user_following = @user.following
+    @user_followers = @user.followers
+
     is_shown_user_admin = is_user_admin? @user
     is_logged_user_admin = is_current_user_admin?
 
