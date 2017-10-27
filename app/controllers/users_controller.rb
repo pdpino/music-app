@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def show
     @artists = @user.artists # Artists from the user
     @songs = @user.songs
-    
+
     @favorite_songs = @user.favorite_songs
     @favorite_artists = @user.favorite_artists
     @favorite_albums = @user.favorite_albums
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :photo)
     end
 
     def set_user

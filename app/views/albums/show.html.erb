@@ -15,10 +15,7 @@
   <%= @album.release_date %>
 </p>
 
-<p>
-  <strong>Imagen:</strong>
-  <%= @album.artwork_img_name %>
-</p>
+<img src="<%= @album.image %>" alt="Imagen">
 
 <p>
   <%= @album.is_single ? "Es un single" : "No es un single" %>
@@ -68,6 +65,19 @@
       Sin canciones
     </p>
 <% end %>
+
+<% if has_create_permission %>
+  <%= link_to 'Crear canción', new_song_path({ album_id: @album.id }) %>
+<% end %>
+
+<br> <!-- HACK: use CSS -->
+
+<%= render '_comments/index',
+  item_id: @album.id,
+  comments: @album_comments
+  %>
+
+<%= render '_comments/new', comment_create_path: comment_album_path(@album) %>
 
 
 <%= link_to 'Volver', albums_path %>

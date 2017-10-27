@@ -4,6 +4,8 @@
   <% if @albums.length > 0 then %>
     <% @albums.each do |album| %>
     <li>
+      <img src="<%= album.image %>" alt="foto">
+
       <%= album.name %>
       |
       <%= link_to 'Mostrar', album %>
@@ -24,6 +26,6 @@
   <% end %>
 </ul>
 
-<% if @has_create_permission %>
+<% if has_create_permission %>
   <%= link_to 'Crear álbum', new_album_path %>
 <% end%>

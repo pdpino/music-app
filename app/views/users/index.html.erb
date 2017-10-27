@@ -4,6 +4,7 @@
   <% if @users.length > 0 then %>
     <% @users.each do |user| %>
       <li>
+        <img src="<%= user.photo %>" alt="foto">
         <%= user.first_name %>
         <%= user.last_name %>
         |

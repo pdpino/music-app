@@ -2,8 +2,6 @@ class FavoritesController < ApplicationController
   before_action :require_user
   before_action :correct_user
 
-  helper_method :can_add_favorite_song, :can_add_favorite_artist, :can_add_favorite_album
-
   def mark_song
     mark_favorite(Song, @user.favorite_songs, :song_id)
   end

@@ -17,11 +17,18 @@ class User < ApplicationRecord
   has_many :favorite_artists, through: :favorites, source: :favoritable, source_type: 'Artist'
   # NOTE: source_types must be capitalized string, it doesn't work with symbols
 
-  has_secure_password
+  has_many :comments, foreign_key: :user_id
+  has_many :comment_songs, through: :comments, source: :commentable, source_type: 'Song'
+  has_many :comment_albums, through: :comments, source: :commentable, source_type: 'Album'
+  has_many :comment_artists, through: :comments, source: :commentable, source_type: 'Artist'
+
+  mount_uploader :photo, ImageUploader
 
   validates :first_name, presence: true, if: :info_required?
   validates :last_name, presence: true, if: :info_required?
   validates :email, presence: true, uniqueness: true, if: :info_required?
+
+  has_secure_password
   validates :password, confirmation: true, length: { minimum: 8 }, format: { with: PASSWORD_FORMAT }, if: :password_required?
 
   def info_required?

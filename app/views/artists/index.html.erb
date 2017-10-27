@@ -4,6 +4,8 @@
   <% if @artists.length > 0 then %>
     <% @artists.each do |artist| %>
     <li>
+      <img src="<%= artist.image %>" alt="foto">
+
       <%= artist.name %>
       |
       <%= link_to 'Mostrar', artist %>
@@ -24,6 +26,6 @@
   <% end %>
 </ul>
 
-<% if @has_create_permission %>
+<% if has_create_permission %>
   <%= link_to 'Crear artista', new_artist_path %>
 <% end%>

@@ -5,6 +5,8 @@
   <%= @artist.name %>
 </p>
 
+<img src="<%= @artist.image %>" alt="Imagen">
+
 <p>
   <strong>Descripción:</strong>
   <%= @artist.description.present? ? @artist.description : "Sin descripción" %>
@@ -75,6 +77,10 @@
     </p>
 <% end %>
 
+<% if has_create_permission %>
+  <%= link_to 'Crear album', new_album_path({ artist_id: @artist.id }) %>
+<% end %>
+
 <h3>Canciones:</h3>
 <% if @artist_songs.length > 0 then %>
   <% @artist_songs.each do |song| %>
@@ -89,6 +95,13 @@
       Este artista no tiene canciones
     </p>
 <% end %>
+
+<%= render '_comments/index',
+  item_id: @artist.id,
+  comments: @artist_comments
+  %>
+
+<%= render '_comments/new', comment_create_path: comment_artist_path(@artist) %>
 
 
 <%= link_to 'Volver', artists_path %>
