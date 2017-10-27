@@ -42,4 +42,11 @@ class Artist < ApplicationRecord
       end
     end
   end
+
+  def avg_rating
+    # REVIEW: change by a oneline rubyish way to do this
+    avg = 0
+    albums.each { |album| avg += album.avg_rating }
+    avg
+  end
 end

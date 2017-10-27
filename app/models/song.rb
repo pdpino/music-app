@@ -26,4 +26,14 @@ class Song < ApplicationRecord
     message: "tiene que ser de la forma minutos:segundos"
   }
   validates :owner_id, presence: true
+
+  def avg_rating
+    rating = ratings.average(:stars)
+    if rating
+      rating.round(2)
+    else
+      0
+    end
+  end
+
 end
