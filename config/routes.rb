@@ -14,17 +14,32 @@ Rails.application.routes.draw do
   resources :genres
   resources :albums
   resources :artists
-  ###Luciano is working here:
   resources :playlists
-  ###Luciano's work stops here.
-  ## resources is equivalent to:
-  # get 'artists' => 'artists#index'
-  # get 'artists/new' => 'artists#new', as: 'new_artist'
-  # get 'artists/:id' => 'artists#show', as: 'artist'
-  # get 'artists/:id/edit' => 'artists#edit', as: 'edit_artist'
-  # post 'artists' => 'artists#create'
-  # patch 'artists/:id' => 'artists#update'
-  # delete 'artists/:id' => 'artists#destroy'
+
+  # Edit password
+  get 'users/:id/edit_password' => 'users#edit_password', as: 'edit_user_password'
+  patch 'users/:id/update_password' => 'users#update_password'
+
+  # Grant admin permissions
+  patch 'users/:id/admin' => 'users#grant_admin', as: 'grant_admin'
+
+  # Favorites
+  post 'users/:user_id/favorites/songs/:song_id' => 'favorites#mark_song', as: 'add_favorite_song'
+  post 'users/:user_id/favorites/artists/:artist_id' => 'favorites#mark_artist', as: 'add_favorite_artist'
+  post 'users/:user_id/favorites/albums/:album_id' => 'favorites#mark_album', as: 'add_favorite_album'
+
+  delete 'users/:user_id/favorites/songs/:song_id' => 'favorites#remove_song', as: 'remove_favorite_song'
+  delete 'users/:user_id/favorites/artists/:artist_id' => 'favorites#remove_artist', as: 'remove_favorite_artist'
+  delete 'users/:user_id/favorites/albums/:album_id' => 'favorites#remove_album', as: 'remove_favorite_album'
+
+  # Comments
+  post 'songs/:song_id/comments' => 'comments#comment_song', as: 'comment_song'
+  post 'artists/:artist_id/comments' => 'comments#comment_artist', as: 'comment_artist'
+  post 'albums/:album_id/comments' => 'comments#comment_album', as: 'comment_album'
+
+  delete 'songs/:song_id/comments/:comment_id' => 'comments#remove_comment_song', as: 'remove_comment_song'
+  delete 'artists/:artist_id/comments/:comment_id' => 'comments#remove_comment_artist', as: 'remove_comment_artist'
+  delete 'albums/:album_id/comments/:comment_id' => 'comments#remove_comment_album', as: 'remove_comment_album'
 
 end
 
@@ -43,6 +58,16 @@ end
 
 # Example resource route (maps HTTP verbs to controller actions automatically):
 #   resources :products
+
+# Use of 'resources :artists' is equivalent to:
+# get 'artists' => 'artists#index'
+# get 'artists/new' => 'artists#new', as: 'new_artist'
+# get 'artists/:id' => 'artists#show', as: 'artist'
+# get 'artists/:id/edit' => 'artists#edit', as: 'edit_artist'
+# post 'artists' => 'artists#create'
+# patch 'artists/:id' => 'artists#update'
+# delete 'artists/:id' => 'artists#destroy'
+
 
 # Example resource route with options:
 #   resources :products do

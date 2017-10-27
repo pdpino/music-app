@@ -18,3 +18,12 @@
 
 # Set environment variables files
 .env
+
+# rubymine ide assets
+.idea/*
+
+# Mac files
+.DS_Store
+
+# Uploaded files # do not overload github!
+public/uploads/

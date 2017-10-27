@@ -9,23 +9,22 @@ class SongsController < ApplicationController
   before_action :set_song_attributes, only: [:show, :edit, :update]
 
   def index
-    @has_create_permission = current_user || false
-    # NOTE: This could be a before_action but is only used here
-
     @songs = Song.all
   end
 
   def show
+    @song_comments = @song.comments
   end
 
   def new
     @song = Song.new
 
-    # REVIEW: neccesary ??
-    # in _form this things are used,
-    @song_artists = Array.new # Empty array
-    @song_genres = Array.new
-    @song_albums = Array.new
+    if params[:album_id] # An album wants to create this
+      album = Album.find(params[:album_id])
+      @song_artists = Array.new album.artists
+      @song_albums = [ album ]
+      @eligible_albums << album
+    end
   end
 
   def edit
@@ -70,8 +69,8 @@ class SongsController < ApplicationController
       selected_genres_id = params[:all_genres].map do |x| x.to_i end
       permitted[:genres] = Genre.find(selected_genres_id)
 
-      params[:all_albums] ||= Array.new
-      selected_albums_id = params[:all_albums].map do |x| x.to_i end
+      params[:eligible_albums] ||= Array.new
+      selected_albums_id = params[:eligible_albums].map do |x| x.to_i end
       permitted[:albums] = Album.find(selected_albums_id)
 
       permitted
@@ -86,7 +85,6 @@ class SongsController < ApplicationController
       # NOTE: parse to array to be able to match intersection with @song_artists
       @all_artists = Array.new Artist.all
       @all_genres = Array.new Genre.all
-      # @all_albums = Array.new Album.all
 
       # HACK: don't use raw SQL !!!
       query = "SELECT albums.*
@@ -100,7 +98,7 @@ class SongsController < ApplicationController
         query + " AND song.id = #{@song.id}"
       end
 
-      @all_albums = Album.find_by_sql(query)
+      @eligible_albums = Album.find_by_sql(query)
     end
 
     def set_song_attributes

@@ -4,7 +4,12 @@
   <strong>Nombre:</strong>
   <%= @user.first_name %>
   <%= @user.last_name %>
+  <% if @show_is_admin %>
+    <strong>Este usuario tiene permisos de administrador</strong>
+  <% end %>
 </p>
+
+<img src="<%= @user.photo %>" alt="Foto">
 
 <p>
   <strong>Email:</strong>
@@ -13,12 +18,38 @@
 
 <% if @has_permission %>
   <%= link_to 'Editar', edit_user_path(@user) %>
-  <%= link_to 'Eliminar', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <%= link_to 'Editar Contraseña', edit_user_password_path(@user) %>
+  <%= link_to 'Eliminar Usuario', @user, method: :delete, data: { confirm: 'Está seguro?' } %>
 <% end %>
 
+<% if @can_grant_admin %>
+  <%= link_to 'Dar permisos de administrador', grant_admin_path(@user), method: :patch, data: { confirm: 'Está seguro? Esto no se puede deshacer' } %>
+<% end %>
 
-<% if @artists.length > 0 then %>
-  <h3>Artistas que ha creado el usuario:</h3>
+<%= render 'favorite-snippet',
+  resource_name: 'canciones',
+  favorite_items: @favorite_songs,
+  item_path: Proc.new { |song| song_path(song) },
+  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
+  is_female: true
+  %>
+
+<%= render 'favorite-snippet',
+  resource_name: 'artistas',
+  favorite_items: @favorite_artists,
+  item_path: Proc.new { |artist| artist_path(artist) },
+  remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
+  %>
+
+<%= render 'favorite-snippet',
+  resource_name: 'albums',
+  favorite_items: @favorite_albums,
+  item_path: Proc.new { |album| album_path(album) },
+  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+  %>
+
+<h3>Artistas que ha creado el usuario:</h3>
+<% if @artists.any? %>
   <% @artists.each do |artist| %>
     <li>
       <%= artist.name %>
@@ -32,8 +63,8 @@
     </p>
 <% end %>
 
-<% if @songs.length > 0 then %>
-  <h3>Canciones que ha creado el usuario:</h3>
+<h3>Canciones que ha creado el usuario:</h3>
+<% if @songs.any? %>
   <% @songs.each do |song| %>
     <li>
       <%= song.name %>

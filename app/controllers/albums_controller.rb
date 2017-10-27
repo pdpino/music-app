@@ -9,22 +9,19 @@ class AlbumsController < ApplicationController
   before_action :set_album_attributes, only: [:show, :edit, :update]
 
   def index
-    @has_create_permission = current_user || false
-    # NOTE: This could be a before_action but is only used here
-
     @albums = Album.all
   end
 
   def show
+    @album_comments = @album.comments
   end
 
   def new
     @album = Album.new
 
-    # REVIEW: neccesary ??
-    # in _form this things are used,
-    @album_artists = Array.new # Empty array
-    @album_songs = Array.new # Empty array
+    if params[:artist_id] # An artist wants to create this
+      @album_artists = [Artist.find(params[:artist_id])]
+    end
   end
 
   def edit
@@ -58,7 +55,7 @@ class AlbumsController < ApplicationController
 
   private
     def album_params
-      permitted = params.require(:album).permit(:name, :description, :release_date, :is_single, :artwork_img_name)
+      permitted = params.require(:album).permit(:name, :description, :release_date, :is_single, :image)
 
       # OPTIMIZE
       params[:all_artists] ||= Array.new

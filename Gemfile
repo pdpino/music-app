@@ -60,3 +60,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Create seeds
 gem 'faker' # , '~> 5.0'
+
+# Handle files
+gem 'carrierwave', '~> 1.0'

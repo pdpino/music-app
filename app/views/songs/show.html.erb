@@ -16,6 +16,14 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
+<%= render '_favorites/update',
+  item: @song,
+  can_add_favorite: Proc.new { |user, song| can_add_favorite_song(user, song) },
+  can_remove_favorite: Proc.new { |user, song| can_remove_favorite_song(user, song) },
+  add_favorite_item_path: Proc.new { |user, song| add_favorite_song_path(user, song) },
+  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) }
+  %>
+
 <h3>Artista (s):</h3>
 <% if @song_artists.length > 0 then %>
   <% @song_artists.each do |artist| %>
@@ -28,6 +36,21 @@
 <% else %>
     <p>
       Sin artista
+    </p>
+<% end %>
+
+<h3>Álbum (s):</h3>
+<% if @song_albums.length > 0 then %>
+  <% @song_albums.each do |album| %>
+    <li>
+      <%= album.name %>
+      |
+      <%= link_to 'Mostrar', album %>
+    </li>
+  <% end %>
+<% else %>
+    <p>
+      Sin álbumes
     </p>
 <% end %>
 
@@ -61,6 +84,11 @@
     </p>
 <% end %>
 
+<%= render '_comments/index',
+  item_id: @song.id,
+  comments: @song_comments
+  %>
 
+<%= render '_comments/new', comment_create_path: comment_song_path(@song) %>
 
 <%= link_to 'Volver', songs_path %>

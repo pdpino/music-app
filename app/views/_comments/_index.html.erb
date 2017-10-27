@@ -1,0 +1,25 @@
+<!-- Display comments
+  provide: 'comments', 'item_id' -->
+
+<h3>Comentarios:</h3>
+<% if comments.any? %>
+  <% comments.each do |comment| %>
+    <li>
+      <%= comment.user.first_name %>
+      -
+      <%= comment.user.created_at.strftime("%Y-%b-%d %H:%M") %>
+      :
+      <br>
+      <%= comment.content %>
+      <br>
+      <% if can_remove_comment(comment) %>
+        <%= link_to 'Borrar comentario', remove_comment_song_path(item_id, comment.id), method: :delete %>
+      <% end %>
+    </li>
+    <br>
+  <% end %>
+<% else %>
+    <p>
+      No hay comentarios
+    </p>
+<% end %>

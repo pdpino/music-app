@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171025153217) do
+=======
+ActiveRecord::Schema.define(version: 20171026233704) do
+>>>>>>> develop
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,10 +42,17 @@ ActiveRecord::Schema.define(version: 20171025153217) do
     t.string   "description"
     t.date     "release_date"
     t.boolean  "is_single"
+<<<<<<< HEAD
     t.string   "artwork_img_name"
     t.integer  "owner_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+=======
+    t.string   "image"
+    t.integer  "owner_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+>>>>>>> develop
     t.index ["owner_id"], name: "index_albums_on_owner_id", using: :btree
   end
 
@@ -73,15 +84,42 @@ ActiveRecord::Schema.define(version: 20171025153217) do
     t.integer  "owner_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+<<<<<<< HEAD
     t.index ["owner_id"], name: "index_artists_on_owner_id", using: :btree
   end
 
+=======
+    t.string   "image"
+    t.index ["owner_id"], name: "index_artists_on_owner_id", using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.text     "content"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favoritable_id"
+    t.string   "favoritable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id", using: :btree
+  end
+
+>>>>>>> develop
   create_table "genres", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+<<<<<<< HEAD
   create_table "playlists", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -91,6 +129,8 @@ ActiveRecord::Schema.define(version: 20171025153217) do
     t.datetime "updated_at",  null: false
   end
 
+=======
+>>>>>>> develop
   create_table "song_genres", force: :cascade do |t|
     t.integer  "song_id"
     t.integer  "genre_id"
@@ -102,7 +142,11 @@ ActiveRecord::Schema.define(version: 20171025153217) do
 
   create_table "songs", force: :cascade do |t|
     t.string   "name"
+<<<<<<< HEAD
     t.time     "duration"
+=======
+    t.string   "duration"
+>>>>>>> develop
     t.integer  "owner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,9 +161,18 @@ ActiveRecord::Schema.define(version: 20171025153217) do
     t.string   "role"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+<<<<<<< HEAD
   end
 
   add_foreign_key "albums", "users", column: "owner_id"
   add_foreign_key "artists", "users", column: "owner_id"
   add_foreign_key "songs", "users", column: "owner_id"
+=======
+    t.string   "photo"
+  end
+
+  add_foreign_key "albums", "users", column: "owner_id", on_delete: :cascade
+  add_foreign_key "artists", "users", column: "owner_id", on_delete: :cascade
+  add_foreign_key "songs", "users", column: "owner_id", on_delete: :cascade
+>>>>>>> develop
 end
