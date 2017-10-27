@@ -58,4 +58,8 @@ class User < ApplicationRecord
     updating_password || new_record?
   end
 
+  def full_name
+    first_name.capitalize + ' ' + last_name
+  end
+
 end
