@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :genres
   resources :albums
   resources :artists
+  resources :playlists
 
   # Edit password
   get 'users/:id/edit_password' => 'users#edit_password', as: 'edit_user_password'

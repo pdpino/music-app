@@ -1,0 +1,38 @@
+<h1>
+  <%="Playlists de la App"%>
+</h1>
+<li>
+  <h3><%= link_to "Crear Playlist", new_playlist_path %></h3>
+</li>
+<% @playlists.each do |playlist1| %>
+  <h3><%= playlist1.name %></h3>
+  <div>
+    <!--
+    <p>
+      <% vx = playlist1.id %>
+      <%= "Id de la playlist: #{vx}" %>
+    </p>
+  -->
+    <p>
+      <% vx = playlist1.description %>
+      <%= "Descripción de la playlist: #{vx}" %>
+    </p>
+    <!--
+    <p>
+      <% vx = playlist1.owner_id %>
+      <%= "Id del Usuario Creador: #{vx}" %>
+    </p>
+  -->
+    <p>
+      <% vx1 = playlist1.ranking %>
+      <%= "Ranking de esta playlist: #{vx1}" %>
+    </p>
+    <li>
+      <!--me rutea a la 3000/playlists/id-->
+      <%= link_to "Mostrar: #{playlist1.name}", playlist1 %>
+    </li>
+
+
+  </div>
+
+<%end%>
