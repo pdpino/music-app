@@ -90,17 +90,18 @@ class SongsController < ApplicationController
 
       # HACK: don't use raw SQL !!!
       query = "SELECT albums.*
-            FROM albums, artists, album_artists as AA, songs, artist_songs as SA
+            FROM albums, artists, songs, album_artists as AA, artist_songs as SA
             WHERE albums.id = AA.album_id AND
               artists.id = AA.artist_id AND
               artists.id = SA.artist_id AND
               songs.id = SA.song_id"
 
       if @song
-        query + " AND song.id = #{@song.id}"
+        query + " AND songs.id = #{@song.id}"
       end
 
       @eligible_albums = Album.find_by_sql(query)
+      @eligible_albums.uniq! { |album| album.id }
     end
 
     def set_song_attributes
