@@ -23,10 +23,10 @@
 
 <div class="row">
   <h1><%= @album.name %></h1>
-  
+
   <p class="lead">
     <%= @album.description.blank? ? '' : @album.description %>
-  </p>  
+  </p>
 
   <hr>
 
@@ -40,8 +40,6 @@
     <strong>Fecha de lanzamiento:</strong>
     <%= @album.release_date %>
   </p>
-
-<<<<<<< HEAD
 
   <p>
     <%= @album.is_single ? "Es un single" : "No es un single" %>
