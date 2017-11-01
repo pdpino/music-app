@@ -5,12 +5,15 @@ class SessionsController < ApplicationController
   end
 
   def create
+    @error = false
     @user = User.find_by_email(params[:session][:email])
     if @user && @user.authenticate(params[:session][:password])
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      redirect_to login_path # TODO: mostrar error en contraseña y/o mail
+      # redirect_to login_path
+      @error = true
+      render :new
     end
   end
 

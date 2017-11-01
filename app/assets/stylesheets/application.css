@@ -16,7 +16,7 @@
 
 body
 {
-    padding-top: 50px
+    padding-top: 50px;
 }
 
 .page-header h1 {
@@ -46,6 +46,13 @@ body
     height: auto;
 }
 
+.small-thumbnail
+{
+    display: block;
+    width: auto;
+    height: 50px;
+}
+
 .profile-image {
     display: block;
     height: 300px;
@@ -60,4 +67,39 @@ body
 	padding: 0;
 	margin: 0;
 	padding-left: 10px;
+}
+
+.custom-footer {
+    padding-bottom: 50px;
+    padding-top: 20px;
+}
+
+.logo {
+    max-height: 120px;
+    width: auto;
+    filter: grayscale(100%);
+}
+
+.btn-title {
+    margin-top: 8px;
+}
+
+.tr-no-image {
+    height: 60px;
+}
+
+.wall-textinput {
+    resize: none;
+}
+
+.wall-post {
+    margin-top: 10px;
+}
+
+#main-page-container {
+    min-height: 100vh;
+}
+
+#footer-logo-row {
+    padding-top: 50px;
 }

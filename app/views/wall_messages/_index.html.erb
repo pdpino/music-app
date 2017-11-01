@@ -1,25 +1,48 @@
-<h3>Muro</h3>
+<!--
+  Diseño e implementación basados en código disponible en
+  https://bootsnipp.com/snippets/featured/user-comment-example
+-->
+
+
+
+
 <% if @user_wall.any? %>
-  <% @user_wall.each do |wall_message| %>
-    <li>
-      <%= wall_message.writer.first_name %>
-      -
-      <%= wall_message.created_at.strftime("%Y-%b-%d %H:%M") %>
-      :
-      <br>
-      <%= wall_message.message %>
-      <br>
-    </li>
-    <% if can_remove_wall_message(wall_message) %>
-      <%= link_to 'Borrar mensaje', remove_wall_message_path({
-          receiver_id: @user.id,
-          message_id: wall_message.id
-        }),
-        method: :delete
-      %>
+    <% @user_wall.each do |wall_message| %>
+
+        <div class="row wall-post">
+          <div class="col-sm-1">
+            <div class="thumbnail">
+              <img class="small-thumbnail" src="<%= wall_message.writer.image_src %>">
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <strong>
+                  <%= wall_message.writer.first_name + ' ' + wall_message.writer.last_name %>
+                </strong>
+                <em class="text-muted pull-right">
+                  <%= wall_message.created_at.strftime("a las %H:%M del %d de %b, %Y") %>
+                </em>
+              </div>
+              <div class="panel-body">
+                <%= wall_message.message %>
+              </div>
+            </div>
+          </div>
+          <% if can_remove_wall_message(wall_message) %>
+              <%= link_to 'Borrar mensaje', remove_wall_message_path({
+                       receiver_id: @user.id,
+                       message_id: wall_message.id
+                    }),
+                    method: :delete,
+                    :class => 'btn btn-primary btn-xs btn-warning pull-right'
+
+          %>
+        </div>
+
+      <% end %>
     <% end %>
-    <br>
-  <% end %>
 <% else %>
     <p>
       No hay publicaciones

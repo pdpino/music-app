@@ -1,13 +1,13 @@
 <div class="row padding-first-element">
   <h1>Álbumes disponibles</h1>
   <hr>
+  <% if has_create_permission %>
+    <%= link_to 'Crear álbum', new_album_path, :class => 'btn btn-primary btn-title' %>
+  <% end%>
 </div>
 
 <div class="row padding-first-element">
 
-  <% if has_create_permission %>
-    <%= link_to 'Crear álbum', new_album_path %>
-  <% end%>
 
   <% if @albums.length > 0 then %>
     <table class="table table-striped table-hover ">

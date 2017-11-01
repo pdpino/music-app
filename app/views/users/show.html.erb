@@ -6,7 +6,6 @@
 
   <div class="col-lg-3 col-md-3 col-sm-4">
     <ul class="list-group">
-      <li class="list-group-item"><%= render 'follows/update', user: @user %></li>
       <% if @has_permission %>
           <li class="list-group-item">
             <%= link_to 'Editar Perfil', edit_user_path(@user)%>
@@ -35,121 +34,121 @@
 <div class="row">
   <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
   <p class="lead"><%= @user.email %></p>
+  <%= render 'follows/update', user: @user %>
 
   <% if @show_is_admin %>
       <div class="alert alert-warning">
-        <h4>Precaución!</h4>
         <p>Este usuario tiene permisos de administrador.</p>
       </div>
     <strong>Este usuario tiene permisos de administrador</strong>
   <% end %>
-</p>
-
+  </p>
 <hr>
+</div>
 
-<%= render 'follows/update', user: @user %>
-
-<h3> Siguiendo </h3>
-<div class="col-lg-3 col-md-3 col-sm-4">
-<% if @user_following.any? then %>
-    <ul class="list-group">
-      <% @user_following.each do |user_follows| %>
-        <li>
-          <%= link_to user_follows.followed.full_name, user_path(user_follows.followed) %>
-
-          <%= @has_permission ?  (' | ' + link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete)) : '' %>
-          
-        </li>
-    <% end %>
-  <% else %>
-      <p>
-        No sigue a nadie.
-      </p>
-  <% end %>
-
-<h3> Seguidores </h3>
-<% if @user_followers.any? then %>
-  <% @user_followers.each do |user_follower| %>
-    <li>
-      <%= link_to user_follower.follower.full_name, user_path(user_follower.follower) %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      No tiene.
-    </p>
-<% end %>
-
-
-<%= render 'favorites/index',
-  resource_name: 'canciones',
-  favorite_items: @favorite_songs,
-  item_path: Proc.new { |song| song_path(song) },
-  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
-  is_female: true
-  %>
-
-<%= render 'favorites/index',
-  resource_name: 'artistas',
-  favorite_items: @favorite_artists,
-  item_path: Proc.new { |artist| artist_path(artist) },
-  remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
-  %>
-
-<%= render 'favorites/index',
-  resource_name: 'albums',
-  favorite_items: @favorite_albums,
-  item_path: Proc.new { |album| album_path(album) },
-  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-  %>
-
-<h3>Artistas que ha creado el usuario:</h3>
-<% if @artists.any? %>
-  <% @artists.each do |artist| %>
-    <li>
-      <%= artist.name %>
-      |
-      <%= link_to 'Mostrar', artist %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado artistas
-    </p>
-<% end %>
-
-<h3>Albums que ha creado el usuario:</h3>
-<% if @albums.any? %>
-  <% @albums.each do |album| %>
-    <li>
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado albums
-    </p>
-<% end %>
-
-<h3>Canciones que ha creado el usuario:</h3>
-<% if @songs.any? %>
-  <% @songs.each do |song| %>
-    <li>
-      <%= song.name %>
-      |
-      <%= link_to 'Mostrar', song %>
-    </li>
-  <% end %>
-<% end %>
+<div class="row">
+  <h3>Muro</h3>
+  <%= render 'wall_messages/new' %>
+  <%= render 'wall_messages/index' %>
   <hr>
 </div>
 
 <div class="row">
-  <%= render 'wall_messages/new' %>
-  <%= render 'wall_messages/index' %>
-  <hr>
+  <h3> Siguiendo </h3>
+  <div class="col-lg-3 col-md-3 col-sm-4">
+  <% if @user_following.any? then %>
+      <ul class="list-group">
+        <% @user_following.each do |user_follows| %>
+          <li>
+            <%= link_to user_follows.followed.full_name, user_path(user_follows.followed) %>
+
+            <%= @has_permission ?  (' | ' + link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete)) : '' %>
+
+          </li>
+      <% end %>
+    <% else %>
+        <p>
+          No sigue a nadie.
+        </p>
+    <% end %>
+
+  <h3> Seguidores </h3>
+  <% if @user_followers.any? then %>
+    <% @user_followers.each do |user_follower| %>
+      <li>
+        <%= link_to user_follower.follower.full_name, user_path(user_follower.follower) %>
+      </li>
+    <% end %>
+  <% else %>
+      <p>
+        No tiene.
+      </p>
+  <% end %>
+
+
+  <%= render 'favorites/index',
+    resource_name: 'canciones',
+    favorite_items: @favorite_songs,
+    item_path: Proc.new { |song| song_path(song) },
+    remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
+    is_female: true
+    %>
+
+  <%= render 'favorites/index',
+    resource_name: 'artistas',
+    favorite_items: @favorite_artists,
+    item_path: Proc.new { |artist| artist_path(artist) },
+    remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
+    %>
+
+  <%= render 'favorites/index',
+    resource_name: 'albums',
+    favorite_items: @favorite_albums,
+    item_path: Proc.new { |album| album_path(album) },
+    remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
+    %>
+
+  <h3>Artistas que ha creado el usuario:</h3>
+  <% if @artists.any? %>
+    <% @artists.each do |artist| %>
+      <li>
+        <%= artist.name %>
+        |
+        <%= link_to 'Mostrar', artist %>
+      </li>
+    <% end %>
+  <% else %>
+      <p>
+        Este usuario no ha creado artistas
+      </p>
+  <% end %>
+
+  <h3>Albums que ha creado el usuario:</h3>
+  <% if @albums.any? %>
+    <% @albums.each do |album| %>
+      <li>
+        <%= album.name %>
+        |
+        <%= link_to 'Mostrar', album %>
+      </li>
+    <% end %>
+  <% else %>
+      <p>
+        Este usuario no ha creado albums
+      </p>
+  <% end %>
+
+  <h3>Canciones que ha creado el usuario:</h3>
+  <% if @songs.any? %>
+    <% @songs.each do |song| %>
+      <li>
+        <%= song.name %>
+        |
+        <%= link_to 'Mostrar', song %>
+      </li>
+    <% end %>
+  <% end %>
+    <hr>
 </div>
 
 <div class="row">
