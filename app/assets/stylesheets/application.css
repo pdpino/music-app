@@ -39,6 +39,10 @@ body
     padding-top: 30px;
 }
 
+.wall-post-element-padding {
+    padding-left: 5px;
+}
+
 .custom-thumbnail {
     display: block;
     width: 120px;
@@ -46,11 +50,10 @@ body
     height: auto;
 }
 
-.small-thumbnail
-{
-    display: block;
-    width: auto;
-    height: 50px;
+.vertical-center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
 .profile-image {
@@ -93,7 +96,11 @@ body
 }
 
 .wall-post {
-    margin-top: 10px;
+    margin-top: 50px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+
 }
 
 #main-page-container {
