@@ -3,16 +3,15 @@
 
 
 <% if errors.any? %>
-<div class="alert alert-dismissible alert-danger">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-
-  <% if local_assigns[:show_just_one] %>
-    <h4>Error: </h4>
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <% if local_assigns[:show_just_one] %>
+      <h4>Error: </h4>
       <ul>
         <li><%= errors.first[0] %></li>
         <li><%= errors.first[1] %></li>
       </ul>
-  <% else %>
+    <% else %>
       <h4><%= errors.count + errors.count > 1 ? 'Errores' : 'Error' %>: </h4>
 
       <ul>
@@ -21,7 +20,5 @@
         <% end %>
       </ul>
     <% end %>
-  <% end %>
-
-</div>
-
+  </div>
+<% end %>
