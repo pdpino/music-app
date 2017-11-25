@@ -15,6 +15,8 @@
         <thead>
           <tr>
             <th>Nombre</th>
+            <th>Artista</th>
+            <th>Album</th>
             <th></th>
           </tr>
         </thead>
@@ -22,6 +24,15 @@
           <% @songs.each do |song| %>
             <tr class="tr-no-image">
               <td><%= link_to song.name, song %></td>
+              <td><%
+                n = ''
+                if song.artists.any? then
+                  song.artists.each do |a|
+                    n = n + a.name + ', '
+                  end
+              %><%= n.chomp(', ') %><% end%>
+              </td>
+              <td><%= song.albums.any? ? song.album.first.name : '' %></td>
               <td>
                 <%= can_add_favorite_song(current_user, song) ? link_to( 'Añadir a favoritas',
                     add_favorite_song_path(current_user, song), method: :post,
