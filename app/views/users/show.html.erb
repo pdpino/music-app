@@ -58,7 +58,7 @@
           <%= link_to user_follows.followed.full_name, user_path(user_follows.followed) %>
 
           <%= @has_permission ?  (' | ' + link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete)) : '' %>
-          
+
         </li>
     <% end %>
   <% else %>
@@ -104,46 +104,14 @@
   %>
 
 <h3>Artistas que ha creado el usuario:</h3>
-<% if @artists.any? %>
-  <% @artists.each do |artist| %>
-    <li>
-      <%= artist.name %>
-      |
-      <%= link_to 'Mostrar', artist %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado artistas
-    </p>
-<% end %>
+<%= render 'artists/index-snippet', artists: @artists %>
 
 <h3>Albums que ha creado el usuario:</h3>
-<% if @albums.any? %>
-  <% @albums.each do |album| %>
-    <li>
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado albums
-    </p>
-<% end %>
+<%= render 'albums/index-snippet', albums: @albums %>
 
 <h3>Canciones que ha creado el usuario:</h3>
-<% if @songs.any? %>
-  <% @songs.each do |song| %>
-    <li>
-      <%= song.name %>
-      |
-      <%= link_to 'Mostrar', song %>
-    </li>
-  <% end %>
-<% end %>
-  <hr>
+<%= render 'songs/index-snippet', songs: @songs %>
+
 </div>
 
 <div class="row">
@@ -177,33 +145,10 @@
     %>
 
   <h3>Artistas que ha creado el usuario:</h3>
-  <% if @artists.any? %>
-    <% @artists.each do |artist| %>
-      <li>
-        <%= artist.name %>
-        |
-        <%= link_to 'Mostrar', artist %>
-      </li>
-    <% end %>
-  <% else %>
-      <p>
-        Este usuario no ha creado artistas
-      </p>
-  <% end %>
+  <%= render 'artists/index-snippet', artists: @artists %>
 
   <h3>Canciones que ha creado el usuario:</h3>
-  <% if @songs.any? %>
-    <% @songs.each do |song| %>
-      <li>
-        <%= song.name %>
-        |
-        <%= link_to 'Mostrar', song %>
-      </li>
-    <% end %>
-  <% else %>
-      <p>
-        Este usuario no ha creado canciones
-      </p>
-  <% end %>
+  <%= render 'songs/index-snippet', songs: @songs %>
+
 
 </div>

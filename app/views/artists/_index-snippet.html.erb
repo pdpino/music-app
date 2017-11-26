@@ -1,0 +1,16 @@
+<%# Index snippet for artists
+  provide: artists %>
+
+<% if artists.any? %>
+  <ul class="ul-no-bullet">
+    <% artists.each do |artist| %>
+      <li>
+        <%= link_to artist.name, artist %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+    <p>
+      Sin artistas
+    </p>
+<% end %>
