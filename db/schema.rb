@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027061811) do
+ActiveRecord::Schema.define(version: 20171126143906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,8 +143,9 @@ ActiveRecord::Schema.define(version: 20171027061811) do
     t.string   "name"
     t.string   "duration"
     t.integer  "owner_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "youtube_url"
     t.index ["owner_id"], name: "index_songs_on_owner_id", using: :btree
   end
 
