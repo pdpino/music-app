@@ -1,5 +1,15 @@
 <div class="row padding-first-row">
   <div class="col-lg-5">
+
+
+    <% if @error %>
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <h4>Error en las credenciales.</h4>
+          <p>Usuario y/o contraseña son incorrectas. </p>
+        </div>
+    <% end %>
+
     <%= form_for(:session, url: login_path, :html => { :class => 'form-horizontal' } ) do |f| %>
 
         <fieldset>
@@ -27,4 +37,3 @@
     <%= link_to "No tengo cuenta.", signup_path %>
   </div>
 </div>
-

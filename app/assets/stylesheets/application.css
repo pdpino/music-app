@@ -16,7 +16,7 @@
 
 body
 {
-    padding-top: 50px
+    padding-top: 50px;
 }
 
 .page-header h1 {
@@ -39,11 +39,21 @@ body
     padding-top: 30px;
 }
 
+.wall-post-element-padding {
+    padding-left: 5px;
+}
+
 .custom-thumbnail {
     display: block;
     width: 120px;
     max-height: 150px;
     height: auto;
+}
+
+.vertical-center {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
 .profile-image {
@@ -60,4 +70,48 @@ body
 	padding: 0;
 	margin: 0;
 	padding-left: 10px;
+}
+
+.custom-footer {
+    padding-bottom: 50px;
+    padding-top: 20px;
+}
+
+.logo {
+    max-height: 120px;
+    width: auto;
+    filter: grayscale(100%);
+}
+
+.btn-title {
+    margin-top: 8px;
+}
+
+.tr-no-image {
+    height: 60px;
+}
+
+.wall-textinput {
+    resize: none;
+}
+
+.wall-post {
+    margin-top: 50px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+
+}
+
+.follows-thumbnail {
+    height: 125px;
+    overflow: hidden;
+}
+
+#main-page-container {
+    min-height: 100vh;
+}
+
+#footer-logo-row {
+    padding-top: 50px;
 }

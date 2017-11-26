@@ -6,7 +6,6 @@
 
   <div class="col-lg-3 col-md-3 col-sm-4">
     <ul class="list-group">
-      <li class="list-group-item"><%= render 'follows/update', user: @user %></li>
       <% if @has_permission %>
           <li class="list-group-item">
             <%= link_to 'Editar Perfil', edit_user_path(@user)%>
@@ -35,175 +34,261 @@
 <div class="row">
   <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
   <p class="lead"><%= @user.email %></p>
+  <%= render 'follows/update', user: @user %>
 
   <% if @show_is_admin %>
       <div class="alert alert-warning">
-        <h4>Precaución!</h4>
         <p>Este usuario tiene permisos de administrador.</p>
       </div>
     <strong>Este usuario tiene permisos de administrador</strong>
   <% end %>
-</p>
-
+  </p>
 <hr>
+</div>
 
-<%= render 'follows/update', user: @user %>
+<div>
+  <div class="row">
+    <h3>Muro</h3>
+    <%= render 'wall_messages/new' %>
+    <%= render 'wall_messages/index' %>
+    <hr>
+  </div>
+</div>
 
-<h3> Siguiendo </h3>
-<div class="col-lg-3 col-md-3 col-sm-4">
-<% if @user_following.any? then %>
-    <ul class="list-group">
-      <% @user_following.each do |user_follows| %>
-        <li>
-          <%= link_to user_follows.followed.full_name, user_path(user_follows.followed) %>
 
-          <%= @has_permission ?  (' | ' + link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed), method: :delete)) : '' %>
-          
-        </li>
+<div class="row">
+  <h3> Siguiendo <%= @user_following.any? ? '(' + @user_following.count.to_s + ')': '' %> </h3>
+  <% if @user_following.any? then %>
+        <% @user_following.each do |user_follows| %>
+          <div class="col-xl-1 col-lg-2 col-md-2 col-sm-2 col-xs-4">
+            <div class="center-block">
+              <%= link_to image_tag(user_follows.followed.image_src, :class => "follows-thumbnail"),
+                          user_path(user_follows.followed)%>
+            </div>
+              <%= user_follows.followed.full_name %>
+            <%= @has_permission ? (link_to( 'Dejar de seguir', unfollow_path(current_user, user_follows.followed),
+                                            method: :delete, :class => "btn btn-primary btn-xs btn-warning")) : '' %>
+          </div>
+        <% end %>
+    <% else %>
+        <p>
+          No sigue a nadie.
+        </p>
     <% end %>
+</div>
+
+<div class="row">
+  <h3> Seguidores <%= @user_followers.any? ? '(' + @user_followers.count.to_s + ')': '' %></h3>
+  <% if @user_followers.any? then %>
+      <% @user_followers.each do |user_follower| %>
+          <div class="col-xl-1 col-lg-2 col-md-2 col-sm-2 col-xs-4">
+            <div class="center-block">
+              <%= link_to image_tag(user_follower.follower.image_src, :class => "follows-thumbnail"),
+                          user_path(user_follower.follower.full_name)%>
+            </div>
+            <%= user_follower.follower.full_name %>
+          </div>
+      <% end %>
   <% else %>
       <p>
-        No sigue a nadie.
+        No tiene.
+      </p>
+  <% end %>
+</div>
+
+<div class="row">
+  <h3>Canciones favoritas <%= @favorite_songs.any? ? '(' + @favorite_songs.length.to_s + ')': ''%></h3>
+  <% if @favorite_songs.length > 0 then %>
+
+      <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Artista</th>
+          <th>Album</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @favorite_songs.each do |song| %>
+              <tr class="tr-no-image">
+                <td><%= link_to song.name, song %></td>
+                <td><%
+                  n = ''
+                  if song.artists.any? then
+                    song.artists.each do |a|
+                      n = n + a.name + ', '
+                    end
+                %><%= n.chomp(', ') %><% end%>
+                </td>
+                <td><%= song.albums.any? ? song.album.first.name : '' %></td>
+                <td>
+                  <%= can_add_favorite_song(current_user, song) ? link_to( 'Añadir a favoritas',
+                                                                           add_favorite_song_path(current_user, song), method: :post,
+                                                                           :class => "btn btn-primary btn-xs")  : '' %>
+                  <%=can_remove_favorite_song(current_user, song) ? link_to( 'Eliminar de mis favoritas',
+                                                                             remove_favorite_song_path(current_user, song), method: :delete,
+                                                                             :class => "btn btn-primary btn-xs btn-warning") : '' %>
+                </td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
+  <% else %>
+      <p>
+        No hay canciones para mostrar
+      </p>
+  <% end %>
+</div>
+
+<div class="row">
+
+  <h3>Artistas favoritos <%= @favorite_artists.any? ? '(' + @favorite_artists.count.to_s + ')': '' %></h3>
+
+    <% if @favorite_artists.any? %>
+        <table class="table table-striped table-hover ">
+          <thead>
+          <tr>
+            <th class="col-xl-2 col-lg-2 col-md-3 col-sm-6"></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @favorite_artists.each do |artist| %>
+              <tr>
+                <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
+                  <img src="<%= (artist.image.blank? ? asset_path('artist-default.png') : artist.image) %>"
+                       class="img-thumbnail rounded float-left custom-thumbnail" alt="artist thumbnail" />
+                </td>
+                <td><%= link_to (artist.name.capitalize), artist  %></td>
+                <td>
+                  <%= can_add_favorite_artist(current_user, artist) ? link_to( 'Añadir a favoritos',
+                                                                               add_favorite_artist_path(current_user, artist), method: :post,
+                                                                               :class => "btn btn-primary btn-xs") : ''%>
+                  <%= can_remove_favorite_artist(current_user, artist) ? link_to( 'Eliminar de mis favoritos',
+                                                                                  remove_favorite_artist_path(current_user, artist), method: :delete,
+                                                                                  :class => "btn btn-primary btn-xs btn-warning") : ''%>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+    <% else %>
+        <p>
+          No hay artistas para mostrar
+        </p>
+    <% end %>
+
+</div>
+
+<div class="row">
+  <h3>Álbumes favoritos <%= @favorite_albums.any? ? '(' + @favorite_albums.count.to_s + ')' : ''%></h3>
+
+  <% if @favorite_albums.length > 0 then %>
+      <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+          <th class="col-xl-2 col-lg-2 col-md-3 col-sm-6"></th>
+          <th>Nombre</th>
+          <th>Artista</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <% @favorite_albums.each do |album| %>
+            <tr>
+              <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
+                <img src="<%= (album.image.blank? ? asset_path('album-default.jpeg') : album.image) %>"
+                     class="img-thumbnail rounded float-left custom-thumbnail" alt="album thumbnail" />
+              </td>
+
+              <td>
+                <%= link_to album.name, album %>
+              </td>
+
+              <td><%
+                n = ''
+                if album.artists.any? then
+                  album.artists.each do |a|
+                    n = n + a.name + ', '
+                  end
+              %><%= n.chomp(', ') %><% end%>
+              </td>
+
+              <td>
+
+              <td>
+                <%= can_add_favorite_album(current_user, album) ? link_to( 'Añadir a favoritos',
+                                                                           add_favorite_album_path(current_user, album), method: :post,
+                                                                           :class => "btn btn-primary btn-xs") : ''%>
+                <%= can_remove_favorite_album(current_user, album) ? link_to( 'Eliminar de mis favoritos',
+                                                                              remove_favorite_album_path(current_user, album), method: :delete,
+                                                                              :class => "btn btn-primary btn-xs btn-warning") : ''%>
+              </td>
+
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% else %>
+      <p>
+        No hay álbumes para mostrar
       </p>
   <% end %>
 
-<h3> Seguidores </h3>
-<% if @user_followers.any? then %>
-  <% @user_followers.each do |user_follower| %>
-    <li>
-      <%= link_to user_follower.follower.full_name, user_path(user_follower.follower) %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      No tiene.
-    </p>
-<% end %>
 
-
-<%= render 'favorites/index',
-  resource_name: 'canciones',
-  favorite_items: @favorite_songs,
-  item_path: Proc.new { |song| song_path(song) },
-  remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
-  is_female: true
-  %>
-
-<%= render 'favorites/index',
-  resource_name: 'artistas',
-  favorite_items: @favorite_artists,
-  item_path: Proc.new { |artist| artist_path(artist) },
-  remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
-  %>
-
-<%= render 'favorites/index',
-  resource_name: 'albums',
-  favorite_items: @favorite_albums,
-  item_path: Proc.new { |album| album_path(album) },
-  remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-  %>
-
-<h3>Artistas que ha creado el usuario:</h3>
-<% if @artists.any? %>
-  <% @artists.each do |artist| %>
-    <li>
-      <%= artist.name %>
-      |
-      <%= link_to 'Mostrar', artist %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado artistas
-    </p>
-<% end %>
-
-<h3>Albums que ha creado el usuario:</h3>
-<% if @albums.any? %>
-  <% @albums.each do |album| %>
-    <li>
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Este usuario no ha creado albums
-    </p>
-<% end %>
-
-<h3>Canciones que ha creado el usuario:</h3>
-<% if @songs.any? %>
-  <% @songs.each do |song| %>
-    <li>
-      <%= song.name %>
-      |
-      <%= link_to 'Mostrar', song %>
-    </li>
-  <% end %>
-<% end %>
-  <hr>
-</div>
-
-<div class="row">
-  <%= render 'wall_messages/new' %>
-  <%= render 'wall_messages/index' %>
-  <hr>
 </div>
 
 <div class="row">
 
-  <%= render 'favorites/index',
-    resource_name: 'canciones',
-    favorite_items: @favorite_songs,
-    item_path: Proc.new { |song| song_path(song) },
-    remove_favorite_item_path: Proc.new { |user, song| remove_favorite_song_path(user, song) },
-    is_female: true
-    %>
-
-  <%= render 'favorites/index',
-    resource_name: 'artistas',
-    favorite_items: @favorite_artists,
-    item_path: Proc.new { |artist| artist_path(artist) },
-    remove_favorite_item_path: Proc.new { |user, artist| remove_favorite_artist_path(user, artist) }
-    %>
-
-  <%= render 'favorites/index',
-    resource_name: 'albums',
-    favorite_items: @favorite_albums,
-    item_path: Proc.new { |album| album_path(album) },
-    remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-    %>
 
   <h3>Artistas que ha creado el usuario:</h3>
   <% if @artists.any? %>
-    <% @artists.each do |artist| %>
-      <li>
-        <%= artist.name %>
-        |
-        <%= link_to 'Mostrar', artist %>
-      </li>
-    <% end %>
+      <ul>
+        <% @artists.each do |artist| %>
+          <li>
+            <%= link_to artist.name, artist %>
+          </li>
+        <% end %>
+      </ul>
   <% else %>
       <p>
-        Este usuario no ha creado artistas
+        Éste usuario no ha creado artistas.
+      </p>
+  <% end %>
+
+  <h3>Álbumes que ha creado el usuario:</h3>
+  <% if @albums.any? %>
+      <ul>
+        <% @albums.each do |album| %>
+          <li>
+            <%= link_to album.name, album %>
+          </li>
+        <% end %>
+      </ul>
+  <% else %>
+      <p>
+        Éste usuario no ha creado álbumes.
       </p>
   <% end %>
 
   <h3>Canciones que ha creado el usuario:</h3>
   <% if @songs.any? %>
-    <% @songs.each do |song| %>
-      <li>
-        <%= song.name %>
-        |
-        <%= link_to 'Mostrar', song %>
-      </li>
-    <% end %>
-  <% else %>
+    <ul>
+      <% @songs.each do |song| %>
+        <li>
+          <%= link_to song.name, song %>
+        </li>
+      <% end %>
+    </ul>
+    <% else %>
       <p>
-        Este usuario no ha creado canciones
+        Éste usuario no ha creado canciones.
       </p>
   <% end %>
-
 </div>

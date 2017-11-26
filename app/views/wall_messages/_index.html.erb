@@ -1,25 +1,65 @@
-<h3>Muro</h3>
+<!--
+  Diseño e implementación basados en código disponible en
+  https://bootsnipp.com/snippets/featured/user-comment-example
+-->
+
 <% if @user_wall.any? %>
-  <% @user_wall.each do |wall_message| %>
-    <li>
-      <%= wall_message.writer.first_name %>
-      -
-      <%= wall_message.created_at.strftime("%Y-%b-%d %H:%M") %>
-      :
-      <br>
-      <%= wall_message.message %>
-      <br>
-    </li>
-    <% if can_remove_wall_message(wall_message) %>
-      <%= link_to 'Borrar mensaje', remove_wall_message_path({
-          receiver_id: @user.id,
-          message_id: wall_message.id
-        }),
-        method: :delete
-      %>
+
+    <% @user_wall.each do |wall_message| %>
+      <div class="container-fluid">
+        <div class="row wall-post">
+        <!-- INICIO WALL POST -->
+        
+
+          <!-- IMAGEN DEL USUARIO -->
+          <div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-xs-5 wall-post-element-padding">
+            <div class="thumbnail">
+              <img src="<%= wall_message.writer.image_src %>">
+            </div>
+          </div>
+
+
+          <div class="col-xl-11 col-lg-10 col-md-8 col-sm-8 col-xs-12">
+            
+            <!-- CONTENIDO DEL MENSAJE (ancho complementario al ancho de la imagen - dejando dos col de sobra) -->
+            <div class="row wall-post-element-padding">  
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <strong>
+                    <%= wall_message.writer.first_name + ' ' + wall_message.writer.last_name %>
+                  </strong>
+                  <em class="text-muted pull-right">
+                    <%= wall_message.created_at.strftime("a las %H:%M del %d de %b, %Y") %>
+                  </em>
+                </div>
+                <div class="panel-body">
+                  <%= wall_message.message %>
+                </div>
+              </div>
+            </div> 
+            <!-- FIN CONTENIDO DEL MENSAJE -->
+
+            <!-- BOTON DE REMOVER (si y solo si tiene permisos) -->
+            <% if can_remove_wall_message(wall_message) %>
+              <div class="row wall-post-element-padding">
+                <%= link_to 'Borrar mensaje', remove_wall_message_path({
+                         receiver_id: @user.id,
+                         message_id: wall_message.id
+                      }),
+                      method: :delete,
+                      :class => 'btn btn-primary btn-xs btn-warning' %>
+              </div>
+            <% end %>
+
+          </div>
+        
+
+        <!-- FIN WALL POST -->
+        </div>
+      </div>
     <% end %>
-    <br>
-  <% end %>
+
+
 <% else %>
     <p>
       No hay publicaciones

@@ -63,4 +63,8 @@ class User < ApplicationRecord
     first_name.capitalize + ' ' + last_name
   end
 
+  def image_src
+    photo.blank? ? ActionController::Base.helpers.asset_path('user-default.png') : photo
+  end
+
 end

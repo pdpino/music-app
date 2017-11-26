@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>MusicApp29</title>
+    <link rel="icon" href="<%= asset_path('favicon.png') %>">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -54,9 +55,45 @@
 
 
     <!-- CONTAINER Y aplicación específica-->
-    <div class="container">
+    <div id="main-page-container" class="container">
       <%= yield %>
     </div>
 
+    <!-- pie de página -->
+    <div class="container" >
+      <hr>
+      <div class="custom-footer">
+
+        <div class="row">
+          <em>
+            <h4>IIC2143 - Ingeniería de Software</h4>
+            <h5>Segundo Semestre, 2017</h5>
+            <h5>Grupo 29</h5>
+            <ul class="ul-no-bullet">
+              <li>Pablo Pino</li>
+              <li>David Fuller</li>
+              <li>Luciano Chiang</li>
+            </ul>
+          </em>
+
+        <div class="row" id="footer-logo-row">
+          <a class="col-xl-1 col-l-2 col-med-3 col-sm-3" href="http://www.uc.cl">
+            <img class="logo" src="<%= asset_path('logo-puc.png') %>" />
+          </a>
+          <a class="col-xl-1 col-l-2 col-med-3 col-sm-3" href="http://www.ing.puc.cl">
+            <img class="logo" src="<%= asset_path('logo-ing.png') %>" />
+          </a>
+        </div>
+
+        </div>
+
+        <div class="row">
+
+        </div>
+
+      </div>
+    </div>
+
   </body>
+
 </html>

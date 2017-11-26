@@ -1,24 +1,24 @@
 <!-- provide: errors (Errors type, usually @instance.errors)
     optional: show_just_one: true, to just show 1 error (instead of all) -->
 
-<% if errors.any? %>
-  <div id="error_explanation">
-    <% if local_assigns[:show_just_one] %>
-      <%= errors.first[0] %>
-      <%= errors.first[1] %>
-    <% else %>
-        <h2><%= pluralize(errors.count, "error") %>: </h2>
 
-        <ul>
-          <% errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      <!-- OTRA FORMA:
-        <% errors.each do |attr, msg| %>
-          <%= attr %> <%= msg %>
+<% if errors.any? %>
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <% if local_assigns[:show_just_one] %>
+      <h4>Error: </h4>
+      <ul>
+        <li><%= errors.first[0] %></li>
+        <li><%= errors.first[1] %></li>
+      </ul>
+    <% else %>
+      <h4><%= errors.count + errors.count > 1 ? 'Errores' : 'Error' %>: </h4>
+
+      <ul>
+        <% errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
-       -->
+      </ul>
     <% end %>
   </div>
 <% end %>

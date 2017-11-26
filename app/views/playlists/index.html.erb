@@ -1,11 +1,11 @@
 <div class="row padding-first-element">
   <h1>Playlists</h1>
   <hr>
+  <%= link_to "Crear Playlist", new_playlist_path, :class => 'btn btn-primary btn-title' %>
 </div>
 
 <div class="row padding-first-element">
-  <%= link_to "Crear Playlist", new_playlist_path %>
-  
+
   <% @playlists.each do |playlist1| %>
     <h3><%= playlist1.name %></h3>
     <div>

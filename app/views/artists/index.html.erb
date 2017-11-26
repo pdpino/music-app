@@ -1,13 +1,12 @@
 <div class="row padding-first-element">
   <h1>Artistas disponibles</h1>
   <hr>
+  <% if has_create_permission %>
+      <%= link_to 'Crear artista', new_artist_path, :class => 'btn btn-primary btn-title' %>
+  <% end%>
 </div>
 
 <div class="row padding-first-element">
-  
-  <% if has_create_permission %>
-      <%= link_to 'Crear un nuevo artista', new_artist_path %>
-  <% end%>
 
   <% if @artists.any? %>
     <table class="table table-striped table-hover ">
@@ -28,8 +27,12 @@
             </td>
             <td><%= link_to (artist.name.capitalize), artist  %></td>
             <td>
-              <%= can_add_favorite_artist(current_user, artist) ? link_to( 'Añadir a favoritos', add_favorite_artist_path(current_user, artist), method: :post) : ''%>
-              <%= can_remove_favorite_artist(current_user, artist) ? link_to( 'Eliminar de mis favoritos', remove_favorite_artist_path(current_user, artist), method: :delete) : ''%>
+              <%= can_add_favorite_artist(current_user, artist) ? link_to( 'Añadir a favoritos',
+                     add_favorite_artist_path(current_user, artist), method: :post,
+                         :class => "btn btn-primary btn-xs") : ''%>
+              <%= can_remove_favorite_artist(current_user, artist) ? link_to( 'Eliminar de mis favoritos',
+                     remove_favorite_artist_path(current_user, artist), method: :delete,
+                         :class => "btn btn-primary btn-xs btn-warning") : ''%>
             </td>
           </tr>
         <% end %>

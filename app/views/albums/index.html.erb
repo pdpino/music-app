@@ -1,20 +1,21 @@
 <div class="row padding-first-element">
   <h1>Álbumes disponibles</h1>
   <hr>
+  <% if has_create_permission %>
+    <%= link_to 'Crear álbum', new_album_path, :class => 'btn btn-primary btn-title' %>
+  <% end%>
 </div>
 
 <div class="row padding-first-element">
 
-  <% if has_create_permission %>
-    <%= link_to 'Crear álbum', new_album_path %>
-  <% end%>
 
   <% if @albums.length > 0 then %>
     <table class="table table-striped table-hover ">
       <thead>
         <tr>
           <th class="col-xl-2 col-lg-2 col-md-3 col-sm-6"></th>
-          <th></th>
+          <th>Nombre</th>
+          <th>Artista</th>
           <th></th>
         </tr>
       </thead>
@@ -31,16 +32,27 @@
             <td>
               <%= link_to album.name, album %>
             </td>
+
+            <td><%
+              n = ''
+              if album.artists.any? then
+                album.artists.each do |a|
+                  n = n + a.name + ', '
+                end
+            %><%= n.chomp(', ') %><% end%>
+            </td>
             
             <td>
-              <%= render 'favorites/update',
-                item: album,
-                can_add_favorite: Proc.new { |user, album| can_add_favorite_album(user, album) },
-                can_remove_favorite: Proc.new { |user, album| can_remove_favorite_album(user, album) },
-                add_favorite_item_path: Proc.new { |user, album| add_favorite_album_path(user, album) },
-                remove_favorite_item_path: Proc.new { |user, album| remove_favorite_album_path(user, album) }
-                %>
-              </td>
+
+            <td>
+              <%= can_add_favorite_album(current_user, album) ? link_to( 'Añadir a favoritos',
+                   add_favorite_album_path(current_user, album), method: :post,
+                   :class => "btn btn-primary btn-xs") : ''%>
+              <%= can_remove_favorite_album(current_user, album) ? link_to( 'Eliminar de mis favoritos',
+                    remove_favorite_album_path(current_user, album), method: :delete,
+                    :class => "btn btn-primary btn-xs btn-warning") : ''%>
+            </td>
+
           </tr>
         <% end %>
       </tbody>
