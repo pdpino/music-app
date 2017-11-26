@@ -45,8 +45,6 @@ class SongsController < ApplicationController
 
     @song = Song.new(create_params)
 
-    puts "ARTISTS: #{@song.artists}"
-
     if @song.valid?
       # Search youtube video
       videos = Yt::Collections::Videos.new
