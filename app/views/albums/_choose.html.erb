@@ -1,0 +1,19 @@
+<!-- Display a list to choose between albums
+  must exist: @eligible_albums, existing_albums
+ -->
+
+<div>
+  <h3>Elegir álbum (s):</h3>
+  <% if @eligible_albums.any? %>
+   <% @eligible_albums.each do |album| %>
+     <%= check_box_tag("eligible_albums[]", album.id, is_in?(existing_albums, album) ) %>
+     <%= label_tag(:eligible_albums, album.name) %>
+     <br> <!-- HACK: use CSS!!! -->
+   <% end %>
+
+  <% else %>
+    <p>
+      No existen álbumes para elegir
+    </p>
+  <% end %>
+</div>

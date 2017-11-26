@@ -13,7 +13,7 @@
     <%= f.label :image, "Imagen del artista" %>
     <%= f.file_field :image %>
   </div>
-  
+
   <div>
     <%= f.label :description, "Descripción" %>
     <%= f.text_field :description %>
@@ -39,20 +39,7 @@
     <%= f.date_field :active_until %>
   </div>
 
-  <div>
-    <% if @all_genres.any? %>
-      <h3>Elegir género (s):</h3>
-      <% @all_genres.each do |genre| %>
-        <%= check_box_tag("all_genres[]", genre.id, is_in?(@artist_genres, genre) ) %>
-        <%= label_tag(:all_genres, genre.name) %>
-        <br> <!-- HACK: use CSS!!! -->
-      <% end %>
-    <% else %>
-        <p>
-          No existen géneros para elegir
-        </p>
-    <% end %>
-  </div>
+  <%= render 'genres/choose', existing_genres: @artist_genres %>
 
   <div>
     <%= f.submit "Guardar" %>

@@ -28,20 +28,7 @@
     <%= is_single_field.check_box :is_single %> Single
   <% end %>
 
-  <div>
-    <% if @all_artists.any? %>
-      <h3>Elegir artista (s):</h3>
-      <% @all_artists.each do |artist| %>
-        <%= check_box_tag("all_artists[]", artist.id, is_in?(@album_artists, artist) ) %>
-        <%= label_tag(:all_artists, artist.name) %>
-        <br> <!-- HACK: use CSS!!! -->
-      <% end %>
-    <% else %>
-        <p>
-          No existen artistas para elegir
-        </p>
-    <% end %>
-  </div>
+  <%= render 'artists/choose', existing_artists: @album_artists %>
 
   <div>
     <%= f.submit "Guardar" %>

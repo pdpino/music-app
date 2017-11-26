@@ -14,58 +14,9 @@
     <%= f.text_field :duration %>
   </div>
 
-  <div>
-    <% if @all_artists.any? %>
-      <h3>Elegir artista (s):</h3>
-
-      <% @all_artists.each do |artist| %>
-        <%= check_box_tag("all_artists[]", artist.id, is_in?(@song_artists, artist) ) %>
-        <%= label_tag(:all_artists, artist.name) %>
-
-        <br> <!-- HACK: use CSS!!! -->
-
-      <% end %>
-
-    <% else %>
-        <p>
-          No existen artistas para elegir
-        </p>
-    <% end %>
-  </div>
-
-  <div>
-    <% if @all_genres.any? %>
-      <h3>Elegir género (s):</h3>
-
-      <% @all_genres.each do |genre| %>
-        <%= check_box_tag("all_genres[]", genre.id, is_in?(@song_genres, genre) ) %>
-        <%= label_tag(:all_genres, genre.name) %>
-        <br> <!-- HACK: use CSS!!! -->
-      <% end %>
-
-    <% else %>
-        <p>
-          No existen géneros para elegir
-        </p>
-    <% end %>
-  </div>
-
-  <div>
-    <% if @eligible_albums.any? %>
-      <h3>Elegir álbum (s):</h3>
-
-      <% @eligible_albums.each do |album| %>
-        <%= check_box_tag("eligible_albums[]", album.id, is_in?(@song_albums, album) ) %>
-        <%= label_tag(:eligible_albums, album.name) %>
-        <br> <!-- HACK: use CSS!!! -->
-      <% end %>
-
-    <% else %>
-        <p>
-          No existen álbumes para elegir
-        </p>
-    <% end %>
-  </div>
+  <%= render 'artists/choose', existing_artists: @song_artists %>
+  <%= render 'albums/choose', existing_albums: @song_albums %>
+  <%= render 'genres/choose', existing_genres: @song_genres %>
 
   <div>
     <%= f.submit "Guardar" %>

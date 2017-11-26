@@ -1,0 +1,18 @@
+<!-- Display a list to choose between artists
+  must exist: @all_artists, existing_artists
+ -->
+
+<div>
+  <h3>Elegir artista (s):</h3>
+  <% if @all_artists.any? %>
+    <% @all_artists.each do |artist| %>
+      <%= check_box_tag("all_artists[]", artist.id, is_in?(existing_artists, artist) ) %>
+      <%= label_tag(:all_artists, artist.name) %>
+      <br> <!-- HACK: use CSS!!! -->
+    <% end %>
+  <% else %>
+      <p>
+        No existen artistas para elegir
+      </p>
+  <% end %>
+</div>
