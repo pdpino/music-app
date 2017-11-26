@@ -5,6 +5,7 @@
   <ul class="ul-no-bullet">
     <% artists.each do |artist| %>
       <li>
+        <img src="<%= artist.image %>" alt="photo">
         <%= link_to artist.name, artist %>
       </li>
     <% end %>

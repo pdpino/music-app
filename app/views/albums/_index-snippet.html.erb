@@ -5,6 +5,7 @@
   <ul class="ul-no-bullet">
     <% albums.each do |album| %>
       <li>
+        <img src="<%= album.image %>" alt="photo">
         <%= link_to album.name, album %>
       </li>
     <% end %>
