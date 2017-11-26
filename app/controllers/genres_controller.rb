@@ -4,7 +4,12 @@ class GenresController < ApplicationController
   before_action :correct_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @genres = Genre.all
+    # REFACTOR: this is copied in all the controllers with search
+    unless params["text"].nil?
+      @genres = Genre.where("name ILIKE ?", "%#{params["text"]}%")
+    else
+      @genres = Genre.all
+    end
   end
 
   def show

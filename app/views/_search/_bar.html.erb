@@ -1,0 +1,10 @@
+<%# Show a search bar
+  provide: search_path
+  must exist: @text %>
+
+<div class="search-bar">
+  <form action="<%= search_path %>" method="get">
+    <input type="text" name="text" value="<%= params["text"] %>">
+    <input type="submit" value="Buscar">
+  </form>
+</div>

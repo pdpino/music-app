@@ -5,7 +5,15 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :edit_password, :update_password, :destroy]
 
   def index
-    @users = User.all
+    # REFACTOR: this is copied in all the controllers with search
+    unless params["text"].nil?
+      param = "%#{params["text"]}%"
+      @users = User.where("first_name ILIKE ? OR last_name ILIKE ? OR email ILIKE ?", param, param, param)
+      @searched = true
+    else
+      @users = Array.new
+      @searched = false
+    end
   end
 
   def show

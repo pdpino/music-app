@@ -3,12 +3,7 @@
   <hr>
 </div>
 
-<div class="search-bar">
-  <form action="<%= songs_path %>" method="get">
-    <input type="text" name="text" value="">
-    <input type="submit" value="Buscar">
-  </form>
-</div>
+<%= render '_search/bar', search_path: songs_path %>
 
 <div class="row padding-first-element">
 

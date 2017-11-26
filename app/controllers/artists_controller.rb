@@ -9,7 +9,15 @@ class ArtistsController < ApplicationController
   before_action :set_artist_attributes, only: [:show, :edit, :update]
 
   def index
-    @artists = Artist.all
+    # REFACTOR: this is copied in all the controllers with search
+    unless params["text"].nil?
+      param = "%#{params["text"]}%"
+      @artists = Artist.where("name ILIKE ? OR members ILIKE ?", param, param)
+      @searched = true
+    else
+      @artists = Array.new
+      @searched = false
+    end
   end
 
   def show

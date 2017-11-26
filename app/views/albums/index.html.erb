@@ -3,6 +3,8 @@
   <hr>
 </div>
 
+<%= render '_search/bar', search_path: albums_path %>
+
 <div class="row padding-first-element">
 
   <% if has_create_permission %>
@@ -31,7 +33,7 @@
             <td>
               <%= link_to album.name, album %>
             </td>
-            
+
             <td>
               <%= render 'favorites/update',
                 item: album,
@@ -47,7 +49,7 @@
     </table>
   <% else %>
       <p>
-        No hay álbumes para mostrar
+        <%= (@searched) ? "No hay álbumes para mostrar" : "Busca álbumes!" %>
       </p>
   <% end %>
 

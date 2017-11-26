@@ -3,8 +3,10 @@
   <hr>
 </div>
 
+<%= render '_search/bar', search_path: artists_path %>
+
 <div class="row padding-first-element">
-  
+
   <% if has_create_permission %>
       <%= link_to 'Crear un nuevo artista', new_artist_path %>
   <% end%>
@@ -35,10 +37,10 @@
         <% end %>
       </tbody>
     </table>
-    
+
   <% else %>
     <p>
-      No hay artistas para mostrar
+      <%= (@searched) ? "No hay artistas para mostrar" : "Busca artistas!" %>
     </p>
   <% end %>
 </div>
