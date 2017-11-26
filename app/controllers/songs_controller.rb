@@ -9,7 +9,13 @@ class SongsController < ApplicationController
   before_action :set_song_attributes, only: [:show, :edit, :update]
 
   def index
-    @songs = Song.all
+    unless params["text"].nil?
+      @songs = Song.where("name LIKE ?", "%#{params["text"]}%")
+      @searched = true
+    else
+      @songs = Array.new
+      @searched = false
+    end
   end
 
   def show

@@ -1,13 +1,18 @@
 <div class="row padding-first-element">
-  <h1>Canciones disponibles</h1>
+  <h1>Canciones</h1>
   <hr>
 </div>
 
+<div class="search-bar">
+  <form action="<%= songs_path %>" method="get">
+    <input type="text" name="text" value="">
+    <input type="submit" value="Buscar">
+  </form>
+</div>
+
 <div class="row padding-first-element">
-  
 
     <% if @songs.length > 0 then %>
-      
       <table class="table table-striped table-hover ">
         <thead>
           <tr>
@@ -28,7 +33,7 @@
         </tbody>
     <% else %>
         <p>
-          No hay canciones para mostrar
+          <%= (@searched) ? "No hay canciones para mostrar" : "Busca canciones!" %>
         </p>
     <% end %>
 
