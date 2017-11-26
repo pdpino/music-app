@@ -1,0 +1,16 @@
+<%# Index snippet for genres
+  provide: genres %>
+
+<% if genres.any? %>
+  <ul class="ul-no-bullet">
+    <% genres.each do |genre| %>
+      <li>
+        <%= link_to genre.name, genre %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+    <p>
+      No hay géneros
+    </p>
+<% end %>

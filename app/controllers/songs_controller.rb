@@ -1,5 +1,7 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy]
+  include YoutubeHelper
+
+  before_action :set_song, only: [:show, :edit, :update, :destroy, :edit_youtube, :update_youtube, :delete_youtube]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
@@ -9,7 +11,14 @@ class SongsController < ApplicationController
   before_action :set_song_attributes, only: [:show, :edit, :update]
 
   def index
-    @songs = Song.all
+    # REFACTOR: this is copied in all the controllers with search
+    unless params["text"].nil?
+      @songs = Song.where("name ILIKE ?", "%#{params["text"]}%")
+      @searched = true
+    else
+      @songs = Array.new
+      @searched = false
+    end
   end
 
   def show
@@ -38,6 +47,11 @@ class SongsController < ApplicationController
 
     @song = Song.new(create_params)
 
+    if @song.valid?
+      video = yt_search_first("#{@song.name} #{@song.artists.map(&:name).join(' ')}")
+      @song.youtube_url = yt_get_embed_url(video.id) unless video.nil?
+    end
+
     if @song.save
       redirect_to @song
     else
@@ -51,6 +65,33 @@ class SongsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def edit_youtube
+    # Search yt videos
+    videos = yt_search_n(params[:text], params[:limit]) unless params[:text].nil?
+
+    # default value:
+    params[:limit] = 5 if params[:limit].nil?
+    params[:text] = @song.name if params[:text].nil?
+
+    render :edit_youtube, locals: { videos: videos }
+  end
+
+  def update_youtube
+    youtube_params = params.require(:song).permit(:youtube_url)
+    new_url = youtube_params[:youtube_url]
+    @song.youtube_url = yt_get_embed_url(new_url) unless new_url.nil? || new_url.empty?
+    if @song.save
+      redirect_to @song
+    else
+      render :edit_youtube
+    end
+  end
+
+  def delete_youtube
+    @song.update({ youtube_url: nil })
+    redirect_to @song
   end
 
   def destroy

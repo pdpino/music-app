@@ -1,0 +1,18 @@
+<!-- Display a list to choose between genres
+  must exist: @all_genres, existing_genres
+ -->
+
+<div>
+  <h3>Elegir género (s):</h3>
+  <% if @all_genres.any? %>
+    <% @all_genres.each do |genre| %>
+      <%= check_box_tag("all_genres[]", genre.id, is_in?(existing_genres, genre) ) %>
+      <%= label_tag(:all_genres, genre.name) %>
+      <br> <!-- HACK: use CSS!!! -->
+    <% end %>
+  <% else %>
+     <p>
+       No existen géneros para elegir
+     </p>
+  <% end %>
+</div>

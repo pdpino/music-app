@@ -23,10 +23,10 @@
 
 <div class="row">
   <h1><%= @album.name %></h1>
-  
+
   <p class="lead">
     <%= @album.description.blank? ? '' : @album.description %>
-  </p>  
+  </p>
 
   <hr>
 
@@ -41,42 +41,16 @@
     <%= @album.release_date %>
   </p>
 
-<<<<<<< HEAD
-
   <p>
     <%= @album.is_single ? "Es un single" : "No es un single" %>
     <!-- CHGME: really creative... -->
   </p>
 
   <h3>Artista (s):</h3>
-  <% if @album_artists.length > 0 then %>
-    <ul class="ul-no-bullet">
-      <% @album_artists.each do |artist| %>
-        <li>
-          <%= link_to artist.name, artist %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-      <p>
-        Sin artistas
-      </p>
-  <% end %>
+  <%= render 'artists/index-snippet', artists: @album_artists %>
 
   <h3>Canciones (s):</h3>
-  <% if @album_songs.length > 0 then %>
-    <ul class="ul-no-bullet">
-      <% @album_songs.each do |song| %>
-        <li>
-          <%= link_to song.name, song %>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-      <p>
-        Sin canciones
-      </p>
-  <% end %>
+  <%= render 'songs/index-snippet', songs: @album_songs %>
 
   <% if has_create_permission %>
     <%= link_to 'Crear canción', new_song_path({ album_id: @album.id }) %>
@@ -86,4 +60,7 @@
 
   <%= render 'comments/index', item_id: @album.id, comments: @album_comments %>
   <%= render 'comments/new', comment_create_path: comment_album_path(@album) %>
+
+  <h3>Noticias:</h3>
+  <%= render 'news/index-snippet', news: @album.news %>
 </div>

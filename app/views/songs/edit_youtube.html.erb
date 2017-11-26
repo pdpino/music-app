@@ -1,0 +1,72 @@
+<h1>Editar link a youtube</h1>
+
+<%= link_to 'Cancelar', song_path(@song) %>
+<%= link_to 'Eliminar link', delete_song_youtube_path(@song), method: :delete %>
+
+<h4>Ingresa una URL directamente</h4>
+<p>(Utiliza una URL embed, watch o youtu.be)</p>
+<!-- TODO: explicar esto bien !! O sacarlo -->
+
+<%= form_for(@song, url: { action: "update_youtube" }) do |f| %>
+  <div>
+    <%= f.label :youtube_url, "URL" %>
+    <%= f.text_field :youtube_url, value: "" %>
+  </div>
+
+  <div>
+    <%= f.submit "Guardar" %>
+  </div>
+<% end %>
+
+<hr>
+
+<h4>o busca un video!</h4>
+<div class="search-bar">
+  <form action="<%= edit_song_youtube_path %>" method="get">
+    <div>
+      <input type="text" name="text" value="<%= params["text"] %>">
+    </div>
+
+    <div>
+      <label for="limit">Cantidad de resultados</label>
+      <input type="number" name="limit" value="<%= params["limit"] %>">
+    </div>
+
+    <div>
+      <input type="submit" value="Buscar">
+    </div>
+  </form>
+</div>
+
+<% unless videos.nil? %>
+  <div class="">
+    <ul>
+      <% videos.each do |video| %>
+       <li>
+         <img src="<%= video.thumbnail_url %>" alt="thumbnail">
+         <div>
+           <strong>
+             <%= link_to video.title, yt_get_watch_url(video.id), target: :_blank %>
+           </strong>
+         </div>
+         <div>
+           <%= duration_in_minutes(video.duration) %>
+         </div>
+
+         <%= form_for(@song, url: { action: "update_youtube" }) do |f| %>
+           <div>
+             <%= f.hidden_field :youtube_url, value: video.id %>
+           </div>
+
+           <div>
+             <%= f.submit "Seleccionar" %>
+           </div>
+         <% end %>
+
+         <hr> <!-- HACK: use css -->
+
+       </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

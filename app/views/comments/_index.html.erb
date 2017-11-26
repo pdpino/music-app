@@ -5,7 +5,8 @@
 <% if comments.any? %>
   <% comments.each do |comment| %>
     <li>
-      <%= comment.user.first_name %>
+      <img src="<%= comment.user.photo %>" alt="photo">
+      <%= link_to comment.user.first_name, user_path(comment.user) %>
       -
       <%= comment.created_at.strftime("%Y-%b-%d %H:%M") %>
       :

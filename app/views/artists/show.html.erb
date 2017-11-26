@@ -47,52 +47,20 @@
 
 <div class="row">
 <h3>Género (s):</h3>
-<% if @artist_genres.any? %>
-  <% @artist_genres.each do |genre| %>
-    <li>
-      <%= genre.name %>
-      |
-      <%= link_to 'Mostrar', genre %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Sin géneros
-    </p>
-<% end %>
+<%= render 'genres/index-snippet', genres: @artist_genres %>
 
 <h3>Álbum (s):</h3>
-<% if @artist_albums.length > 0 then %>
-  <ul class="ul-no-bullet"
-    <% @artist_albums.each do |album| %>
-      <li>
-        <%= link_to album.name, album %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-    <p>
-      Sin álbumes
-    </p>
-<% end %>
+<%= render 'albums/index-snippet', albums: @artist_albums %>
 
 <% if has_create_permission %>
   <%= link_to 'Crear album', new_album_path({ artist_id: @artist.id }) %>
 <% end %>
 
 <h3>Canciones:</h3>
-<% if @artist_songs.length > 0 then %>
-  <ul class="ul-no-bullet"
-    <% @artist_songs.each do |song| %>
-      <li>
-        <%= link_to song.name, song %>
-      </li>
-    <% end %>
-<% else %>
-    <p>
-      Este artista no tiene canciones
-    </p>
-<% end %>
+<%= render 'songs/index-snippet', songs: @artist_songs %>
 
 <%= render 'comments/index', item_id: @artist.id, comments: @artist_comments %>
 <%= render 'comments/new', comment_create_path: comment_artist_path(@artist) %>
+
+<h3>Noticias:</h3>
+<%= render 'news/index-snippet', news: @artist.news %>

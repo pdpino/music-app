@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :albums
   resources :artists
   resources :playlists
+  resources :news
 
   # Edit password
   get 'users/:id/edit_password' => 'users#edit_password', as: 'edit_user_password'
@@ -55,6 +56,10 @@ Rails.application.routes.draw do
 
   delete 'users/:follower_id/follows/:followed_id' => 'follows#unfollow', as: 'unfollow'
 
+  # Edit youtube url
+  get 'songs/:id/edit_youtube' => 'songs#edit_youtube', as: 'edit_song_youtube'
+  patch 'songs/:id/update_youtube' => 'songs#update_youtube', as: 'update_song_youtube'
+  delete 'songs/:id/youtube' => 'songs#delete_youtube', as: 'delete_song_youtube'
 
 end
 

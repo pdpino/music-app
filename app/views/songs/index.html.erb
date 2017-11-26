@@ -6,11 +6,13 @@
   <% end%>
 </div>
 
+<%= render '_search/bar', search_path: songs_path %>
+
 <div class="row padding-first-element">
-  
+
 
     <% if @songs.length > 0 then %>
-      
+
       <table class="table table-striped table-hover ">
         <thead>
           <tr>
@@ -24,15 +26,19 @@
           <% @songs.each do |song| %>
             <tr class="tr-no-image">
               <td><%= link_to song.name, song %></td>
-              <td><%
-                n = ''
-                if song.artists.any? then
-                  song.artists.each do |a|
-                    n = n + a.name + ', '
-                  end
-              %><%= n.chomp(', ') %><% end%>
+              <td>
+                <% song.artists.each_with_index do |artist, index| %>
+                  <%= link_to artist.name, artist %>
+                  <% if index < song.artists.length - 1 %>
+                    ,
+                  <% end %>
+                <% end %>
               </td>
-              <td><%= song.albums.any? ? song.album.first.name : '' %></td>
+              <td>
+                <% if song.albums.any? %>
+                  <%= link_to song.albums.first.name, song.albums.first %>
+                <% end %>
+              </td>
               <td>
                 <%= can_add_favorite_song(current_user, song) ? link_to( 'Añadir a favoritas',
                     add_favorite_song_path(current_user, song), method: :post,
@@ -47,7 +53,7 @@
       </table>
     <% else %>
         <p>
-          No hay canciones para mostrar
+          <%= (@searched) ? "No hay canciones para mostrar" : "Busca canciones!" %>
         </p>
     <% end %>
 

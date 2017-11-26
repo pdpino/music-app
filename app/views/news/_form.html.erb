@@ -1,0 +1,29 @@
+<h1><%= title %></h1>
+
+<%= form_for(@news) do |f| %>
+  <div>
+    <%= f.label :title, "Titulo" %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :content, "Contenido" %>
+    <%= f.text_area :content %>
+  </div>
+  <div>
+    <%= f.label :image, "Imagen" %>
+    <%= f.file_field :image %>
+  </div>
+
+  <%= render 'artists/choose', existing_artists: @news_artists %>
+
+  <%= render 'albums/choose', existing_albums: @news_albums %>
+
+  <%= render 'songs/choose', existing_songs: @news_songs %>
+
+  <div>
+    <%= f.submit "Guardar" %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Volver', news_index_path %>

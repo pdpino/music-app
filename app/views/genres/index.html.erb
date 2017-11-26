@@ -6,8 +6,9 @@
   <% end%>
 </div>
 
-<div class="row padding-first-element">
+<%= render '_search/bar', search_path: genres_path %>
 
+<div class="row padding-first-element">
 
 
   <% if @genres.length > 0 then %>

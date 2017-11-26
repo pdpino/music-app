@@ -1,0 +1,21 @@
+<!-- Display news
+  provide: 'news', 'item_id' -->
+
+<% if news.any? %>
+  <ul>
+    <% news.each do |news_item| %>
+      <li>
+        <img src="<%= news_item.image %>" alt="image">
+        <%= news_item.created_at.strftime("%Y-%b-%d %H:%M") %>
+        :
+        <h4><%= news_item.title %></h4>
+        <p><%= news_item.content %></p>
+      </li>
+      <br>
+    <% end %>
+  </ul>
+<% else %>
+    <p>
+      No hay noticias
+    </p>
+<% end %>

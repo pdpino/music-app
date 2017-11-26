@@ -16,6 +16,9 @@ class Album < ApplicationRecord
   has_many :ratings, as: :rateable
   has_many :user_ratings, through: :ratings, as: :rateable
 
+  has_many :news_relation, as: :newsable
+  has_many :news, through: :news_relation, as: :newsable
+  
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true
