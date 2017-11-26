@@ -2,7 +2,8 @@
 <% if @user_wall.any? %>
   <% @user_wall.each do |wall_message| %>
     <li>
-      <%= wall_message.writer.first_name %>
+      <img src="<%= wall_message.writer.photo %>" alt="photo">
+      <%= link_to wall_message.writer.first_name, user_path(wall_message.writer) %>
       -
       <%= wall_message.created_at.strftime("%Y-%b-%d %H:%M") %>
       :
