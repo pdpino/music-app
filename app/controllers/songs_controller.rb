@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+  include YoutubeHelper
+
   before_action :set_song, only: [:show, :edit, :update, :destroy, :edit_youtube, :update_youtube]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -46,11 +48,8 @@ class SongsController < ApplicationController
     @song = Song.new(create_params)
 
     if @song.valid?
-      # Search youtube video
-      videos = Yt::Collections::Videos.new
-      query = "#{@song.name} #{@song.artists.map(&:name).join(' ')}"
-      video = videos.where(q: query).first
-      @song.youtube_url = "https://www.youtube.com/embed/#{video.id}" unless video.nil?
+      video = yt_search_first("#{@song.name} #{@song.artists.map(&:name).join(' ')}")
+      @song.youtube_url = yt_get_embed_url(video.id) unless video.nil?
     end
 
     if @song.save
@@ -69,13 +68,21 @@ class SongsController < ApplicationController
   end
 
   def edit_youtube
-    render :edit_youtube
+    # Search yt videos
+    videos = yt_search_n(params[:text], params[:limit]) unless params[:text].nil?
+
+    # default value:
+    params[:limit] = 5 if params[:limit].nil?
+    params[:text] = @song.name if params[:text].nil?
+
+    render :edit_youtube, locals: { videos: videos }
   end
 
   def update_youtube
-    url_params = params.require(:song).permit(:youtube_url)
-    puts "URL PARAMS: #{url_params}"
-    if @song.update(url_params)
+    youtube_params = params.require(:song).permit(:youtube_url)
+    new_url = youtube_params[:youtube_url]
+    @song.youtube_url = yt_get_embed_url(new_url) unless new_url.nil? || new_url.empty?
+    if @song.save
       redirect_to @song
     else
       render :edit_youtube
