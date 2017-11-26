@@ -17,6 +17,8 @@ module YoutubeHelper
         video_id = video_id.split("=")[-1]
       elsif video_id.include? "embed"
         return video_id
+      elsif video_id.include? "youtu.be"
+        video_id = video_id.split("/")[-1]
       end
     end
     "https://www.youtube.com/embed/#{video_id}"
