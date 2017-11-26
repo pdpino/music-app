@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   include YoutubeHelper
 
-  before_action :set_song, only: [:show, :edit, :update, :destroy, :edit_youtube, :update_youtube]
+  before_action :set_song, only: [:show, :edit, :update, :destroy, :edit_youtube, :update_youtube, :delete_youtube]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
@@ -87,6 +87,11 @@ class SongsController < ApplicationController
     else
       render :edit_youtube
     end
+  end
+
+  def delete_youtube
+    @song.update({ youtube_url: nil })
+    redirect_to @song
   end
 
   def destroy

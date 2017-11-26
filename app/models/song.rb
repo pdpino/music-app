@@ -27,8 +27,6 @@ class Song < ApplicationRecord
   }
   validates :owner_id, presence: true
 
-  validates :youtube_url, :format => URI::regexp(%w(http https))# =~ 'http://'
-
   def avg_rating
     rating = ratings.average(:stars)
     if rating
