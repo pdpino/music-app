@@ -45,10 +45,13 @@ class SongsController < ApplicationController
 
     @song = Song.new(create_params)
 
+    puts "ARTISTS: #{@song.artists}"
+
     if @song.valid?
       # Search youtube video
       videos = Yt::Collections::Videos.new
-      video_id = videos.where(q: @song.name).first.id
+      query = "#{@song.name} #{@song.artists.map(&:name).join(' ')}"
+      video_id = videos.where(q: query).first.id
       @song.youtube_url = "https://www.youtube.com/embed/#{video_id}"
     end
 
