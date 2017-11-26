@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-  before_action :set_song, only: [:show, :edit, :update, :destroy]
+  before_action :set_song, only: [:show, :edit, :update, :destroy, :edit_youtube, :update_youtube]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   before_action :require_user, only: [:new, :create, :edit, :update, :destroy]
@@ -65,6 +65,20 @@ class SongsController < ApplicationController
       redirect_to @song
     else
       render :edit
+    end
+  end
+
+  def edit_youtube
+    render :edit_youtube
+  end
+
+  def update_youtube
+    url_params = params.require(:song).permit(:youtube_url)
+    puts "URL PARAMS: #{url_params}"
+    if @song.update(url_params)
+      redirect_to @song
+    else
+      render :edit_youtube
     end
   end
 
