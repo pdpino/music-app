@@ -63,3 +63,6 @@ gem 'faker' # , '~> 5.0'
 
 # Handle files
 gem 'carrierwave', '~> 1.0'
+
+# Youtube API
+gem 'yt', '~> 0.28.0'
