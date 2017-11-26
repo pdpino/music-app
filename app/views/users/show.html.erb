@@ -38,11 +38,13 @@
 
   <% if @show_is_admin %>
       <div class="alert alert-warning">
+        <h4>Precaución!</h4>
         <p>Este usuario tiene permisos de administrador.</p>
       </div>
     <strong>Este usuario tiene permisos de administrador</strong>
   <% end %>
-  </p>
+</p>
+
 <hr>
 </div>
 
@@ -54,7 +56,6 @@
     <hr>
   </div>
 </div>
-
 
 <div class="row">
   <h3> Siguiendo <%= @user_following.any? ? '(' + @user_following.count.to_s + ')': '' %> </h3>
@@ -181,7 +182,6 @@
           No hay artistas para mostrar
         </p>
     <% end %>
-
 </div>
 
 <div class="row">
@@ -248,47 +248,13 @@
 
 
   <h3>Artistas que ha creado el usuario:</h3>
-  <% if @artists.any? %>
-      <ul>
-        <% @artists.each do |artist| %>
-          <li>
-            <%= link_to artist.name, artist %>
-          </li>
-        <% end %>
-      </ul>
-  <% else %>
-      <p>
-        Éste usuario no ha creado artistas.
-      </p>
-  <% end %>
-
-  <h3>Álbumes que ha creado el usuario:</h3>
-  <% if @albums.any? %>
-      <ul>
-        <% @albums.each do |album| %>
-          <li>
-            <%= link_to album.name, album %>
-          </li>
-        <% end %>
-      </ul>
-  <% else %>
-      <p>
-        Éste usuario no ha creado álbumes.
-      </p>
-  <% end %>
+  <%= render 'artists/index-snippet', artists: @artists %>
 
   <h3>Canciones que ha creado el usuario:</h3>
-  <% if @songs.any? %>
-    <ul>
-      <% @songs.each do |song| %>
-        <li>
-          <%= link_to song.name, song %>
-        </li>
-      <% end %>
-    </ul>
-    <% else %>
-      <p>
-        Éste usuario no ha creado canciones.
-      </p>
-  <% end %>
+  <%= render 'songs/index-snippet', songs: @songs %>
+
+  <h3>Albums que ha creado el usuario:</h3>
+  <%= render 'albums/index-snippet', albums: @albums %>
+
+
 </div>

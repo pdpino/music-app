@@ -30,64 +30,13 @@
   %>
 
 <h3>Artista (s):</h3>
-<% if @song_artists.any? %>
-  <% @song_artists.each do |artist| %>
-    <li>
-      <%= artist.name %>
-      |
-      <%= link_to 'Mostrar', artist %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Sin artista
-    </p>
-<% end %>
+<%= render 'artists/index-snippet', artists: @song_artists %>
 
 <h3>Álbum (s):</h3>
-<% if @song_albums.any? %>
-  <% @song_albums.each do |album| %>
-    <li>
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Sin álbumes
-    </p>
-<% end %>
+<%= render 'albums/index-snippet', albums: @song_albums %>
 
 <h3>Géneros (s):</h3>
-<% if @song_genres.any? %>
-  <% @song_genres.each do |genre| %>
-    <li>
-      <%= genre.name %>
-      |
-      <%= link_to 'Mostrar', genre %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Sin géneros
-    </p>
-<% end %>
-
-<h3>Álbum (s):</h3>
-<% if @song_albums.any? %>
-  <% @song_albums.each do |album| %>
-    <li>
-      <%= album.name %>
-      |
-      <%= link_to 'Mostrar', album %>
-    </li>
-  <% end %>
-<% else %>
-    <p>
-      Sin álbumes
-    </p>
-<% end %>
+<%= render 'genres/index-snippet', genres: @song_genres %>
 
 <%= render 'comments/index', item_id: @song.id, comments: @song_comments %>
 <%= render 'comments/new', comment_create_path: comment_song_path(@song) %>

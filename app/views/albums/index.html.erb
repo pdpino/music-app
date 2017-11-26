@@ -33,15 +33,15 @@
               <%= link_to album.name, album %>
             </td>
 
-            <td><%
-              n = ''
-              if album.artists.any? then
-                album.artists.each do |a|
-                  n = n + a.name + ', '
-                end
-            %><%= n.chomp(', ') %><% end%>
+            <td>
+              <% album.artists.each_with_index do |artist, index| %>
+                <%= link_to artist.name, artist %>
+                <% if index < album.artists.length - 1 %>
+                  ,
+                <% end %>
+              <% end %>
             </td>
-            
+
             <td>
 
             <td>

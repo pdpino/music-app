@@ -1,0 +1,16 @@
+<%# Index snippet for songs
+  provide: songs %>
+
+<% if songs.any? %>
+  <ul class="ul-no-bullet">
+    <% songs.each do |song| %>
+      <li>
+        <%= link_to song.name, song %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+    <p>
+      Sin canciones
+    </p>
+<% end %>

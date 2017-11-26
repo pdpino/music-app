@@ -2,7 +2,6 @@ class Rating < ApplicationRecord
   belongs_to :rateable, polymorphic: true
   # NOTE:
   # rateable = that can be rated
-  # could be a song, artist, album or list
 
   belongs_to :user
 
@@ -13,4 +12,7 @@ class Rating < ApplicationRecord
   }
 
   default_scope { order(created_at: :desc) }
+
+  # NOTE: this didnt work, so is managed on controller level
+  # validates :rateable_id, uniqueness: { scope: [:user, :rateable_type] }
 end
