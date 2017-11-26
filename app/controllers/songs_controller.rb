@@ -49,8 +49,8 @@ class SongsController < ApplicationController
       # Search youtube video
       videos = Yt::Collections::Videos.new
       query = "#{@song.name} #{@song.artists.map(&:name).join(' ')}"
-      video_id = videos.where(q: query).first.id
-      @song.youtube_url = "https://www.youtube.com/embed/#{video_id}"
+      video = videos.where(q: query).first
+      @song.youtube_url = "https://www.youtube.com/embed/#{video.id}" unless video.nil?
     end
 
     if @song.save
