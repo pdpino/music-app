@@ -66,3 +66,6 @@
 
 <%= render 'comments/index', item_id: @artist.id, comments: @artist_comments %>
 <%= render 'comments/new', comment_create_path: comment_artist_path(@artist) %>
+
+<h3>Noticias:</h3>
+<%= render 'news/index-snippet', news: @artist.news %>

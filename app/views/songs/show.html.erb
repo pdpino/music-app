@@ -53,4 +53,7 @@
 <%= render 'ratings/index', ratings: @song_ratings %>
 <%= render 'ratings/new', rating_create_path: rate_song_path(@song) %>
 
+<h3>Noticias:</h3>
+<%= render 'news/index-snippet', news: @song.news %>
+
 <%= link_to 'Volver', songs_path %>

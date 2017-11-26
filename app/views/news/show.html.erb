@@ -1,0 +1,13 @@
+<%= link_to "Volver a todas las noticias", news_index_path %>
+<h4><%= @news.title %></h4>
+<%= @news.created_at.strftime("%Y-%b-%d %H:%M") %>
+<br>
+<img src="<%= @news.image %>" alt="image">
+<p><%= @news.content %></p>
+
+
+<% if @has_permission %>
+  <%= link_to 'Editar', edit_news_path(@news) %>
+  <%= link_to 'Eliminar', @news, method: :delete, data: { confirm: 'Está seguro?' } %>
+  <br> <!-- HACK: use CSS instead of this -->
+<% end %>

@@ -60,4 +60,7 @@
 
   <%= render 'comments/index', item_id: @album.id, comments: @album_comments %>
   <%= render 'comments/new', comment_create_path: comment_album_path(@album) %>
+
+  <h3>Noticias:</h3>
+  <%= render 'news/index-snippet', news: @album.news %>
 </div>

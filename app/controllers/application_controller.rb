@@ -62,5 +62,13 @@ class ApplicationController < ActionController::Base
 
   def index
     # USE AS HOME
+    if is_current_user_admin?
+      selected_home = "admin"
+    elsif current_user
+      selected_home = "user"
+    else
+      selected_home = "guest"
+    end
+    render :index, locals: { selected_home: selected_home }
   end
 end

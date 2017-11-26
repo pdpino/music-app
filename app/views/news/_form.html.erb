@@ -1,0 +1,21 @@
+<h1><%= title %></h1>
+
+<%= form_for(@news) do |f| %>
+  <div>
+    <%= f.label :title, "Titulo" %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :content, "Contenido" %>
+    <%= f.text_area :content %>
+  </div>
+  <div>
+    <%= f.label :image, "Imagen" %>
+    <%= f.file_field :image %>
+  </div>
+  <div>
+    <%= f.submit "Subir" %>
+  </div>
+<% end %>
+
+<%= link_to 'Volver', news_index_path %>

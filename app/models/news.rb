@@ -4,4 +4,5 @@ class News < ApplicationRecord
   has_many :albums_news, through: :news_relation, source: :newsable, source_type: 'Album'
   has_many :artists_news, through: :news_relation, source: :newsable, source_type: 'Artist'
 
+  mount_uploader :image, ImageUploader
 end

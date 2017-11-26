@@ -1,0 +1,24 @@
+<h1>Noticias</h1>
+
+<%= render '_search/bar', search_path: news_index_path %>
+
+<% if @has_permission %>
+  <%= link_to 'Crear noticia', new_news_path, :class => 'btn btn-primary btn-title' %>
+<% end%>
+
+<% if @news.any? %>
+  <ul>
+    <% @news.each do |news_item| %>
+      <li>
+        <img src="<%= news_item.image %>" alt="image">
+        <strong><%= link_to news_item.title, news_item %></strong>
+        <%= news_item.created_at.strftime("%Y-%b-%d %H:%M") %>
+      </li>
+      <br>
+    <% end %>
+  </ul>
+<% else %>
+    <p>
+      No hay noticias
+    </p>
+<% end %>
