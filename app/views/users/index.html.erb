@@ -3,6 +3,8 @@
   <hr>
 </div>
 
+<%= render '_search/bar', search_path: users_path %>
+
 <div class="row padding-first-element">
     <% if @users.any? %>
       <table class="table table-striped table-hover ">
@@ -34,7 +36,7 @@
 
     <% else %>
         <p>
-          No hay usuarios para mostrar
+          <%= (@searched) ? "No hay usuarios para mostrar" : "Busca usuarios!" %>
         </p>
     <% end %>
 </div>

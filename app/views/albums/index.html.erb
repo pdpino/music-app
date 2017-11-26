@@ -6,6 +6,8 @@
   <% end%>
 </div>
 
+<%= render '_search/bar', search_path: albums_path %>
+
 <div class="row padding-first-element">
 
 
@@ -32,7 +34,7 @@
             <td>
               <%= link_to album.name, album %>
             </td>
-
+            
             <td>
               <% album.artists.each_with_index do |artist, index| %>
                 <%= link_to artist.name, artist %>
@@ -59,7 +61,7 @@
     </table>
   <% else %>
       <p>
-        No hay álbumes para mostrar
+        <%= (@searched) ? "No hay álbumes para mostrar" : "Busca álbumes!" %>
       </p>
   <% end %>
 

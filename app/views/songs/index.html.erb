@@ -6,6 +6,8 @@
   <% end%>
 </div>
 
+<%= render '_search/bar', search_path: songs_path %>
+
 <div class="row padding-first-element">
 
 
@@ -51,7 +53,7 @@
       </table>
     <% else %>
         <p>
-          No hay canciones para mostrar
+          <%= (@searched) ? "No hay canciones para mostrar" : "Busca canciones!" %>
         </p>
     <% end %>
 

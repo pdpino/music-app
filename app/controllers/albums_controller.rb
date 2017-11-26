@@ -9,7 +9,14 @@ class AlbumsController < ApplicationController
   before_action :set_album_attributes, only: [:show, :edit, :update]
 
   def index
-    @albums = Album.all
+    # REFACTOR: this is copied in all the controllers with search
+    unless params["text"].nil?
+      @albums = Album.where("name ILIKE ?", "%#{params["text"]}%")
+      @searched = true
+    else
+      @albums = Array.new
+      @searched = false
+    end
   end
 
   def show

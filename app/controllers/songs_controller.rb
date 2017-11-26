@@ -9,7 +9,14 @@ class SongsController < ApplicationController
   before_action :set_song_attributes, only: [:show, :edit, :update]
 
   def index
-    @songs = Song.all
+    # REFACTOR: this is copied in all the controllers with search
+    unless params["text"].nil?
+      @songs = Song.where("name ILIKE ?", "%#{params["text"]}%")
+      @searched = true
+    else
+      @songs = Array.new
+      @searched = false
+    end
   end
 
   def show
