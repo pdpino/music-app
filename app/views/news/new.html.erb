@@ -1,1 +1,71 @@
-<%= render 'form', title: 'Nueva noticia' %>
+<%=
+  # render 'form', title: 'Nueva noticia'
+%>
+
+<div class="row padding-first-row">
+  <div class="col-lg-5">
+    <%= form_for :news, :html => { :class => 'form-horizontal' } do |f| %>
+
+        <%=
+          # debug(f)
+        %>
+
+        <fieldset>
+          <legend>Crear noticia</legend>
+
+          <div class="form-group">
+            <label for="title" class="col-lg-2 control-label">Título</label>
+            <div class="col-lg-10">
+              <%= f.text_field :title, :class => 'form-control', :placeholder => "Título de la noticia" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="content" class="col-lg-2 control-label">Contenido de la noticia</label>
+            <div class="col-lg-10">
+              <%= f.text_field :content, :class => 'form-control', :placeholder => "Contenido de la noticia" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image" class="col-lg-2 control-label">Imagen relacionada</label>
+            <div class="col-lg-10">
+              <%= f.file_field :image, :class => 'form-control', :placeholder => "Apellido" %>
+            </div>
+          </div>
+
+
+          <!-- TODO: setear cancion, artista, album -->
+          <div class="form-group">
+            <label for="image" class="col-lg-2 control-label">Artista(s) relacionado(s)</label>
+            <div class="col-lg-10">
+              <%=
+                # f.text_field :news_artists, :class => 'form-control'
+              %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image" class="col-lg-2 control-label">Álbum(es) relacionado(s)</label>
+            <div class="col-lg-10">
+              <%=
+                # f.text_field :news_artists, :class => 'form-control'
+              %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="image" class="col-lg-2 control-label">Canción(es) relacionado(as)</label>
+            <div class="col-lg-10">
+              <%=
+                # f.text_field :news_artists, :class => 'form-control'
+              %>
+            </div>
+          </div>
+
+
+
+        </fieldset>
+    <% end %>
+  </div>
+</div>

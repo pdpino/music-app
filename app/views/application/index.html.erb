@@ -3,14 +3,12 @@
     <div class="col-lg-8 col-md-7 col-sm-6">
       <h1>Bienvenido a MusicApp29!</h1>
       <p class="lead">
-        Hola
-        <% if current_user %>,
-          <strong><%= current_user.first_name %></strong>
-        <% end %>!
+        Hola<% if current_user %>, <strong><%= current_user.first_name%></strong><% end %>!
       </p>
-
-      <%= render selected_home %>
-
     </div>
   </div>
+</div>
+
+<div class="row">
+    <%= render selected_home %>
 </div>
