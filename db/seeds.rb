@@ -124,10 +124,10 @@ iron_maiden.genres << [rock, metal]
 
 maroon_5 = Artist.create({
   name: 'Maroon 5',
-  description: 'Maroon 5 es una banda musical de Pop y Pop Rock1​ estadounidense. El grupo se formó originalmente entre 1994 y 1995 como Kara\'s Flowers mientras sus integrantes cursaban la secundaria.',
+  description: 'Maroon 5 es una banda musical de Pop y Pop Rock1​ estadounidense. El grupo se formó originalmente entre 1994 y 1995 como Karas Flowers mientras sus integrantes cursaban la secundaria.',
   country: 'Estados Unidos',
   members: 'Adam Levine, Mickey Madden, James Valentine, Matt Flynn, P. J. Morton, Jesse Carmichael, Sam Farrar',
-  active_since: '1994',
+  active_since: 1994,
   # active_until: ,
   owner_id: admin.id,
   })
@@ -138,7 +138,7 @@ bruno_mars = Artist.create({
   description: 'Peter Gene Hernandez (Honolulú, 8 de octubre de 1985), conocido como Bruno Mars, es un cantante, compositor, productor musical y coreógrafo estadounidense.',
   country: 'Hawai',
   members: '',
-  active_since: '2008',
+  active_since: 2008,
   # active_until: ,
   owner_id: admin.id,
   })
@@ -149,7 +149,7 @@ coldplay = Artist.create({
   description: 'Coldplay es una banda británica de pop rock formada en Londres en 1996. El grupo está integrado por Chris Martin (voz, teclado, guitarra), Jon Buckland (guitarra principal), Guy Berryman (bajo eléctrico) y Will Champion (batería, coros y otros instrumentos).',
   country: 'Inglaterra',
   members: 'Jonny Buckland, Will Champion, Chris Martin, Guy Berryman.',
-  active_since: '1996',
+  active_since: 1996,
   # active_until: ,
   owner_id: admin.id,
   })
@@ -160,18 +160,30 @@ bob_marley = Artist.create({
   description: 'Bob Marley fue un músico, guitarrista y compositor jamaicano. Durante su carrera musical fue el líder, compositor y guitarrista de las bandas de ska, rocksteady y reggae The Wailers (1964-1974) y Bob Marley & The Wailers (1974-1982).',
   country: 'Jamaica',
   members: '',
-  active_since: '1962',
-  active_until: '1980',
+  active_since: 1962,
+  active_until: 1980,
   owner_id: admin.id,
   })
 bob_marley.genres << reggae
 
 
 ### Create songs
-brick = Song.create({ name: 'Another brick in the wall' })
-wish_song = Song.create({ name: 'Wish you were here' })
-numb = Song.create({ name: 'Comfortably numb' })
-machine = Song.create({ name: 'Welcome to the machine' })
+brick = Song.create({
+  name: 'Another brick in the wall',
+  owner_id: admin.id,
+  })
+wish_song = Song.create({
+  name: 'Wish you were here',
+  owner_id: admin.id,
+  })
+numb = Song.create({
+  name: 'Comfortably numb',
+  owner_id: admin.id,
+  })
+machine = Song.create({
+  name: 'Welcome to the machine',
+  owner_id: admin.id,
+  })
 pink_floyd.songs << [brick, wish_song, numb, machine]
 
 
@@ -180,7 +192,8 @@ wish = Album.create({
   name: 'Wish you were here',
   release_date: '1975-09-13',
   is_single: false,
-  description: 'Wish You Were Here es el noveno álbum de estudio de la banda británica de rock Pink Floyd, lanzado en septiembre de 1975 e inspirado en el material que compusieron durante su gira europea de 1974 y que grabaron en los Abbey Road Studios de Londres.'
+  description: 'Wish You Were Here es el noveno álbum de estudio de la banda británica de rock Pink Floyd, lanzado en septiembre de 1975 e inspirado en el material que compusieron durante su gira europea de 1974 y que grabaron en los Abbey Road Studios de Londres.',
+  owner_id: admin.id,
   })
 wish.artists << pink_floyd
 wish.songs << [machine, wish_song]
