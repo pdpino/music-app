@@ -95,7 +95,7 @@ pink_floyd = Artist.create({
   country: 'Inglaterra',
   members: 'Roger Waters, David Gilmour, Nick Mason, Richard Wright',
   active_since: '1965',
-  active_until: '1995',
+  active_until: 1995,
   owner_id: admin.id,
   })
 pink_floyd.genres << rock
@@ -106,7 +106,7 @@ queen = Artist.create({
   country: 'Inglaterra',
   members: 'Brian May, Freddie Mercury, John Deacon, Roger Taylor',
   active_since: '1970',
-  # active_until: '',
+  # active_until:',
   owner_id: admin.id,
   })
 queen.genres << rock
@@ -117,7 +117,7 @@ iron_maiden = Artist.create({
   country: 'Inglaterra',
   members: 'Steve Harris, Bruce Dickinson, Dave Murray, Adrian Smith, Janick Gers, Nicko McBrain',
   active_since: '1975',
-  # active_until: '',
+  # active_until:',
   owner_id: admin.id,
   })
 iron_maiden.genres << [rock, metal]
@@ -128,7 +128,7 @@ maroon_5 = Artist.create({
   country: 'Estados Unidos',
   members: 'Adam Levine, Mickey Madden, James Valentine, Matt Flynn, P. J. Morton, Jesse Carmichael, Sam Farrar',
   active_since: '1994',
-  active_until: '',
+  # active_until: ,
   owner_id: admin.id,
   })
 maroon_5.genres << pop
@@ -139,7 +139,7 @@ bruno_mars = Artist.create({
   country: 'Hawai',
   members: '',
   active_since: '2008',
-  active_until: '',
+  # active_until: ,
   owner_id: admin.id,
   })
 bruno_mars.genres << pop
@@ -150,7 +150,7 @@ coldplay = Artist.create({
   country: 'Inglaterra',
   members: 'Jonny Buckland, Will Champion, Chris Martin, Guy Berryman.',
   active_since: '1996',
-  active_until: '',
+  # active_until: ,
   owner_id: admin.id,
   })
 coldplay.genres << [pop, rock]
@@ -195,7 +195,7 @@ wish.songs << [machine, wish_song]
 #       description: Faker::Lorem.paragraph,
 #       country: Faker::Address.country,
 #       members: members,
-#       active_since: Faker::Date.backward(100),
+#       active_since: 'Faker'::Date.backward(100),
 #       active_until: Date.today,
 #       owner_id: admin.id
 #     }

@@ -30,7 +30,7 @@ class Artist < ApplicationRecord
   validate :active_since_in_past, :active_until_between_since_and_today
 
   def active_since_in_past
-    if active_since.present? && active_since > Date.today
+    if active_since.present? && active_since > Date.today.year
       errors.add(:active_since, "inválido")
       # FIXME: mejorar mensaje de error (indica "active_since")
     end
@@ -38,7 +38,7 @@ class Artist < ApplicationRecord
 
   def active_until_between_since_and_today
     if active_until.present?
-      if active_until > Date.today
+      if active_until > Date.today.year
         errors.add(:active_until, "debe ser pasada")
       elsif active_since.present? && active_until < active_since
         errors.add(:active_until, "debe ser después que la fecha de inicio")
