@@ -18,7 +18,7 @@ class Album < ApplicationRecord
 
   has_many :news_relation, as: :newsable
   has_many :news, through: :news_relation, as: :newsable
-  
+
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true
@@ -29,5 +29,9 @@ class Album < ApplicationRecord
     avg = 0
     songs.each { |song| avg += song.avg_rating }
     avg
+  end
+
+  def image_src
+    image.blank? ? ActionController::Base.helpers.asset_path('album-default.jpg') : image
   end
 end

@@ -1,7 +1,7 @@
 <div class="row padding-first-element">
 
 
-  <img src="<%= (@user.photo.blank? ? asset_path('user-default.png') : @user.photo) %>"
+  <img src="<%= @user.image_src %>"
        class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="user profile image" />
 
   <div class="col-lg-3 col-md-3 col-sm-4">
@@ -32,7 +32,7 @@
 </div>
 
 <div class="row">
-  <h1><%= @user.first_name + ' ' + @user.last_name %></h1>
+  <h1><%= @user.full_name %></h1>
   <p class="lead"><%= @user.email %></p>
   <%= render 'follows/update', user: @user %>
 
@@ -160,7 +160,7 @@
           <% @favorite_artists.each do |artist| %>
               <tr>
                 <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
-                  <img src="<%= (artist.image.blank? ? asset_path('artist-default.png') : artist.image) %>"
+                  <img src="<%= artist.image_src %>"
                        class="img-thumbnail rounded float-left custom-thumbnail" alt="artist thumbnail" />
                 </td>
                 <td><%= link_to (artist.name.capitalize), artist  %></td>
@@ -203,7 +203,7 @@
         <% @favorite_albums.each do |album| %>
             <tr>
               <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
-                <img src="<%= (album.image.blank? ? asset_path('album-default.jpeg') : album.image) %>"
+                <img src="<%= album.image_src %>"
                      class="img-thumbnail rounded float-left custom-thumbnail" alt="album thumbnail" />
               </td>
 

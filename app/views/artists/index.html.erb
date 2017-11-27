@@ -24,7 +24,7 @@
         <% @artists.each do |artist| %>
           <tr>
             <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
-              <img src="<%= (artist.image.blank? ? asset_path('artist-default.png') : artist.image) %>"
+              <img src="<%= artist.image_src %>"
                    class="img-thumbnail rounded float-left custom-thumbnail" alt="artist thumbnail" />
             </td>
             <td><%= link_to (artist.name.capitalize), artist  %></td>
@@ -40,7 +40,7 @@
         <% end %>
       </tbody>
     </table>
-    
+
   <% else %>
     <p>
       <%= (@searched) ? "No hay artistas para mostrar" : "Busca artistas!" %>

@@ -2,10 +2,10 @@
   provide: artists %>
 
 <% if artists.any? %>
-  <ul class="ul-no-bullet">
+  <ul class="ul-no-bullet ul-row">
     <% artists.each do |artist| %>
       <li>
-        <img src="<%= artist.image %>" alt="photo">
+        <img src="<%= artist.image_src %>" class="img-thumbnail rounded float-left custom-thumbnail" alt="artist thumbnail">
         <%= link_to artist.name, artist %>
       </li>
     <% end %>

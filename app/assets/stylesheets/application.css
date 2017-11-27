@@ -119,3 +119,8 @@ body
 #footer-logo-row {
     padding-top: 50px;
 }
+
+.ul-row {
+  display: flex;
+  flex-flow: wrap row;
+}

@@ -52,4 +52,9 @@ class Artist < ApplicationRecord
     albums.each { |album| avg += album.avg_rating }
     avg
   end
+
+  def image_src
+    # 'artist-default.png'
+    image.blank? ? ActionController::Base.helpers.asset_path('artist-default-2.jpg') : image
+  end
 end

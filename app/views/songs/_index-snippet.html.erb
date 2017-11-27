@@ -2,9 +2,10 @@
   provide: songs %>
 
 <% if songs.any? %>
-  <ul class="ul-no-bullet">
+  <ul class="ul-no-bullet ul-row">
     <% songs.each do |song| %>
       <li>
+        <img src="<%= song.image_src %>" class="img-thumbnail rounded float-left custom-thumbnail" alt="song thumbnail">
         <%= link_to song.name, song %>
       </li>
     <% end %>

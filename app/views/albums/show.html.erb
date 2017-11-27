@@ -1,6 +1,6 @@
 <div class="row padding-first-element">
 
-  <img src="<%= (@album.image.blank? ? asset_path('album-default.png') : @album.image) %>" class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="album artwork" />
+  <img src="<%= @album.image_src %>" class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="album artwork" />
 
 
   <div class="col-lg-3 col-md-3 col-sm-4">

@@ -1,5 +1,5 @@
 <div class="row padding-first-element">
-  <img src="<%= (@artist.image.blank? ? asset_path('artist-default.png') : @artist.image) %>"
+  <img src="<%= @artist.image_src %>"
        class="img-thumbnail rounded float-left profile-image col-lg-3 col-md-3 col-sm-4" alt="user profile image" />
 
    <div class="col-lg-3 col-md-3 col-sm-4">

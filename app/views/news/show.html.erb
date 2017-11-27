@@ -9,7 +9,10 @@
   <br> <!-- HACK: use CSS instead of this -->
 <% end %>
 
-<img src="<%= @news.image %>" alt="image">
+<div>
+  <img src="<%= @news.image_src %>" height="300" width="300" alt="news image">
+</div>
+
 <p><%= @news.content %></p>
 
 <h3>Artistas:</h3>

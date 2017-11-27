@@ -13,7 +13,7 @@
   <ul>
     <% @news.each do |news_item| %>
       <li>
-        <img src="<%= news_item.image %>" alt="image">
+        <img src="<%= news_item.image_src %>" class="img-thumbnail rounded float-left custom-thumbnail profile-image" alt="news thumbnail">
         <strong><%= link_to news_item.title, news_item %></strong>
         <%= news_item.created_at.strftime("%Y-%b-%d %H:%M") %>
       </li>

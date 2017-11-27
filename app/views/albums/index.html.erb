@@ -27,14 +27,14 @@
         <% @albums.each do |album| %>
           <tr>
             <td class="col-xl-2 col-lg-2 col-md-3 col-sm-6">
-              <img src="<%= (album.image.blank? ? asset_path('album-default.jpeg') : album.image) %>"
+              <img src="<%= album.image_src %>"
                    class="img-thumbnail rounded float-left custom-thumbnail" alt="album thumbnail" />
             </td>
 
             <td>
               <%= link_to album.name, album %>
             </td>
-            
+
             <td>
               <% album.artists.each_with_index do |artist, index| %>
                 <%= link_to artist.name, artist %>

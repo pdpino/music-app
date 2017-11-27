@@ -2,10 +2,10 @@
   provide: albums %>
 
 <% if albums.any? %>
-  <ul class="ul-no-bullet">
+  <ul class="ul-no-bullet ul-row">
     <% albums.each do |album| %>
       <li>
-        <img src="<%= album.image %>" alt="photo">
+        <img src="<%= album.image_src %>" class="img-thumbnail rounded float-left custom-thumbnail" alt="album thumbnail">
         <%= link_to album.name, album %>
       </li>
     <% end %>
