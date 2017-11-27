@@ -1,30 +1,47 @@
-<h1><%= title %></h1>
+<div class="col-lg-5">
+  <%= form_for @news, :html => { :class => 'form-horizontal' } do |f| %>
 
-<%= form_for(@news) do |f| %>
   <%= render '_errors/snippet', errors: @news.errors %>
-  <div>
-    <%= f.label :title, "Titulo" %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :content, "Contenido" %>
-    <%= f.text_area :content %>
-  </div>
-  <div>
-    <%= f.label :image, "Imagen" %>
-    <%= f.file_field :image %>
-  </div>
+      <fieldset>
+        <legend><%=title%></legend>
 
-  <%= render 'artists/choose', existing_artists: @news_artists %>
+        <div class="form-group">
+          <label for="title" class="col-lg-2 control-label">Título</label>
+          <div class="col-lg-10">
+            <%= f.text_field :title, :class => 'form-control', :placeholder => "Título de la noticia" %>
+          </div>
+        </div>
 
-  <%= render 'albums/choose', existing_albums: @news_albums %>
+        <div class="form-group">
+          <label for="content" class="col-lg-2 control-label">Contenido de la noticia</label>
+          <div class="col-lg-10">
+            <%= f.text_field :content, :class => 'form-control', :placeholder => "Contenido de la noticia" %>
+          </div>
+        </div>
 
-  <%= render 'songs/choose', existing_songs: @news_songs %>
+        <div class="form-group">
+          <label for="image" class="col-lg-2 control-label">Imagen relacionada</label>
+          <div class="col-lg-10">
+            <%= f.file_field :image, :class => 'form-control', :placeholder => "Apellido" %>
+          </div>
+        </div>
 
-  <div>
-    <%= f.submit "Guardar" %>
-  </div>
+        <%= render 'artists/choose', existing_artists: @news_artists %>
 
-<% end %>
+        <%= render 'albums/choose', existing_albums: @news_albums %>
 
-<%= link_to 'Volver', news_index_path %>
+        <%= render 'songs/choose', existing_songs: @news_songs %>
+
+
+        <div class="form-group">
+          <div class="col-lg-10 col-lg-offset-2">
+            <%= f.submit "Guardar", :class => "btn btn-primary" %>
+            <a href="<%=news_index_path%>">
+              <div class="btn btn-primary">Volver (sin guardar)</div>
+            </a>
+          </div>
+        </div>
+
+      </fieldset>
+  <% end %>
+</div>

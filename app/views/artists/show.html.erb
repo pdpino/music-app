@@ -28,29 +28,24 @@
     <%= @artist.description.present? ? @artist.description : "Sin descripción." %>
   </p>
   <hr>
-  <p>
-    <strong>Rating:</strong>
-    <%= @artist_rating %>
+
+  <p class="lead"><em>Rating: </em><%= @artist_rating %></p>
+  <p class="lead"><em>País de origen:</em> <%= @artist.country.present? ? @artist.country : "Desconocido" %></p>
+
+  <p class="lead">
+    <% if @artist.members.present? %>
+        <em>Integrantes:</em> <%= @artist.members %>
+    <% else %>
+      <em>Solista</em>
+    <% end %>
   </p>
-
-  <p>
-    <strong>País de origen:</strong>
-    <%= @artist.country %>
-    <%= @artist.country.present? ? @artist.country : "Desconocido" %>
+  <p class="lead"><em>Actividad: </em>
+    <%= @artist.active_since %> hasta <%= @artist.active_until.present? ? @artist.active_until : "presente" %>
   </p>
+  <hr>
+</div>
 
-  <% if @artist.members.present? %>
-    <h3>Integrantes: </h3>
-    <%= @artist.members %>
-  <% else %>
-    <strong>Solista</strong>
-  <% end %>
-
-<p>
-  <strong>Actividad:</strong>
-  <%= @artist.active_since %> hasta <%= @artist.active_until.present? ? @artist.active_until : "presente" %>
-</p>
-
+<div class="row">
 <h3>Género (s):</h3>
 <%= render 'genres/index-snippet', genres: @artist_genres %>
 
