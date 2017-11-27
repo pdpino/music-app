@@ -66,6 +66,8 @@ class ApplicationController < ActionController::Base
       selected_home = "admin"
     elsif current_user
       selected_home = "user"
+      artist = current_user.favorite_artists.first
+      @news = artist.news
     else
       selected_home = "guest"
     end

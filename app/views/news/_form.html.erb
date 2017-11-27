@@ -1,6 +1,7 @@
 <h1><%= title %></h1>
 
 <%= form_for(@news) do |f| %>
+  <%= render '_errors/snippet', errors: @news.errors %>
   <div>
     <%= f.label :title, "Titulo" %>
     <%= f.text_field :title %>
