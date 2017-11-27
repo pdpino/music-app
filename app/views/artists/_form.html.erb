@@ -30,13 +30,13 @@
   </div>
 
   <div>
-    <%= f.label :active_since, "Activo desde" %>  <!-- TODO: mejor label -->
-    <%= f.date_field :active_since %>
+    <%= f.label :active_since, "Activo desde año" %>
+    <%= f.number_field :active_since %>
   </div>
 
   <div>
-    <%= f.label :active_until, "Activo hasta" %>
-    <%= f.date_field :active_until %>
+    <%= f.label :active_until, "Activo hasta año" %>
+    <%= f.number_field :active_until %>
   </div>
 
   <%= render 'genres/choose', existing_genres: @artist_genres %>
