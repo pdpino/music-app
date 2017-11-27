@@ -66,6 +66,14 @@ class ApplicationController < ActionController::Base
       selected_home = "admin"
     elsif current_user
       selected_home = "user"
+      artists = current_user.favorite_artists
+      @artists_news = artists.map do |artist| artist.news end.flatten
+
+      songs = current_user.favorite_songs
+      @songs_news = songs.map do |song| song.news end.flatten
+
+      albums = current_user.favorite_albums
+      @albums_news = albums.map do |album| album.news end.flatten
     else
       selected_home = "guest"
     end

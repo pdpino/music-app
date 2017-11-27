@@ -19,14 +19,15 @@ class NewsController < ApplicationController
 
   def new
     @news = News.new
-
-    @news_artists = Array.new
-    @news_albums = Array.new
-    @news_songs = Array.new
   end
 
   def create
-    @news = News.new(news_params)
+    @news = News.create(params.require(:news).permit(:title, :content, :image))
+
+    all_params = news_params
+    @news.songs_news << all_params[:songs_news]
+    @news.artists_news << all_params[:artists_news]
+    @news.albums_news << all_params[:albums_news]
 
     if @news.save
       redirect_to @news
@@ -80,7 +81,6 @@ class NewsController < ApplicationController
     end
 
     def set_all_entities
-      # NOTE: parse to array to be able to match intersection with @song_artists
       @all_artists = Array.new Artist.all
       @all_songs = Array.new Song.all
       @eligible_albums = Array.new Album.all
