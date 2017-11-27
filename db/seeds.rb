@@ -13,7 +13,7 @@ require 'faker'
 admin = User.create(
   first_name: 'admin',
   last_name: 'admin',
-  email: 'admin@admin.cl',
+  email: 'admin@musicapp29.com',
   password: 'Admin1234',
   role: 'admin',
   )
