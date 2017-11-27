@@ -120,7 +120,6 @@ iron_maiden = Artist.create({
   })
 iron_maiden.genres << [rock, metal]
 
-
 maroon_5 = Artist.create({
   name: 'Maroon 5',
   description: 'Maroon 5 es una banda musical de Pop y Pop Rock1​ estadounidense. El grupo se formó originalmente entre 1994 y 1995 como Kara\'s Flowers mientras sus integrantes cursaban la secundaria.',
@@ -132,6 +131,28 @@ maroon_5 = Artist.create({
   })
 maroon_5.genres << pop
 
+bruno_mars = Artist.create({
+  name: 'Bruno Mars',
+  description: 'Peter Gene Hernandez (Honolulú, 8 de octubre de 1985), conocido como Bruno Mars, es un cantante, compositor, productor musical y coreógrafo estadounidense.',
+  country: 'Hawai',
+  members: '',
+  active_since: '2008',
+  active_until: '',
+  owner_id: admin.id,
+  })
+bruno_mars.genres << pop
+
+coldplay = Artist.create({
+  name: 'Coldplay',
+  description: 'Coldplay es una banda británica de pop rock formada en Londres en 1996. El grupo está integrado por Chris Martin (voz, teclado, guitarra), Jon Buckland (guitarra principal), Guy Berryman (bajo eléctrico) y Will Champion (batería, coros y otros instrumentos).',
+  country: 'Inglaterra',
+  members: 'Jonny Buckland, Will Champion, Chris Martin, Guy Berryman.',
+  active_since: '1996',
+  active_until: '',
+  owner_id: admin.id,
+  })
+coldplay.genres << [pop, rock]
+
 bob_marley = Artist.create({
   name: 'Bob Marley',
   description: 'Bob Marley fue un músico, guitarrista y compositor jamaicano. Durante su carrera musical fue el líder, compositor y guitarrista de las bandas de ska, rocksteady y reggae The Wailers (1964-1974) y Bob Marley & The Wailers (1974-1982).',
@@ -142,6 +163,25 @@ bob_marley = Artist.create({
   owner_id: admin.id,
   })
 bob_marley.genres << reggae
+
+
+### Create songs
+brick = Song.create({ name: 'Another brick in the wall' })
+wish_song = Song.create({ name: 'Wish you were here' })
+numb = Song.create({ name: 'Comfortably numb' })
+machine = Song.create({ name: 'Welcome to the machine' })
+pink_floyd.songs << [brick, wish_song, numb, machine]
+
+
+### Create albums
+wish = Album.create({
+  name: 'Wish you were here',
+  release_date: '1975-09-13',
+  is_single: false,
+  description: 'Wish You Were Here es el noveno álbum de estudio de la banda británica de rock Pink Floyd, lanzado en septiembre de 1975 e inspirado en el material que compusieron durante su gira europea de 1974 y que grabaron en los Abbey Road Studios de Londres.'
+  })
+wish.artists << pink_floyd
+wish.songs << [machine, wish_song]
 
 ### Create fake artists:
 # artists = Artist.create( Array.new(10) do
