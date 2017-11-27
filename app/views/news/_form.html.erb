@@ -1,6 +1,7 @@
 <div class="col-lg-5">
-  <%= form_for :news, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= form_for @news, :html => { :class => 'form-horizontal' } do |f| %>
 
+  <%= render '_errors/snippet', errors: @news.errors %>
       <fieldset>
         <legend><%=title%></legend>
 
